@@ -4,7 +4,7 @@
   "description": "Equipo de Trabajo para Proyecto Final en la Carrera de Web Full Stack \"Control y Estado de Cuentas Clientes\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
