@@ -7,9 +7,10 @@
     "dev": "nodemon src/index.js"
   },
   "keywords": [],
-  "author": "Santoro Martín",
+  "author": "Vanessa Baldi, Nestor Mieres, Pablo Pomar y Santoro Martín",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "connect-flash": "^0.1.1",
