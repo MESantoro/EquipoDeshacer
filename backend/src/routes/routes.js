@@ -10,6 +10,84 @@ router.get('/', (req , res)=>{
     res.send('Hola chimi 2')
 })
 
+
+// listar clientes
+router.get('/clientes', (req , res)=>{
+    conexionamysql.query('SELECT * FROM clientes', (error, registros)=>{
+        if(error){
+            console.log('Error en la base de datos', error)
+        }else{
+            res.json(registros)
+        }
+    })
+})
+
+// traer datos de clientes por ID
+
+router.get('/clientes/:id_cli', (req , res)=> {
+    const { id_cli } = req.params;
+    conexionamysql.query('SELECT * FROM clientes WHERE id_cli=?', [id_cli], (error, registros)=>{
+        if(error){
+            console.log('error en a base de datos', error)
+        }else{
+            res.json(registros)
+        }
+    })
+})
+
+/////// insert de clientes
+
+
+router.post('/clientes', bodyParser.json(), (req , res)=>{
+    const { nombre , apellido, direccion, correo, cli_estado, id_cue } = req.body;
+
+    console.log(req.body);
+
+    conexionamysql.query('INSERT INTO clientes (nombre, apellido, direccion, correo, cli_estado, id_cue) VALUES (?, ?, ?, ?, ?, ?)', [nombre, apellido, direccion, correo, cli_estado, id_cue], (error, registros)=>{
+        if(error){
+            console.log('error en la base de datos %s', error.message)
+            res.status(500).send('el insert no se realizo');
+        }else{
+            res.send('el insert se realizo correctamente')
+        }
+        })
+});
+
+/////// edicion de clientes
+
+router.put('/clientes/:id_cli', bodyParser.json(), (req , res) => {
+    const { id_cli } = req.params;
+    const { nombre, apellido, direccion, correo, cli_estado, id_cue } = req.body;
+
+    console.log(req.body);
+
+
+    conexionamysql.query('UPDATE clientes SET nombre = ?, apellido = ?, direccion = ?, correo = ?, cli_estado = ?, id_cue = ? WHERE id_cli = ?',
+    [nombre, apellido, direccion, correo, cli_estado, id_cue, id_cli], (error, registros) => {
+        if(error){
+            console.log('error en la base de datos %s', error.message)
+            res.status(500).send('la edicion no se realizo');
+        }else{
+            res.status(200).send('la edicion se realizo correctamente')
+        }
+        })
+});
+
+/////// delete de clientes
+router.delete('/clientes/:id_cli', bodyParser.json(), (req , res) => {
+    const { id_cli } = req.params;
+
+    conexionamysql.query('DELETE FROM clientes WHERE id_cli = ?', [id_cli], (error, registros) => {
+        if (error) {
+            console.log('error en la base de datos %s', error.message);
+            res.status(500).send('El registro ' + id_cli + ' no se eliminó correctamente');
+        } else {
+            res.status(200).send('El registro ' + id_cli + ' se eliminó correctamente');
+        }
+    });
+});
+
+
 // listar productos
 router.get('/productos', (req , res)=>{
     conexionamysql.query('SELECT * FROM productos', (error, registros)=>{
@@ -151,9 +229,9 @@ router.delete('/tipo_productos/:id_tip', bodyParser.json(), (req , res) => {
     });
 });
 
-// listar clientes
-router.get('/clientes', (req , res)=>{
-    conexionamysql.query('SELECT * FROM clientes', (error, registros)=>{
+// listar estado de las cuentas
+router.get('/cuenta_estado', (req , res)=>{
+    conexionamysql.query('SELECT * FROM cuenta_estado', (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -162,11 +240,10 @@ router.get('/clientes', (req , res)=>{
     })
 })
 
-// traer datos de clientes por ID
-
-router.get('/clientes/:id_cli', (req , res)=> {
-    const { id_cli } = req.params;
-    conexionamysql.query('SELECT * FROM clientes WHERE id_cli=?', [id_cli], (error, registros)=>{
+// traer estado de cuentas por ID
+router.get('/cuenta_estado/:id_cue', (req , res)=>{
+    const {id_cue} = req.params
+    conexionamysql.query('SELECT * FROM cuenta_estado WHERE id_cue=?', [id_cue], (error, registros)=>{
         if(error){
             console.log('error en a base de datos', error)
         }else{
@@ -175,15 +252,13 @@ router.get('/clientes/:id_cli', (req , res)=> {
     })
 })
 
-/////// insert de clientes
-
-
-router.post('/clientes', bodyParser.json(), (req , res)=>{
-    const { nombre , apellido, direccion, correo, cli_estado, id_cue } = req.body;
+/////// insert de estado de cuentas
+router.post('/cuenta_estado', bodyParser.json(), (req , res)=>{
+    const { estado , id_cue } = req.body;
 
     console.log(req.body);
 
-    conexionamysql.query('INSERT INTO clientes (nombre, apellido, direccion, correo, cli_estado, id_cue) VALUES (?, ?, ?, ?, ?, ?)', [nombre, apellido, direccion, correo, cli_estado, id_cue], (error, registros)=>{
+    conexionamysql.query('INSERT INTO cuenta_estado (estado, id_cue) VALUES (?,?)', [estado, id_cue], (error, registros)=>{
         if(error){
             console.log('error en la base de datos %s', error.message)
             res.status(500).send('el insert no se realizo');
@@ -193,17 +268,14 @@ router.post('/clientes', bodyParser.json(), (req , res)=>{
         })
 });
 
-/////// edicion de clientes
-
-router.put('/clientes/:id_cli', bodyParser.json(), (req , res) => {
-    const { id_cli } = req.params;
-    const { nombre, apellido, direccion, correo, cli_estado, id_cue } = req.body;
+/////// edicion de estado de cuentas
+router.put('/cuenta_estado/:id_cue', bodyParser.json(), (req , res)=>{
+    const { estado } = req.body;
+    const { id_cue } = req.params;
 
     console.log(req.body);
 
-
-    conexionamysql.query('UPDATE clientes SET nombre = ?, apellido = ?, direccion = ?, correo = ?, cli_estado = ?, id_cue = ? WHERE id_cli = ?',
-    [nombre, apellido, direccion, correo, cli_estado, id_cue, id_cli], (error, registros) => {
+    conexionamysql.query('UPDATE cuenta_estado SET estado = ? WHERE id_cue = ?', [estado, id_cue], (error, registros) => {
         if(error){
             console.log('error en la base de datos %s', error.message)
             res.status(500).send('la edicion no se realizo');
@@ -213,16 +285,16 @@ router.put('/clientes/:id_cli', bodyParser.json(), (req , res) => {
         })
 });
 
-/////// delete de clientes
-router.delete('/clientes/:id_cli', bodyParser.json(), (req , res) => {
-    const { id_cli } = req.params;
+/////// delete de estado de cuentas
+router.delete('/cuenta_estado/:id_cue', bodyParser.json(), (req , res) => {
+    const { id_cue } = req.params;
 
-    conexionamysql.query('DELETE FROM clientes WHERE id_cli = ?', [id_cli], (error, registros) => {
+    conexionamysql.query('DELETE FROM cuenta_estado WHERE id_cue = ?', [id_cue], (error, registros) => {
         if (error) {
             console.log('error en la base de datos %s', error.message);
-            res.status(500).send('El registro ' + id_cli + ' no se eliminó correctamente');
+            res.status(500).send('El registro ' + id_cue + ' no se eliminó correctamente');
         } else {
-            res.status(200).send('El registro ' + id_cli + ' se eliminó correctamente');
+            res.status(200).send('El registro ' + id_cue + ' se eliminó correctamente');
         }
     });
 });
