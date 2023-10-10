@@ -18,32 +18,34 @@ USE `estadosycuentas`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `clientes`
+-- Table structure for table `cliente`
 --
 
-DROP TABLE IF EXISTS `clientes`;
+DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `clientes` (
+CREATE TABLE `cliente` (
   `id_cli` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `apellido` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
   `correo` varchar(45) NOT NULL,
   `cli_estado` enum('O','X') NOT NULL DEFAULT 'O',
-  `id_cue` enum('Pagado','Parcial','Adeuda') NOT NULL DEFAULT 'Pagado',
-  PRIMARY KEY (`id_cli`)
+  `id_cue` int NOT NULL,
+  PRIMARY KEY (`id_cli`),
+  KEY `fk_cliente_cuenta_idx` (`id_cue`),
+  CONSTRAINT `fk_cliente_cuenta` FOREIGN KEY (`id_cue`) REFERENCES `cuenta_estado` (`id_cue`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `clientes`
+-- Dumping data for table `cliente`
 --
 
-LOCK TABLES `clientes` WRITE;
-/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'Carlos','Benitez','aca cerca','carlos@gmail.com','O','Pagado'),(2,'Tito','Marsh','ahi a la vuelta','tito@gmail.com','O','Pagado'),(3,'Rosa','Tosa','mas cerca que Tito','rosa@dmail.com','O','Parcial');
-/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+LOCK TABLES `cliente` WRITE;
+/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1,'Carlos','Benitez','aca cerca','carlos@gmail.com','O',1),(2,'Tito','Marsh','ahi a la vuelta','tito@gmail.com','O',3),(3,'Rosa','Tosa','mas cerca que Tito','rosa@dmail.com','O',2);
+/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -122,6 +124,32 @@ LOCK TABLES `historial` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `menu`
+--
+
+DROP TABLE IF EXISTS `menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `menu` (
+  `id_menu` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  `href` varchar(45) NOT NULL,
+  `id_rol` int NOT NULL,
+  PRIMARY KEY (`id_menu`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menu`
+--
+
+LOCK TABLES `menu` WRITE;
+/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` VALUES (1,'Clientes','/clientes',1),(2,'Cuentas y Estados','/cuenta_estado',1),(3,'Formas de Pago','/forma_pago',1),(4,'Productos','/productos',1),(5,'Tipo de Productos','/tipo_productos',1),(6,'Productos','/productos',2),(7,'Tipo de Productos','/tipo_productos',2),(8,'Productos','/productos',3);
+/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `productos`
 --
 
@@ -131,7 +159,10 @@ DROP TABLE IF EXISTS `productos`;
 CREATE TABLE `productos` (
   `id_pro` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
-  PRIMARY KEY (`id_pro`)
+  PRIMARY KEY (`id_pro`),
+  CONSTRAINT `fk_productos_forma_pago` FOREIGN KEY (`id_pro`) REFERENCES `forma_pago` (`id_pag`),
+  CONSTRAINT `fk_productos_tipo_productos` FOREIGN KEY (`id_pro`) REFERENCES `tipo_productos` (`id_tip`),
+  CONSTRAINT `fk_productos_ubicaciones` FOREIGN KEY (`id_pro`) REFERENCES `ubicaciones` (`id_ubicacion`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -195,6 +226,31 @@ INSERT INTO `tipo_productos` VALUES (1,'Caja'),(2,'Balde');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `ubicaciones`
+--
+
+DROP TABLE IF EXISTS `ubicaciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ubicaciones` (
+  `id_ubicacion` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  `estado` enum('O','X') NOT NULL DEFAULT 'O',
+  PRIMARY KEY (`id_ubicacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ubicaciones`
+--
+
+LOCK TABLES `ubicaciones` WRITE;
+/*!40000 ALTER TABLE `ubicaciones` DISABLE KEYS */;
+INSERT INTO `ubicaciones` VALUES (1,'Pozo','O'),(2,'Frezzer','O'),(3,'Heladera','O');
+/*!40000 ALTER TABLE `ubicaciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuarios`
 --
 
@@ -209,7 +265,7 @@ CREATE TABLE `usuarios` (
   `user` varchar(45) NOT NULL,
   `pass` varchar(255) NOT NULL,
   `correo` varchar(45) NOT NULL,
-  `id_rol` enum('O','X') NOT NULL DEFAULT 'O',
+  `id_rol` int NOT NULL,
   `estado` enum('O','X') NOT NULL DEFAULT 'O',
   PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -221,7 +277,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Pablo','Pomar',12123456,'ppomar','ppomar','ppomar@gmail.com','O','O'),(2,'Nestor','Mieres',12123456,'nmieres','nmieres','nmieresgmail.com','O','O'),(3,'Vanessa','Baldi',12123456,'vbaldi','vbaldi','vbaldigmail.com','O','O'),(4,'Martin','Santoro',12123456,'msantoro','msantoro','msantorogmail.com','O','O');
+INSERT INTO `usuarios` VALUES (1,'Pablo','Pomar',12123456,'ppomar','ppomar','ppomar@gmail.com',1,'O'),(2,'Nestor','Mieres',12123456,'nmieres','nmieres','nmieresgmail.com',2,'O'),(3,'Vanessa','Baldi',12123456,'vbaldi','vbaldi','vbaldigmail.com',3,'O'),(4,'Martin','Santoro',12123456,'msantoro','msantoro','msantorogmail.com',1,'O');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-24 12:39:50
+-- Dump completed on 2023-10-03 20:35:23
