@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import logoDeshacer from './assets/Deshacer.png';
-//import viteLogo from '/vite.svg'
+import viteLogo from '/vite.svg'
 import { Link } from "react-router-dom";
 import * as API from './servicios/servicios'
 
@@ -23,7 +22,7 @@ export function Registro(){
     const registro = async(event)=>{
       event.preventDefault();
       if(pass == pass2){
-        const registro = await API.Registro({user, nombre, dni, user, pass, correo, id_rol})
+        const registro = await API.Registro({apellido, nombre, dni, user, pass, correo, id_rol})
         if(registro.status){
            alert(registro.mensaje)
            window.location.href='/login'
@@ -67,10 +66,10 @@ export function Registro(){
         <>
         <main className="form-signin w-100 m-auto">
               <form onSubmit={registro}>
-                  <a>
-                  <img src={logoDeshacer} className="logo" alt="Deshacer" style={{ width: 'auto', height: '250px' }} />
+                  <a href="https://vitejs.dev" target="_blank">
+                    <img src={viteLogo} className="logo" alt="Vite logo" />
                   </a>
-                <h1 className="h3 mb-3 fw-normal">Por favor completar los datos</h1>
+                <h1 className="h3 mb-3 fw-normal">METELE DATOS CHIMI</h1>
                 
                 <div className="form-floating">
                   <input 
@@ -169,8 +168,8 @@ export function Registro(){
                   />
                   <label for="password">Repita Password</label>
                 </div>
-                <button className="btn btn-primary" type="submit" >Registrarme</button>
-                <p className="mt-5 mb-3 text-body-secondary letra_roja"> En el caso de tener cuenta <Link to="/login">Ingresar</Link></p>
+                <button className="btn btn-primary" type="submit" >PA' DENTRO ESE REGISTRO</button>
+                <p className="mt-5 mb-3 text-body-secondary letra_roja"> SI TENES CUENTA ANDA PA' SHA BO... <Link to="/login">ARRANQUEMOS</Link></p>
               </form>
           </main>
         </>

@@ -1,20 +1,19 @@
 const express = require('express');
-const mysqlConnect = require('../database/bd')
+const conexionamysql = require('../database/bd')
 const bodyParser = require('body-parser');
 const router = express()
 const jwt = require('jsonwebtoken')
-//////////////////////////////
-//////////////////////////////
-// listar fabricantes
+
+// listar Estado de Cuenta
 // metodo GET
-//URL /fabricantes
-//parametros : ninguno
-router.get('/fabricantes', verificarToken,(req , res)=>{
+//URL /Cuenta_estado
+
+router.get('/Cuenta_estado', verificarToken,(req , res)=>{
     jwt.verify(req.token, 'siliconKey', (error, valido)=>{
         if(error){
             res.sendStatus(403);
         }else{
-            mysqlConnect.query('SELECT * FROM fabricantes', (error, registros)=>{
+            conexionamysql.query('SELECT * FROM Cuenta_estado', (error, registros)=>{
                 if(error){
                     console.log('Error en la base de datos', error)
                 }else{
@@ -24,14 +23,14 @@ router.get('/fabricantes', verificarToken,(req , res)=>{
         }
     })
 });
-// traer los  datos del fabricantes por el ID
+// traer estados de cuenta por el ID
 
 // metodo GET
-//URL /fabricantes/:id_fabricante
-//parametros : ninguno
-router.get('/fabricantes/:id_fabricante', (req , res)=>{
-    const { id_fabricante } = req.params
-    mysqlConnect.query('SELECT * FROM fabricantes WHERE id_fabricante=?', [id_fabricante], (error, registros)=>{
+//URL /cuenta_estado/:id_cue
+
+router.get('/cuenta_estado/:id_cue', (req , res)=>{
+    const { id_cue } = req.params
+    conexionamysql.query('SELECT * FROM cuenta_estado WHERE id_cue=?', [id_cue], (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -39,17 +38,17 @@ router.get('/fabricantes/:id_fabricante', (req , res)=>{
         }
     })
 })
-////////////////////insert de fabricante
+////////////////////insert de Estado de cuenta
 
 // metodo POST
-//URL /fabricantes/
+//URL /cuenta_estado/
 //parametros : en el cuerpo(body) 
-    // nombre
+    // estado
 
-router.post('/fabricantes', bodyParser.json(), (req , res)=>{
-    const { nombre }  = req.body
+router.post('/cuenta_estado', bodyParser.json(), (req , res)=>{
+    const { estado }  = req.body
   
-    mysqlConnect.query('INSERT INTO fabricantes (nombre) VALUES (?)', [nombre], (error, registros)=>{
+    conexionamysql.query('INSERT INTO cuenta_estado (estado) VALUES (?)', [estado], (error, registros)=>{
        if(error){
            console.log('Error en la base de datos', error)
        }else{
@@ -62,17 +61,17 @@ router.post('/fabricantes', bodyParser.json(), (req , res)=>{
 })
 
 
-////////////////////edicion de fabricante
+////////////////////edicion de Estado de Cuenta
 // metodo PUT
-//URL /fabricantes/:id_fabricante
+//URL /cuenta_estado/:id_cue
 //parametros : 
     // en el cuerpo(body) 
-    // nombre
-    // y el parametro que vamos a editar ->id_fabricante
-router.put('/fabricantes/:id_fabricante', bodyParser.json(), (req , res)=>{
-    const { nombre }  = req.body
-    const { id_fabricante } = req.params
-    mysqlConnect.query('UPDATE fabricantes SET nombre = ?  WHERE id_fabricante = ?', [nombre, id_fabricante], (error, registros)=>{
+    // estado
+    // y el parametro que vamos a editar ->id_cue
+router.put('/cuenta_estado/:id_cue', bodyParser.json(), (req , res)=>{
+    const { estado }  = req.body
+    const { id_cue } = req.params
+    conexionamysql.query('UPDATE cuenta_estado SET estado = ?  WHERE id_cue = ?', [estado, id_cue], (error, registros)=>{
        if(error){
            console.log('Error en la base de datos', error)
        }else{
@@ -84,26 +83,22 @@ router.put('/fabricantes/:id_fabricante', bodyParser.json(), (req , res)=>{
    })
 })
 
-///////////////////eliminacion de fabricante
-// metodo DELETE
-//URL /fabricantes/:id_fabricante
-//parametros : 
-// y el parametro que vamos a borrar logicamente ->id_fabricante
-router.delete('/fabricantes/:id_fabricante', bodyParser.json(), (req , res)=>{
-    const { actualizar }  = req.body
-    const { id_fabricante } = req.params
-    mysqlConnect.query('UPDATE fabricantes SET estado = ?  WHERE id_fabricante = ?', [actualizar, id_fabricante], (error, registros)=>{
-        if(error){
-            console.log('Error en la base de datos', error)
-        }else{
-            res.json({
-                status:true,
-                mensaje: "El cambio de estado se realizo correctamente"
-                })
+///////////////////eliminacion de estado de cuenta
+
+router.delete('/cuenta_estado/:id_cue', bodyParser.json(), (req , res)=>{
+    const { id_cue } = req.params;
+
+    conexionamysql.query('DELETE FROM cuenta_estado WHERE id_cue = ?', [id_cue], (error, registros) => {
+        if (error) {
+            console.log('error en la base de datos %s', error.message);
+            res.status(500).send('El registro ' + id_cue + ' no se eliminó correctamente');
+        } else {
+            res.status(200).send('El registro ' + id_cue + ' se eliminó correctamente');
         }
-    })
-})
- function verificarToken(req, res, next){
+    });
+});
+
+function verificarToken(req, res, next){
     const bearer= req.headers['authorization'];
     if(typeof bearer!=='undefined'){
         const token =bearer.split(" ")[1]
@@ -113,5 +108,6 @@ router.delete('/fabricantes/:id_fabricante', bodyParser.json(), (req , res)=>{
         res.send('Debe contener un token')
     }
  }
+
 //////////////////////////////
 module.exports= router;

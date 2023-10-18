@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import logoDeshacer from './assets/Deshacer.png';
-//import viteLogo from '/vite.svg'
+import viteLogo from '/vite.svg'
 import { Link } from "react-router-dom";
 import './Login.css'
 import * as API from './servicios/servicios'
@@ -31,12 +30,13 @@ const ingresar = async(event)=>{
 }
     return(
         <>
-          <main className="form-signin w-100 m-auto">
+            <div class="container-fluid">
+            <main class="form-signin w-100 m-auto">
               <form onSubmit={ingresar}>
-                  <a>
-                    <img src={logoDeshacer} className="logo" alt="Deshacer" style={{ width: 'auto', height: '250px' }} />
+                  <a href="https://vitejs.dev" target="_blank">
+                    <img src={viteLogo} classNameName="logo" alt="Vite logo" />
                   </a>
-                <h1 className="h3 mb-3 fw-normal">Entara</h1>
+                <h1 className="h3 mb-3 fw-normal">METELE PAPÁ</h1>
                 {
                  mensaje? 
                 <div className="alert alert-warning" role="alert">
@@ -52,7 +52,7 @@ const ingresar = async(event)=>{
                   onChange={(event)=>setUsername(event.target.value)}
                   className="form-control" 
                   id="floatingInput" 
-                  placeholder="equipodeshacer@gmail.com"
+                  placeholder="jose@gmail.com"
                   />
                   <label for="floatingInput">Usuario</label>
                 </div>
@@ -69,10 +69,13 @@ const ingresar = async(event)=>{
                   <label for="floatingPassword">Contraseña</label>
                 </div>
                
-                <button className="btn btn-primary" type="submit" >Ingresar</button>
-                <p className="mt-5 mb-3 text-body-secondary letra_roja"> Armate un Cuenta <Link to="/registro">Registrarse</Link></p>
+                <button className="btn btn-primary" type="submit" >PA' DENTRO</button>
+                <p className="mt-5 mb-3 text-body-secondary letra_roja"> ¡¡NO EXISTIS!! JAJAJA <Link to="/registro">ENCHUFALE DATA</Link></p>
               </form>
           </main>
+              
+            </div>
+          
         </>
     )
 }

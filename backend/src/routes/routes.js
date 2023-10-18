@@ -1,5 +1,5 @@
 const express = require('express');
-const mysqlConnect = require('../database/bd')
+const conexionamysql = require('../database/bd')
 const bodyParser = require('body-parser');
 
 const bcrypt= require('bcrypt');
@@ -8,9 +8,9 @@ const jwt= require('jsonwebtoken');
 
 const router = express()
 
-// listar modelos
+
 router.get('/', (req , res)=>{
-    res.send('SISTEMA OPERANDO CORRECTAMENTE')
+    res.send('SISTEMA CHIMI OPERANDO CORRECTAMENTE')
 })
 
 // REGISTRO DE USUARIOS
@@ -28,7 +28,7 @@ router.post('/registro', bodyParser.json() , (req , res)=>{
     }
     //  return
 
-    mysqlConnect.query('SELECT * FROM usuarios WHERE user=?', [user], (error, usuarios)=>{
+    conexionamysql.query('SELECT * FROM usuarios WHERE user=?', [user], (error, usuarios)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -39,7 +39,7 @@ router.post('/registro', bodyParser.json() , (req , res)=>{
                     mensaje:"Nombre de Usuario Existente" 
                 })
             }else{
-                mysqlConnect.query('INSERT INTO usuarios (apellido, nombre, dni, user, pass, correo, id_rol ) VALUES (?,?,?,?,?,?,?)', [apellido, nombre, dni, user, hash, correo, id_rol ], (error, registros)=>{
+                conexionamysql.query('INSERT INTO usuarios (apellido, nombre, dni, user, pass, correo, id_rol ) VALUES (?,?,?,?,?,?,?)', [apellido, nombre, dni, user, hash, correo, id_rol ], (error, registros)=>{
                     if(error){
                         console.log('Error en la base de datos al momento de insertar ----> ', error)
                     }else{
@@ -59,7 +59,7 @@ router.get('/menu/:id_rol',verificarToken, (req , res)=>{
         if(error){
             res.sendStatus(403);
         }else{
-            mysqlConnect.query('SELECT * FROM menu WHERE id_rol=?', [id_rol], (error, registros)=>{
+            conexionamysql.query('SELECT * FROM menu WHERE id_rol=?', [id_rol], (error, registros)=>{
                 if(error){
                     console.log('Error en la base de datos', error)
                 }else{
@@ -89,7 +89,7 @@ router.post('/login', bodyParser.json() , (req , res)=>{
         }) 
         return;
     }
-    mysqlConnect.query('SELECT * FROM usuarios WHERE user=?', [user], (error, usuario)=>{
+    conexionamysql.query('SELECT * FROM usuarios WHERE user=?', [user], (error, usuario)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{

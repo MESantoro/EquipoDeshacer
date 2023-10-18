@@ -1,10 +1,11 @@
 const express = require('express');
-const mysqlConnect = require('../database/bd')
+const conexionamysql = require('../database/bd')
 const bodyParser = require('body-parser');
 const router = express()
-// listar modelos
-router.get('/modelos', (req , res)=>{
-    mysqlConnect.query('SELECT m.id_modelo, m.nombre, f.nombre AS fabricante FROM modelos AS m INNER JOIN fabricantes AS f ON f.id_fabricante=m.id_fabricante', (error, registros)=>{
+
+// listar Formas de pago
+router.get('/forma_pago', (req , res)=>{
+    conexionamysql.query('SELECT * FROM forma_pago', (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -14,9 +15,9 @@ router.get('/modelos', (req , res)=>{
 })
 
 // traer los  datos del modelo por ID
-router.get('/modelos/:id_modelo', (req , res)=>{
-    const { id_modelo } = req.params
-    mysqlConnect.query('SELECT * FROM modelos WHERE id_modelo=?', [id_modelo], (error, registros)=>{
+router.get('/forma_pago/:id_pag', (req , res)=>{
+    const { id_pag } = req.params
+    conexionamysql.query('SELECT * FROM forma_pago WHERE id_pag=?', [id_pag], (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -24,11 +25,12 @@ router.get('/modelos/:id_modelo', (req , res)=>{
         }
     })
 })
-////////////////////insert de modulo
-router.post('/modelos', bodyParser.json(), (req , res)=>{
-     const { nombre, id_fabricante }  = req.body
+////////////////////insert de forma de pago
+
+router.post('/forma_pago', bodyParser.json(), (req , res)=>{
+     const { forma,  }  = req.body
     
-     mysqlConnect.query('INSERT INTO modelos (nombre, id_fabricante) VALUES (?, ?)', [nombre, id_fabricante], (error, registros)=>{
+     conexionamysql.query('INSERT INTO forma_pago (forma, ) VALUES (?, ?)', [forma, ], (error, registros)=>{
         if(error){
             res.json({
                 status:false,
@@ -45,22 +47,22 @@ router.post('/modelos', bodyParser.json(), (req , res)=>{
 // /////////////////////////////
 
 ////////////////////edicion de modulo
-router.put('/modelos/:id_modelo', bodyParser.json(), (req , res)=>{
-    const { nombre, id_fabricante }  = req.body
-    const { id_modelo } = req.params
-    mysqlConnect.query('UPDATE modelos SET nombre = ?, id_fabricante = ? WHERE id_modelo = ?', [nombre, id_fabricante, id_modelo], (error, registros)=>{
+router.put('/forma_pago/:id_pag', bodyParser.json(), (req , res)=>{
+    const { forma,  }  = req.body
+    const { id_pag } = req.params
+    conexionamysql.query('UPDATE forma_pago SET forma = ?,  = ? WHERE id_pag = ?', [forma, , id_pag], (error, registros)=>{
        if(error){
            console.log('Error en la base de datos', error)
        }else{
-           res.send('La edicion de registro ' +id_modelo+ ' se realizo correctamente')
+           res.send('La edicion de registro ' +id_pag+ ' se realizo correctamente')
        }
    })
 })
 // /////////////////////////////
-////////////////////eliminar un  modulo
-router.delete('/modelos/:id_modelo', bodyParser.json(), (req , res)=>{
-    const { id_modelo } = req.params
-    mysqlConnect.query('DELETE FROM modelos WHERE id_modelo = ?', [id_modelo], (error, registros)=>{
+////////////////////eliminar forma de pago
+router.delete('/forma_pago/:id_pag', bodyParser.json(), (req , res)=>{
+    const { id_pag } = req.params
+    conexionamysql.query('DELETE FROM forma_pago WHERE id_pag = ?', [id_pag], (error, registros)=>{
        if(error){
            
             res.json({
@@ -70,7 +72,7 @@ router.delete('/modelos/:id_modelo', bodyParser.json(), (req , res)=>{
        }else{
          res.json({
             status:true,
-            mensaje: 'La eliminacion del registro ' +id_modelo+ ' se realizo correctamente'
+            mensaje: 'La eliminacion del registro ' +id_pag+ ' se realizo correctamente'
         })
           
        }

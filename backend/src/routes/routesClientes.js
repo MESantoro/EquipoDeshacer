@@ -1,15 +1,17 @@
 const express = require('express');
-const mysqlConnect = require('../database/bd')
+const conexionamysql = require('../database/bd')
 const bodyParser = require('body-parser');
 const router = express()
 //////////////////////////////
 //////////////////////////////
-// listar de equipos
+// listar de clientes
 // metodo GET
-//URL /equipos
+//URL /clientes
 //parametros : ninguno
-router.get('/equipos', (req , res)=>{
-    mysqlConnect.query("SELECT e.id_equipo, e.nombre,te.nombre tipo_equipo ,concat_ws(' - ', m.nombre, f.nombre) modelo_fabricante, u.nombre lugar_ubicacion, e.serial, e.estado    FROM equipos AS e    INNER JOIN tipos_equipo AS te ON te.id_tipo_equipo=e.id_tipo_equipo  LEFT JOIN modelos AS m ON m.id_modelo=e.id_modelo LEFT JOIN ubicaciones AS u ON u.id_ubicacion=e.id_ubicacion LEFT JOIN fabricantes AS f ON f.id_fabricante = m.id_fabricante ", (error, registros)=>{
+router.get('/clientes', (req , res)=>{
+    //conexionamysql.query("SELECT e.id_cli, e.nombre,te.nombre ,concat_ws(' - ', m.nombre, f.nombre), u.nombre lugar_ubicacion, e.estado    FROM clientes AS e    INNER JOIN tipos_equipo AS te ON te.id_tip=e.id_tip  LEFT JOIN productos AS m ON m.id_pro=e.id_pro LEFT JOIN ubicaciones AS u ON u.id_ubicacion=e.id_ubicacion ", (error, registros)=>{
+    conexionamysql.query('SELECT * FROM clientes', (error, registros)=>{
+
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -19,10 +21,10 @@ router.get('/equipos', (req , res)=>{
 })
 
 
-router.put('/cambiar_estado_equipos/:id_equipo', bodyParser.json(), (req , res)=>{
+router.put('/cambiar_estado_clientes/:id_cli', bodyParser.json(), (req , res)=>{
     const { actualizar }  = req.body
-    const { id_equipo } = req.params
-    mysqlConnect.query('UPDATE equipos SET estado = ?  WHERE id_equipo = ?', [actualizar, id_equipo], (error, registros)=>{
+    const { id_cli } = req.params
+    conexionamysql.query('UPDATE clientes SET cli_estado = ?  WHERE id_cli = ?', [actualizar, id_cli], (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -33,74 +35,66 @@ router.put('/cambiar_estado_equipos/:id_equipo', bodyParser.json(), (req , res)=
         }
     })
 })
-// listar de equipos con filtros
+// listar de clientes con filtros
 // metodo POST
-//URL /equipos_filtrado
+//URL /clientes_filtrado
 //parametros : 
-    // filtros: id_modelo, nombre_equipo, id_ubicacion, id_tipo_equipo, serial
-router.post('/equipos_filtrado', bodyParser.json(),  (req , res)=>{
-    const { id_modelo, nombre_equipo, id_ubicacion, id_tipo_equipo, serial } = req.body
-    // console.log(id_modelo)
-    let my_query ="SELECT e.id_equipo, e.id_modelo ,e.nombre, te.nombre tipo_equipo ,concat_ws(' - ', m.nombre, f.nombre) modelo_fabricante, u.nombre lugar_ubicacion, e.serial, e.estado    FROM equipos AS e    INNER JOIN tipos_equipo AS te ON te.id_tipo_equipo=e.id_tipo_equipo  LEFT JOIN modelos AS m ON m.id_modelo=e.id_modelo LEFT JOIN ubicaciones AS u ON u.id_ubicacion=e.id_ubicacion LEFT JOIN fabricantes AS f ON f.id_fabricante = m.id_fabricante WHERE 1 ";
+    // filtros: id_cli, estado
+    router.post('/clientes_filtrado', bodyParser.json(), (req, res) => {
+        const { id_cli, cli_estado } = req.body;
+        let my_query = "SELECT id_cli, cli_estado FROM clientes WHERE 1 = 1";
     
-    if(id_modelo){
-        my_query = my_query + ` AND e.id_modelo='${id_modelo}'`;
-    }
-    if(id_ubicacion){
-        my_query = my_query + ` AND e.id_ubicacion='${id_ubicacion}'`;
-    }
-    if(nombre_equipo){
-        my_query = my_query + ` AND e.nombre like '%${nombre_equipo}%'`;
-    }
-    if(id_tipo_equipo){
-        my_query = my_query + ` AND e.id_tipo_equipo='${id_tipo_equipo}'`;
-    }
-    if(serial){
-        my_query = my_query + ` AND e.serial like '%${serial}%'`;
-    }
-
-    mysqlConnect.query(my_query, (error, registros)=>{
-        if(error){
-            console.log('Error en la base de datos', error)
-        }else{
-            res.json(registros)
+        if (id_cli) {
+            my_query += ` AND id_cli = ${id_cli}`;
         }
-    })
-})
-////////////////////insert de equipos
+        if (cli_estado) {
+            my_query += ` AND cli_estado = '${cli_estado}'`;
+        }
+    
+        conexionamysql.query(my_query, (error, registros) => {
+            if (error) {
+                console.log('Error en la base de datos', error);
+                res.status(500).json({ error: 'Error en la base de datos' });
+            } else {
+                res.json(registros);
+            }
+        });
+    });
+    
+////////////////////insert de clientes
 
 // metodo POST
-//URL /equipos/
+//URL /clientes/
 //parametros : en el cuerpo(body) 
-    // nombre, id_modelo, id_tipo_equipo, id_ubicacion, serial
+    // id_cli, nombre, apellido, direccion, correo, cli_estado, id_cue
 
-router.post('/equipos', bodyParser.json(), (req , res)=>{
-    const { nombre_equipo, id_modelo, id_tipo_equipo, id_ubicacion, serial }  = req.body
-    if(!nombre_equipo){
+router.post('/clientes', bodyParser.json(), (req , res)=>{
+    const { id_cli, nombre, apellido, direccion, correo, cli_estado, id_cue }  = req.body
+    if(!nombre){
         res.json({
             status:false,
-            mensaje: "El nombre del equipo es un campo obligatorio"
+            mensaje: "El nombre es un campo obligatorio"
         })
     }
-    if(!id_modelo){
+    if(!apellido){
         res.json({
             status:false,
-            mensaje: "El modelo del equipo es un campo obligatorio"
+            mensaje: "El apellido es un campo obligatorio"
         })
     }
-    if(!id_tipo_equipo){
+    if(!correo){
         res.json({
             status:false,
-            mensaje: "El tipo de equipo es un campo obligatorio"
+            mensaje: "El correo es un campo obligatorio"
         })
     }
-    if(!id_ubicacion){
+ /*   if(!id_cli){
         res.json({
             status:false,
-            mensaje: "La ubicacion del equipo es un campo obligatorio"
+            mensaje: "El ID del ciente es un campo obligatorio"
         })
-    }
-    mysqlConnect.query('INSERT INTO equipos (nombre, id_modelo, id_tipo_equipo, id_ubicacion, serial ) VALUES (?,?,?,?,?)', [nombre_equipo, id_modelo, id_tipo_equipo, id_ubicacion, serial ], (error, registros)=>{
+    }*/
+    conexionamysql.query('INSERT INTO clientes (id_cli, nombre, apellido, direccion, correo, cli_estado, id_cue  ) VALUES (?,?,?,?,?,?,?)', [id_cli, nombre, apellido, direccion, correo, cli_estado, id_cue ], (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -111,16 +105,15 @@ router.post('/equipos', bodyParser.json(), (req , res)=>{
         }
     })
 })
-// traer los  datos del equipo por el ID
+// traer los  datos del cliente por el ID
 
 // metodo GET
-//URL /equipos/:id_equipo
-//parametros : id_equipo
-router.get('/equipos/:id_equipo', (req , res)=>{
+//URL /clientes/:id_cli
+router.get('/clientes/:id_cli', (req , res)=>{
     
-    const { id_equipo } = req.params
-    console.log('entra aqui', id_equipo)
-    mysqlConnect.query('SELECT * FROM equipos WHERE id_equipo=?', [id_equipo], (error, registros)=>{
+    const { id_cli } = req.params
+    console.log('entra aqui', id_cli)
+    conexionamysql.query('SELECT * FROM clientes WHERE id_cli=?', [id_cli], (error, registros)=>{
         if(error){
             res.json({
                 status:false
@@ -131,65 +124,66 @@ router.get('/equipos/:id_equipo', (req , res)=>{
             }else{
                 res.json({
                     status:false,
-                    mensaje:"El ID del equipo no existe" 
+                    mensaje:"El ID del cliente no existe" 
                 });
             }
             
         }
     })
 })
-// metodo UPDATE
-//URL /equipos/
-//parametros : 
-    // y el parametro que vamos a borrar logicamente ->id_equipo
-    router.put('/equipos/:id_equipo', bodyParser.json(), (req , res)=>{
-        const { id_equipo } = req.params
-        const { id_modelo, nombre_equipo, id_ubicacion, id_tipo_equipo, serial } = req.body
+// edicion de clientes metodo UPDATE
+//URL /clientes/
+
+    router.put('/clientes/:id_cli', bodyParser.json(), (req , res)=>{
+        const { id_cli } = req.params
+        const { nombre, apellido, direccion, correo, cli_estado, id_cue } = req.body;
         console.log("esto es el body",req.body)
-        if(!nombre_equipo){
+        if(!nombre){
             res.json({
                 status:false,
-                mensaje: "El nombre del equipo es un campo obligatorio"
+                mensaje: "El nombre es un campo obligatorio"
             })
         }
-        if(!id_modelo){
+        if(!apellido){
             res.json({
                 status:false,
-                mensaje: "El modelo del equipo es un campo obligatorio"
+                mensaje: "El apellido es un campo obligatorio"
             })
         }
-        if(!id_tipo_equipo){
+        if(!correo){
             res.json({
                 status:false,
-                mensaje: "El tipo de equipo es un campo obligatorio"
+                mensaje: "El correo un campo obligatorio"
             })
         }
-        if(!id_ubicacion){
+        if(!id_cue){
             res.json({
                 status:false,
-                mensaje: "La ubicacion del equipo es un campo obligatorio"
+                mensaje: "El ID de la cuenta es un campo obligatorio"
             })
         }
-        mysqlConnect.query('SELECT * FROM equipos WHERE id_equipo=?', [id_equipo], (error, registros)=>{
+        conexionamysql.query('SELECT * FROM clientes WHERE id_cli=?', [id_cli], (error, registros)=>{
             if(error){
                 console.log('Error en la base de datos', error)
             }else{
 
                 if(registros.length>0){
-                    mysqlConnect.query('UPDATE equipos SET nombre=?, id_modelo=?, id_tipo_equipo=?, id_ubicacion=?, serial=?  WHERE id_equipo = ?', [nombre_equipo, id_modelo, id_tipo_equipo, id_ubicacion, serial ,id_equipo], (error, registros)=>{
-                        if(error){
-                            console.log('Error en la base de datos', error)
+                    conexionamysql.query('UPDATE clientes SET nombre = ?, apellido = ?, direccion = ?, correo = ?, cli_estado = ?, id_cue = ? WHERE id_cli = ?',
+    [nombre, apellido, direccion, correo, cli_estado, id_cue, id_cli], (error, registros) => {
+        if(error){
+            console.log('error en la base de datos %s', error.message)
+            res.status(500).send('la edicion no se realizo');
                         }else{
                             res.json({
                                 status:true,
-                                mensaje:"El registro " +id_equipo+ " se edito correctamente" 
+                                mensaje:"El registro " +id_cli+ " se edito correctamente" 
                             })
                         }
                     })
                 }else{
                     res.json({
                         status:false,
-                        mensaje:"El ID del equipo no existe" 
+                        mensaje:"El ID del cliente no existe" 
                     })
                 }
                 
@@ -197,34 +191,18 @@ router.get('/equipos/:id_equipo', (req , res)=>{
         })  
     })
 // metodo DELETE
-//URL /equipos/:id_equipo
-//parametros : 
-    // y el parametro que vamos a borrar logicamente ->id_equipo
-router.delete('/equipos/:id_equipo', bodyParser.json(), (req , res)=>{
-    const { id_equipo } = req.params
-    mysqlConnect.query('SELECT * FROM equipos WHERE id_equipo=?', [id_equipo], (error, registros)=>{
-        if(error){
-            console.log('Error en la base de datos', error)
-        }else{
-            if(registros.length>0){
-                mysqlConnect.query('UPDATE equipos SET estado = "B"  WHERE id_equipo = ?', [id_equipo], (error, registros)=>{
-                    if(error){
-                        console.log('Error en la base de datos', error)
-                    }else{
-                        res.json({
-                            status:true,
-                            mensaje:"El registro " +id_equipo+ " se dio de baja correctamente" 
-                        })
-                    }
-                })
-            }else{
-                res.json({
-                    status:false,
-                    mensaje:"El ID del equipo no existe" 
-                })
-            }
-            
+//URL /clientes/:id_cli
+router.delete('/clientes/:id_cli', bodyParser.json(), (req , res) => {
+    const { id_cli } = req.params;
+
+    conexionamysql.query('DELETE FROM clientes WHERE id_cli = ?', [id_cli], (error, registros) => {
+        if (error) {
+            console.log('error en la base de datos %s', error.message);
+            res.status(500).send('El registro ' + id_cli + ' no se eliminó correctamente');
+        } else {
+            res.status(200).send('El registro ' + id_cli + ' se eliminó correctamente');
         }
-    })  
-})
+    });
+});
+
 module.exports= router;

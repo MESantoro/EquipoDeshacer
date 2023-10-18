@@ -1,5 +1,5 @@
 const express = require('express');
-const mysqlConnect = require('../database/bd')
+const conexionamysql = require('../database/bd')
 const bodyParser = require('body-parser');
 const router = express()
 const jwt = require('jsonwebtoken')
@@ -16,7 +16,7 @@ router.get('/usuarios', verificarToken,(req , res)=>{
         if(error){
             res.sendStatus(403);
         }else{
-            mysqlConnect.query('SELECT u.id_usuario, u.apellido, u.nombre, u.user, u.correo, r.nombre rol, u.estado FROM usuarios AS u INNER JOIN roles AS r ON r.id_rol=u.id_rol ', (error, registros)=>{
+            conexionamysql.query('SELECT u.id_usuario, u.apellido, u.nombre, u.user, u.correo, r.nombre rol, u.estado FROM usuarios AS u INNER JOIN roles AS r ON r.id_rol=u.id_rol ', (error, registros)=>{
                 if(error){
                     console.log('Error en la base de datos', error)
                 }else{
@@ -33,7 +33,7 @@ router.get('/usuarios', verificarToken,(req , res)=>{
 //parametros : ninguno
 router.get('/usuarios/:id_usuario', (req , res)=>{
     const { id_usuario } = req.params
-    mysqlConnect.query('SELECT * FROM usuarios WHERE id_usuario=?', [id_usuario], (error, registros)=>{
+    conexionamysql.query('SELECT * FROM usuarios WHERE id_usuario=?', [id_usuario], (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -51,7 +51,7 @@ router.get('/usuarios/:id_usuario', (req , res)=>{
 router.post('/usuarios', bodyParser.json(), (req , res)=>{
     const { nombre }  = req.body
   
-    mysqlConnect.query('INSERT INTO usuarios (nombre) VALUES (?)', [nombre], (error, registros)=>{
+    conexionamysql.query('INSERT INTO usuarios (nombre) VALUES (?)', [nombre], (error, registros)=>{
        if(error){
            console.log('Error en la base de datos', error)
        }else{
@@ -74,7 +74,7 @@ router.post('/usuarios', bodyParser.json(), (req , res)=>{
 router.put('/usuarios/:id_usuario', bodyParser.json(), (req , res)=>{
     const { nombre }  = req.body
     const { id_usuario } = req.params
-    mysqlConnect.query('UPDATE usuarios SET nombre = ?  WHERE id_usuario = ?', [nombre, id_usuario], (error, registros)=>{
+    conexionamysql.query('UPDATE usuarios SET nombre = ?  WHERE id_usuario = ?', [nombre, id_usuario], (error, registros)=>{
        if(error){
            console.log('Error en la base de datos', error)
        }else{
@@ -90,7 +90,7 @@ router.put('/resetpass/:id_usuario', bodyParser.json(), (req , res)=>{
 
     let newPass= bcrypt.hashSync('siliconmisiones', 10);
     const { id_usuario } = req.params
-    mysqlConnect.query('UPDATE usuarios SET pass = ?  WHERE id_usuario = ?', [newPass, id_usuario], (error, registros)=>{
+    conexionamysql.query('UPDATE usuarios SET pass = ?  WHERE id_usuario = ?', [newPass, id_usuario], (error, registros)=>{
        if(error){
            console.log('Error en la base de datos', error)
        }else{
@@ -110,7 +110,7 @@ router.put('/resetpass/:id_usuario', bodyParser.json(), (req , res)=>{
 router.delete('/usuarios/:id_usuario', bodyParser.json(), (req , res)=>{
     const { actualizar }  = req.body
     const { id_usuario } = req.params
-    mysqlConnect.query('UPDATE usuarios SET estado = ?  WHERE id_usuario = ?', [actualizar, id_usuario], (error, registros)=>{
+    conexionamysql.query('UPDATE usuarios SET estado = ?  WHERE id_usuario = ?', [actualizar, id_usuario], (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
