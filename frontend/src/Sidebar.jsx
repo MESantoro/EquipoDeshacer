@@ -36,25 +36,25 @@ export function Sidebar(){
         <div class="container-fluid">
   <div class="row">
     <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-      <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+      <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabIndex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="sidebarMenuLabel">Comomomo</h5>
+          <h5 class="offcanvas-title" id="sidebarMenuLabel">MENUCITO</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
-        <ul className="nav flex-column">
-                            {menus.map((m)=>(
-                                <li className="nav-item">
-                                    <Link  className="nav-link active" aria-current="page"  to={m.href}>{m.nombre}</Link>
-                                
-                                </li>
+          <ul className="nav flex-column">
+            {menus.map((m) => (
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to={m.href}>
+                  {m.nombre}
+                </Link>
+              </li>
                             ))}
-                                <li className="nav-item">
+                                 <li className="nav-item">
                                     <Link  className="nav-link active" aria-current="page"  to='../generador'>Generador</Link>
-                                
-                                </li>
+                                 </li>
                             <li className="nav-link active"  aria-current="page" >{user}</li>
-                            <li><button  class="btn btn-danger" onClick={salir}>Cerrar Session</button></li>
+                            <li><button  class="btn btn-danger" onClick={salir}>RAJEMOS</button></li>
                             </ul>
           
         </div>
@@ -63,20 +63,20 @@ export function Sidebar(){
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Principal</h1>
+        <h1 class="h2">CLIENTES</h1>
         
       </div>
 
-      <h2>Section title</h2>
+      <h2>Tablero de Clientes</h2>
       <div class="table-responsive small">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
-              <th scope="col">Header</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido</th>
+              <th scope="col">DNI</th>
+              <th scope="col">Otro</th>
+              <th scope="col">Otro</th>
             </tr>
           </thead>
           <tbody>

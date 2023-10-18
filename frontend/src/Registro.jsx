@@ -168,8 +168,8 @@ export function Registro(){
                   />
                   <label for="password">Repita Password</label>
                 </div>
-                <button className="btn btn-primary" type="submit" >PA' DENTRO ESE REGISTRO</button>
-                <p className="mt-5 mb-3 text-body-secondary letra_roja"> SI TENES CUENTA ANDA PA' SHA BO... <Link to="/login">ARRANQUEMOS</Link></p>
+                <button type="submit" class="btn btn-outline-success">PA' DENTRO ESOS DATOS</button>
+                <p className="mt-5 mb-3 text-body-secondary letra_roja"> SI TENES CUENTA ANDA PA' SHA BO... <Link to="/login">ARRANQUEMOS Y LOGEATE</Link></p>
               </form>
           </main>
         </>

@@ -69,7 +69,7 @@ const ingresar = async(event)=>{
                   <label for="floatingPassword">Contraseña</label>
                 </div>
                
-                <button className="btn btn-primary" type="submit" >PA' DENTRO</button>
+                <button type="submit" class="btn btn-outline-success">PA' DENTRO</button>
                 <p className="mt-5 mb-3 text-body-secondary letra_roja"> ¡¡NO EXISTIS!! JAJAJA <Link to="/registro">ENCHUFALE DATA</Link></p>
               </form>
           </main>
