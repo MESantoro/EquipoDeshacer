@@ -26,13 +26,11 @@ export function Home() {
         <p className="lead">
           <a href="#" className="btn btn-lg btn-light fw-bold border-white bg-white">Ahi Vamos...</a>
         </p>
-        <Div>
         <nav className="nav nav-masthead justify-content-center">
             <Link to="/" className="nav-link fw-bold py-1 px-0 active">INICIO</Link>
             <Link to="/login" className="nav-link fw-bold py-1 px-0">LOGEO</Link>
             <Link to="/registro" className="nav-link fw-bold py-1 px-0">REGISTRATE</Link>
         </nav>
-        </Div>
       </main>
 
       <footer className="mt-auto">
