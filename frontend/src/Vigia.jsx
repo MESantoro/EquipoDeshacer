@@ -40,7 +40,7 @@ export function Vigia(){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-              html: ' Naningala - No tiene permiso <b></b> .',
+              html: ' Naningala - No tenes Permiso <b></b> .',
               timer: 2000,
               timerProgressBar: true,
               didOpen: () => {

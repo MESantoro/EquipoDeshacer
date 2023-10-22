@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import logoDeshacer from './assets/LogoDH23.png';
-//import viteLogo from '/vite.svg'
 import { Link } from "react-router-dom";
 import './Login.css';
 import * as API from './servicios/servicios';
@@ -52,7 +51,7 @@ return (
             onChange={(event) => setUsername(event.target.value)}
             className="form-control"
             id="floatingInput"
-            placeholder="ed@gmail.com"
+            placeholder="Tu Usuario: TitoPuentes"
           />
           <label htmlFor="floatingInput">Usuario</label>
         </div>
@@ -64,7 +63,7 @@ return (
             onChange={(event) => setPasword(event.target.value)}
             className="form-control"
             id="floatingPassword"
-            placeholder="Password"
+            placeholder="Tu Contraseña: 12345"
           />
           <label htmlFor="floatingPassword">Contraseña</label>
         </div>

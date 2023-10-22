@@ -1,89 +1,71 @@
+/* Colores personalizados */
+:root {
+    --main-bg-color: #f8f9fa; /* Color de fondo principal */
+    --dark-bg-color: #333; /* Color de fondo oscuro */
+    --text-color: #000; /* Color de texto principal */
+    --label-color: #070707; /* Color de texto para etiquetas */
+    --btn-text-color: #151414; /* Color de texto de botones */
+    --btn-hover-bg-color: #0e6e87; /* Color de fondo del botón al pasar el mouse */
+    --red-color: #ff0000; /* Color rojo personalizado */
+}
+
+/* Reutiliza colores personalizados en lugar de valores directos */
 .logo {
-    max-width: 50px; /* Ancho máximo de 100px */
-    height: auto; /* Altura ajustada automáticamente */
-    max-width: 100px; /* Tamaño máximo de la imagen del logo */
-    display: block; /* Centra la imagen horizontalmente */
-    margin: 0 auto; /* Centra la imagen horizontalmente */
+    max-width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
-@keyframes logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-}
-  
-@media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) 
-    .logo {
-      animation: logo-spin infinite 20s linear;
-    }
+.letra_roja {
+    color: var(--red-color) !important;
 }
 
-.letra_roja{
-    color: rgb(255, 0, 0) !important;
-}
-
+/* Estilos generales para fondo y texto */
 .dark-bg {
-    background-color: #333; /* Fondo oscuro */
-    color: #fff; /* Color de texto blanco */
-    /* Otros estilos personalizados */
+    background-color: var(--dark-bg-color);
+    color: #fff;
 }
 
-.dark-bg label {
-    color: #070707; /* Color de texto blanco para las etiquetas */
-}
-
-/* Estilos para el formulario personalizado */
-.custom-form {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    max-width: 600px;
-    margin: auto;
-    padding: 10px; /* Margen interior para separar el contenido del formulario del borde */
-}
-  
-  /* Estilos para reducir el tamaño de los campos de entrada y espacios */
+/* Estilos para reducir el tamaño de los campos de entrada y etiquetas */
 .custom-form .form-control {
-    padding: 10px; /* Ajustar el espacio interior del campo de entrada */
-    font-size: 16px; /* Tamaño de fuente para los campos de entrada */
+    padding: 10px; /* Reducido para evitar campos grandes */
+    font-size: 16px;
 }
-  
+
 .custom-form label {
-    font-size: 14px; /* Tamaño de fuente para las etiquetas */
+    font-size: 14px;
+    color: var(--label-color);
 }
-  
-  /* Estilos adicionales para hacer que el formulario se vea elegante */
+
+/* Estilos para botones */
 .custom-form .btn {
-    color: #151414; /* Color del texto del botón */
+    color: var(--btn-text-color);
     transition: background-color 0.2s;
-} */
-  
-.custom-form .btn:hover {
-    background-color: #0e6e87; /* Cambia el color de fondo en el hover */
-} 
-  
-  /* Estilos para el fondo oscuro */
-.dark-bg {
-    background-color: #333; /* Cambia el color de fondo a un tono oscuro */
 }
-  
-  /* Estilos para cambiar el color de la letra a blanco */
+
+.custom-form .btn:hover {
+    background-color: var(--btn-hover-bg-color);
+}
+
+/* Estilos para el fondo oscuro */
+.dark-bg {
+    background-color: var(--dark-bg-color);
+}
+
+/* Estilos para cambiar el color de la letra a blanco */
 .custom-form, .custom-form label, .custom-form .btn, .custom-form .alert {
-    color: #000000; /* Color del texto en blanco */
+    color: var(--text-color);
 }
 
 .form-container {
-    background-color: #f8f9fa; /* Color de fondo */
-    padding: 20px; /* Espacio interior */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Sombra */
-    max-width: 600px; /* Ancho máximo del formulario */
-    margin: auto; /* Centrado horizontal */
+    background-color: var(--main-bg-color);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin: auto;
 }
+
 
 
