@@ -14,6 +14,11 @@
   -webkit-text-size-adjust: 100%;
 }
 
+.logo {
+  max-width: 60px; /* Ancho máximo de 100px */
+  height: auto; /* Altura ajustada automáticamente */
+}
+
 /* 
 body {
   margin: 0;
@@ -44,4 +49,11 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+.custom-form {
+  width: 80%; /* Ancho del formulario */
+  max-width: 200px; /* Máximo ancho del formulario */
+  padding: 10px; /* Margen interior para separar el contenido del formulario del borde */
+
+  /* Puedes agregar otros estilos personalizados según tus preferencias */
 }

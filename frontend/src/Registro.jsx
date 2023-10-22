@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import viteLogo from '/vite.svg'
+import logoDeshacer from './assets/LogoDH23.png';
+//import viteLogo from '/vite.svg'
 import { Link } from "react-router-dom";
 import * as API from './servicios/servicios'
+import './Registro.css';
 
 export function Registro(){
     
@@ -32,7 +34,7 @@ export function Registro(){
         }
        return;
       }else{
-        setMensajeAlerta('Las contraseñas deben ser iguales.')
+        setMensajeAlerta('Hey!! Las contraseñas deben ser iguales')
         setTimeout(()=>{
           setMensajeAlerta('')
           setPassDos('')
@@ -62,116 +64,119 @@ export function Registro(){
          
     }
 
-    return(
-        <>
-        <main className="form-signin w-100 m-auto">
-              <form onSubmit={registro}>
-                  <a href="https://vitejs.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                  </a>
-                <h1 className="h3 mb-3 fw-normal">METELE DATOS CHIMI</h1>
-                
-                <div className="form-floating">
-                  <input 
-                  type="text" 
-                  value={apellido}
-                  onChange={(event)=>setApellido(event.target.value)}
-                  className="form-control" 
-                  id="apellido" 
-                  />
-                  <label for="apellido">Apellido</label>
-                </div>
-                <div className="form-floating">
-                  <input 
-                  type="text" 
-                  value={nombre}
-                  onChange={(event)=>setNombre(event.target.value)}
-                  className="form-control" 
-                  id="nombre" 
-                  />
-                  <label for="nombre">Nombre</label>
-                </div>
-
-                <div className="form-floating">
-                  <input 
-                  type="number" 
-                  value={dni}
-                  onChange={(event)=>setDni(event.target.value)}
-                  className="form-control" 
-                  id="dni" 
-                  />
-                  <label for="dni">DNI</label>
-                </div>
-                <div className="form-floating">
-                <input 
-                  type="email" 
-                  value={correo}
-                  onChange={(event)=>setCorreo(event.target.value)}
-                  className="form-control" 
-                  id="correo" 
-                  />
-                  <label for="correo">Correo</label>
-                </div>
-                
-                <div className="form-floating">
-                  <input 
-                  required
-                  type="text" 
-                  value={user}
-                  onChange={(event)=>setUser(event.target.value)}
-                  onBlur={(event)=>validarNick(event.target.value)}
-                  className="form-control" 
-                  id="user" 
-                  />
-                  {
-                 nick? 
-                
-                 <i class="bi bi-check-circle"></i>
-                
-                :<></>
-                  }
-                  <label for="usuario">Usuario</label>
-                </div>
-                {
-                 mensajeAlertaNick? 
-                <div className="alert alert-danger" role="alert">
-                 {mensajeAlertaNick}
-                </div>
-                :<></>
-                  }
-                <div className="form-floating">
-                  <input 
-                  required
-                  type="password" 
-                  value={pass}
-                  onChange={(event)=>setPass(event.target.value)}
-                  className="form-control" 
-                  id="pass" 
-                  />
-                  <label for="password">Password</label>
-                </div>
-                {
-                 mensajeAlerta? 
-                <div className="alert alert-danger" role="alert">
-                 {mensajeAlerta}
-                </div>
-              :<></>
-                  }
-                <div className="form-floating">
-                  <input 
-                  required
-                  type="password" 
-                  value={pass2}
-                  onChange={(event)=>setPassDos(event.target.value)}
-                  className="form-control" 
-                  id="pass2" 
-                  />
-                  <label for="password">Repita Password</label>
-                </div>
-                <button type="submit" class="btn btn-outline-success">PA' DENTRO ESOS DATOS</button>
-                <p className="mt-5 mb-3 text-body-secondary letra_roja"> SI TENES CUENTA ANDA PA' SHA BO... <Link to="/login">ARRANQUEMOS Y LOGEATE</Link></p>
-              </form>
-          </main>
-        </>
+    return (
+      <>
+        <main className="form-signin d-flex justify-content-center align-items-center h-100">
+          <form onSubmit={registro} className="form-container">
+            <a>
+              <img src={logoDeshacer} className="logo" alt="LogoDH23" />
+            </a>
+            <h1 className="h3 mb-3 fw-normal">METELE DATOS CHIMI</h1>
+    
+            <div className="form-floating mb-3">
+              <input
+                type="text"
+                value={apellido}
+                onChange={(event) => setApellido(event.target.value)}
+                className="form-control"
+                id="apellido"
+              />
+              <label htmlFor="apellido">Apellido</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                type="text"
+                value={nombre}
+                onChange={(event) => setNombre(event.target.value)}
+                className="form-control"
+                id="nombre"
+              />
+              <label htmlFor="nombre">Nombre</label>
+            </div>
+    
+            <div className="form-floating mb-3">
+              <input
+                type="number"
+                value={dni}
+                onChange={(event) => setDni(event.target.value)}
+                className="form-control"
+                id="dni"
+              />
+              <label htmlFor="dni">Dni</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                type="email"
+                value={correo}
+                onChange={(event) => setCorreo(event.target.value)}
+                className="form-control"
+                id="correo"
+              />
+              <label htmlFor="correo">Correo</label>
+            </div>
+    
+            <div className="form-floating mb-3">
+              <input
+                required
+                type="text"
+                value={user}
+                onChange={(event) => setUser(event.target.value)}
+                onBlur={(event) => validarNick(event.target.value)}
+                className="form-control"
+                id="user"
+              />
+              {nick ? (
+                <i className="bi bi-check-circle"></i>
+              ) : (
+                <></>
+              )}
+              <label htmlFor="usuario">Usuario</label>
+            </div>
+            {mensajeAlertaNick ? (
+              <div className="alert alert-danger" role="alert">
+                {mensajeAlertaNick}
+              </div>
+            ) : (
+              <></>
+            )}
+            <div className="form-floating mb-3">
+              <input
+                required
+                type="password"
+                value={pass}
+                onChange={(event) => setPass(event.target.value)}
+                className="form-control"
+                id="pass"
+              />
+              <label htmlFor="password">Contraseña ♫</label>
+            </div>
+            {mensajeAlerta ? (
+              <div className="alert alert-danger" role="alert">
+                {mensajeAlerta}
+              </div>
+            ) : (
+              <></>
+            )}
+            <div className="form-floating mb-3">
+              <input
+                required
+                type="password"
+                value={pass2}
+                onChange={(event) => setPassDos(event.target.value)}
+                className="form-control"
+                id="pass2"
+              />
+              <label htmlFor="password">Igualita a la Contraseña anterior ♫</label>
+            </div>
+            <button type="submit" className="btn btn-outline-success">
+              PA' DENTRO ESOS DATOS
+            </button>
+            <p className="mt-4 mb-3 text-body-secondary letra_roja">
+              SI TENES CUENTA ANDA PA' SHA BO...{" "}
+              <Link to="/login">ARRANQUEMOS Y LOGEATE</Link>
+            </p>
+          </form>
+        </main>
+      </>
     )
-}
+ }    

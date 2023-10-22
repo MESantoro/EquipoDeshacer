@@ -54,7 +54,7 @@ export function Sidebar(){
                                     <Link  className="nav-link active" aria-current="page"  to='../generador'>Generador</Link>
                                  </li>
                             <li className="nav-link active"  aria-current="page" >{user}</li>
-                            <li><button  class="btn btn-danger" onClick={salir}>RAJEMOS</button></li>
+                            <li><button  class="btn btn-outline-danger" onClick={salir}>RAJEMOS</button></li>
                             </ul>
           
         </div>

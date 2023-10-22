@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import viteLogo from '/vite.svg'
+import logoDeshacer from './assets/LogoDH23.png';
+//import viteLogo from '/vite.svg'
 import { Link } from "react-router-dom";
-import './Login.css'
-import * as API from './servicios/servicios'
+import './Login.css';
+import * as API from './servicios/servicios';
 
 export function Login(){
 const [user, setUsername]= useState('')
@@ -13,69 +14,67 @@ const ingresar = async(event)=>{
   event.preventDefault();
   const usuario = await API.Login({user, pass})
   console.log(usuario);
+
    if(usuario.status){
     window.localStorage.setItem('usuario',JSON.stringify(usuario.datos[0]) )
     window.localStorage.setItem('token', JSON.stringify(usuario.token))
     window.location.href='/principal';
-   }else{
-
-    
+   }else{    
     setMensaje(usuario.mensaje)
         setTimeout(()=>{
             setMensaje('')
-            
-            }, 5000)
+        }, 5000)
    }
   return;
 }
-    return(
-        <>
-            <div class="container-fluid">
-            <main class="form-signin w-100 m-auto">
-              <form onSubmit={ingresar}>
-                  <a href="https://vitejs.dev" target="_blank">
-                    <img src={viteLogo} classNameName="logo" alt="Vite logo" />
-                  </a>
-                <h1 className="h3 mb-3 fw-normal">METELE PAPÁ</h1>
-                {
-                 mensaje? 
-                <div className="alert alert-warning" role="alert">
-                 {mensaje}
-                </div>
-              :<></>
-                  }
-                <div className="form-floating">
-                  <input 
-                  required
-                  type="text" 
-                  value={user}
-                  onChange={(event)=>setUsername(event.target.value)}
-                  className="form-control" 
-                  id="floatingInput" 
-                  placeholder="jose@gmail.com"
-                  />
-                  <label for="floatingInput">Usuario</label>
-                </div>
-                <div className="form-floating">
-                  <input
-                  required 
-                  type="password" 
-                  value={pass} 
-                  onChange={(event)=>setPasword(event.target.value)}
-                  className="form-control" 
-                  id="floatingPassword" 
-                  placeholder="Password"
-                  />
-                  <label for="floatingPassword">Contraseña</label>
-                </div>
-               
-                <button type="submit" class="btn btn-outline-success">PA' DENTRO</button>
-                <p className="mt-5 mb-3 text-body-secondary letra_roja"> ¡¡NO EXISTIS!! JAJAJA <Link to="/registro">ENCHUFALE DATA</Link></p>
-              </form>
-          </main>
-              
-            </div>
-          
-        </>
-    )
+return (
+  <div className="form-signin d-flex justify-content-center align-items-center h-100">
+    <main className="form-signin custom-form">
+      <form onSubmit={ingresar} className="form-container">
+        <div className="text-center mb-4">
+          <a>
+            <img src={logoDeshacer} className="logo" alt="LogoDH23" />
+          </a>
+          <h1 className="h4 mb-3 fw-normal">LOGEO</h1>
+        </div>
+        {mensaje ? (
+          <div className="alert alert-warning" role="alert">
+            {mensaje}
+          </div>
+        ) : (
+          <></>
+        )}
+        <div className="mb-3">
+          <input
+            required
+            type="text"
+            value={user}
+            onChange={(event) => setUsername(event.target.value)}
+            className="form-control"
+            id="floatingInput"
+            placeholder="ed@gmail.com"
+          />
+          <label htmlFor="floatingInput">Usuario</label>
+        </div>
+        <div className="mb-3">
+          <input
+            required
+            type="password"
+            value={pass}
+            onChange={(event) => setPasword(event.target.value)}
+            className="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+          <label htmlFor="floatingPassword">Contraseña</label>
+        </div>
+
+        <button type="submit" className="btn btn-outline-success">PA' DENTRO</button>
+        <p className="mt-4 mb-3 text-center text-body-secondary letra_roja">
+          ¡¡NO EXISTIS!! JAJAJA <Link to="/registro">ENCHUFALE DATA Y ANDA AL REGISTRO</Link>
+        </p>
+      </form>
+    </main>
+  </div>
+)
 }

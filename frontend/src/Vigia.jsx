@@ -18,7 +18,7 @@ export function Vigia(){
         const respuesta= await API.ver_permisos({id_rol, menu });
         if(respuesta.status){
             setPermisoDenegado(true)
-            console.log('puedo')
+            //console.log('puedo')
            
         }else{
             // Swal.fire({
@@ -40,7 +40,7 @@ export function Vigia(){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-              html: ' No tiene permiso <b></b> .',
+              html: ' Naningala - No tiene permiso <b></b> .',
               timer: 2000,
               timerProgressBar: true,
               didOpen: () => {
