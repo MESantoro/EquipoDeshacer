@@ -1,11 +1,11 @@
 /* Colores personalizados */
 :root {
     --main-bg-color: #f8f9fa; /* Color de fondo principal */
-    --dark-bg-color: #333; /* Color de fondo oscuro */
+    --dark-bg-color: #4b4b4b; /* Color de fondo oscuro */
     --text-color: #000; /* Color de texto principal */
     --label-color: #070707; /* Color de texto para etiquetas */
     --btn-text-color: #151414; /* Color de texto de botones */
-    --btn-hover-bg-color: #0e6e87; /* Color de fondo del botón al pasar el mouse */
+    --btn-hover-bg-color: #4af904be; /* Color de fondo del botón al pasar el mouse */
     --red-color: #ff0000; /* Color rojo personalizado */
 }
 
@@ -34,7 +34,7 @@
 }
 
 .custom-form label {
-    font-size: 14px;
+    font-size: 1px;
     color: var(--label-color);
 }
 

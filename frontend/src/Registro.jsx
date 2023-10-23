@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import logoDeshacer from './assets/LogoDH23.png';
-//import viteLogo from '/vite.svg'
 import { Link } from "react-router-dom";
 import * as API from './servicios/servicios'
-import './Registro.css';
+
 
 export function Registro(){
     
@@ -148,7 +147,7 @@ export function Registro(){
                 className="form-control"
                 id="pass"
               />
-              <label htmlFor="password">Contraseña ♫</label>
+              <label htmlFor="password">Clave ♫</label>
             </div>
             {mensajeAlerta ? (
               <div className="alert alert-danger" role="alert">
@@ -166,7 +165,7 @@ export function Registro(){
                 className="form-control"
                 id="pass2"
               />
-              <label htmlFor="password">Igualita a la Contraseña anterior ♫</label>
+              <label htmlFor="password">Igualita a la Clave anterior ♫</label>
             </div>
             <button type="submit" className="btn btn-outline-success">
               PA' DENTRO ESOS DATOS

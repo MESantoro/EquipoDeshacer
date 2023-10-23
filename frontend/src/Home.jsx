@@ -23,13 +23,11 @@ export function Home() {
       <main className="px-3">
         <h1>EQUIPO DESHACER</h1>
         <p className="lead">¡¡¡Creando, Trabajando y Logrando... para luego Deshacer!!!</p>
-        <p className="lead">
-          <a href="#" className="btn btn-lg btn-light fw-bold border-white bg-white">Ahi Vamos...</a>
-        </p>
+        <p className="lead"> Ahi Vamos...</p>
       </main>
 
       <footer className="mt-auto">
-        <p>Trabajo realizado por ®Mieres, ®Baldi, ®Pomar y ®Santoro <a href="https://getbootstrap.com/" className="text-white"></a><a href="https://twitter.com/mdo" className="text-white"></a>.</p>
+        <p>Trabajo realizado por: ®Mieres - ®Baldi - ®Pomar - ®Santoro <a href="https://getbootstrap.com/" className="text-white"></a><a href="https://twitter.com/mdo" className="text-white"></a>.</p>
       </footer>
       <div>
         <nav className="nav nav-masthead justify-content-center">

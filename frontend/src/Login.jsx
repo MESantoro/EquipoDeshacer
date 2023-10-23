@@ -34,7 +34,7 @@ return (
           <a>
             <img src={logoDeshacer} className="logo" alt="LogoDH23" />
           </a>
-          <h1 className="h4 mb-3 fw-normal">LOGEO</h1>
+          <h1 className="h4 mb-3 fw-normal">LOGEO DH23</h1>
         </div>
         {mensaje ? (
           <div className="alert alert-warning" role="alert">
@@ -63,9 +63,9 @@ return (
             onChange={(event) => setPasword(event.target.value)}
             className="form-control"
             id="floatingPassword"
-            placeholder="Tu Contraseña: 12345"
+            placeholder="Tu Clave: 12345"
           />
-          <label htmlFor="floatingPassword">Contraseña</label>
+          <label htmlFor="floatingPassword">Clave</label>
         </div>
 
         <button type="submit" className="btn btn-outline-success">PA' DENTRO</button>
