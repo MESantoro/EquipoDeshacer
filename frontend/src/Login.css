@@ -3,7 +3,7 @@
     --main-bg-color: #f8f9fa; /* Color de fondo principal */
     --dark-bg-color: #4b4b4b; /* Color de fondo oscuro */
     --text-color: #000; /* Color de texto principal */
-    --label-color: #070707; /* Color de texto para etiquetas */
+    --label-color: #292727; /* Color de texto para etiquetas */
     --btn-text-color: #151414; /* Color de texto de botones */
     --btn-hover-bg-color: #4af904be; /* Color de fondo del botón al pasar el mouse */
     --red-color: #ff0000; /* Color rojo personalizado */
@@ -29,12 +29,12 @@
 
 /* Estilos para reducir el tamaño de los campos de entrada y etiquetas */
 .custom-form .form-control {
-    padding: 10px; /* Reducido para evitar campos grandes */
+    padding: 8px; /* Reducido para evitar campos grandes */
     font-size: 16px;
 }
 
 .custom-form label {
-    font-size: 1px;
+    font-size: 20px;
     color: var(--label-color);
 }
 
@@ -54,13 +54,13 @@
 }
 
 /* Estilos para cambiar el color de la letra a blanco */
-.custom-form, .custom-form label, .custom-form .btn, .custom-form .alert {
+.custom-form, .custom-form .btn, .custom-form .alert {
     color: var(--text-color);
 }
 
 .form-container {
     background-color: var(--main-bg-color);
-    padding: 10px;
+    padding: 8px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     max-width: 800px;

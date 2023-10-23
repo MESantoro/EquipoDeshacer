@@ -42,4 +42,16 @@
   .navbar .form-control {
     padding: .75rem 1rem;
   }
+
+
+/* Estilos para el botón en el menú reducido en estado hover (al pasar el mouse sobre el botón) */
+.navbar-nav .nav-link:hover {
+  background-color: #2ab300; /* Cambia el color de fondo en el hover */
+}
+
+/* Estilos para el botón en el menú reducido en estado activo (cuando se hace clic en el botón) */
+.navbar-nav .nav-link:active {
+  background-color: #899c76; /* Cambia el color de fondo cuando se hace clic */
+}
+
   

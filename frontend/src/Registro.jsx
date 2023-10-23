@@ -70,9 +70,9 @@ export function Registro(){
             <a>
               <img src={logoDeshacer} className="logo" alt="LogoDH23" />
             </a>
-            <h1 className="h3 mb-3 fw-normal">METELE DATOS CHIMI</h1>
+            <h1 className="h3 mb-2 fw-normal">METELE DATOS CHIMI</h1>
     
-            <div className="form-floating mb-3">
+            <div className="form-floating mb-1">
               <input
                 type="text"
                 value={apellido}
@@ -82,7 +82,7 @@ export function Registro(){
               />
               <label htmlFor="apellido">Apellido</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className="form-floating mb-1">
               <input
                 type="text"
                 value={nombre}
@@ -93,7 +93,7 @@ export function Registro(){
               <label htmlFor="nombre">Nombre</label>
             </div>
     
-            <div className="form-floating mb-3">
+            <div className="form-floating mb-1">
               <input
                 type="number"
                 value={dni}
@@ -103,7 +103,7 @@ export function Registro(){
               />
               <label htmlFor="dni">Dni</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className="form-floating mb-1">
               <input
                 type="email"
                 value={correo}
@@ -114,7 +114,7 @@ export function Registro(){
               <label htmlFor="correo">Correo</label>
             </div>
     
-            <div className="form-floating mb-3">
+            <div className="form-floating mb-1">
               <input
                 required
                 type="text"
@@ -138,7 +138,7 @@ export function Registro(){
             ) : (
               <></>
             )}
-            <div className="form-floating mb-3">
+            <div className="form-floating mb-1">
               <input
                 required
                 type="password"
@@ -147,7 +147,7 @@ export function Registro(){
                 className="form-control"
                 id="pass"
               />
-              <label htmlFor="password">Clave ♫</label>
+              <label htmlFor="password">♫ Clave ♫</label>
             </div>
             {mensajeAlerta ? (
               <div className="alert alert-danger" role="alert">
@@ -156,7 +156,7 @@ export function Registro(){
             ) : (
               <></>
             )}
-            <div className="form-floating mb-3">
+            <div className="form-floating mb-1">
               <input
                 required
                 type="password"
@@ -165,15 +165,15 @@ export function Registro(){
                 className="form-control"
                 id="pass2"
               />
-              <label htmlFor="password">Igualita a la Clave anterior ♫</label>
+              <label htmlFor="password">♫ Igualita a la Clave anterior ♫</label>
             </div>
             <button type="submit" className="btn btn-outline-success">
               PA' DENTRO ESOS DATOS
             </button>
-            <p className="mt-4 mb-3 text-body-secondary letra_roja">
+            <p className="mt-4 mb-1 text-body-secondary letra_roja">
               SI TENES CUENTA ANDA PA' SHA BO...{" "}
               <Link to="/login">ARRANQUEMOS Y LOGEATE</Link>
-            </p>
+            </p> 
           </form>
         </main>
       </>
