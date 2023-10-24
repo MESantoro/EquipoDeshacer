@@ -13,10 +13,10 @@ import { Link } from "react-router-dom";
     )
 
 // Funcion para cambio de estados 
-const cambiar_estado = async (e, id_cliente, estado_actual)=>{
+const cambiar_estado = async (e, id_cli, estado_actual)=>{
     e.preventDefault();
     const actualizar = (estado_actual=="O")?"X":"O";
-    const respuesta= await API.ActualizarEstadoCliente(id_cliente, {actualizar});
+    const respuesta= await API.ActualizarEstadoCliente(id_cli, {actualizar});
     if(respuesta.status){
         setMensaje(respuesta.mensaje)
         setTimeout(()=>{
@@ -58,12 +58,12 @@ const cambiar_estado = async (e, id_cliente, estado_actual)=>{
                 <td >{cc.cli_estado}</td>
                 <td >{cc.id_cue}</td>
                 <td >
-                    <Link to={`/editcliente/${cc.id_cliente}`} ><button class="btn btn-warning btn-sm">Editar</button></Link>
+                    <Link to={`/editcliente/${cc.id_cli}`} ><button class="btn btn-warning btn-sm">Editar</button></Link>
                 </td>
                 {(cc.cli_estado=="X")?
-                <td><button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, cc.id_cliente, cc.cli_estado )}>Desactivar</button></td>
+                <td><button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, cc.id_cli, cc.cli_estado )}>Desactivar</button></td>
                 :
-                <td><button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, cc.id_cliente, cc.cli_estado )} >Activar</button></td>
+                <td><button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, cc.id_cli, cc.cli_estado )} >Activar</button></td>
                 }
                 
                 </tr>
