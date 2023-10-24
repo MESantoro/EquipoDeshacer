@@ -23,8 +23,6 @@ export function Sidebar(){
       setMenu(datos.menu)
   }
 
-  
-
   const salir = ()=>{
       localStorage.removeItem('usuario');
       window.location.href='/';

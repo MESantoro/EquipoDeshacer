@@ -15,6 +15,7 @@ export function Home() {
     <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column bg-dark text-white text-center">
       <header className="mb-auto">
         <div>
+         
           <h3 className="mb-0">PANTALLA PRINCIPAL</h3>
           
         </div>
@@ -31,7 +32,7 @@ export function Home() {
       </footer>
       <div>
         <nav className="nav nav-masthead justify-content-center">
-            <Link to="/login" className="nav-link fw-bold py-1 px-0">LOGEO</Link>
+            <Link to="/login" className="nav-link fw-bold py-1 px-0">LOGUEO</Link>
         </nav>
       </div>
       <div>

@@ -7,9 +7,9 @@ import { Login } from './Login'
 import { Principal } from './Principal'
 import { Registro } from './Registro'
 
-/*import { Cuenta_Estado } from './componentesJSX/cuenta_estado/Cuenta_Estado' //listo
-import { Cliente } from './componentesJSX/cliente/Cliente' //listo
-import { Formas_Pago } from './componentesJSX/formas_pago/Formas_Pago' //listo
+import { Cuenta_Estado } from './componentesJSX/Cuenta_Estado/CuentaEstado' //listo
+import { Cliente } from './componentesJSX/Cliente/Cliente' //listo
+/* import { Formas_Pago } from './componentesJSX/formas_pago/Formas_Pago' //listo
 import { AddCuenta_Estado } from './componentesJSX/cuenta_estado/AddCuenta_Estado' //listo
 import { AddFormas_Pago } from './componentesJSX/formas_pago/AddFormas_Pago' //listo
 import { EditCuenta_Estado } from './componentesJSX/cuenta_estado/EditCuenta_Estado' //listo
@@ -29,9 +29,9 @@ function App() {
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/principal' element={<Principal/>}></Route>
         <Route path='/registro' element={<Registro/>}></Route>
-        {/* <Route path='/cliente' element={<Cliente/>}></Route>
+        <Route path='/cliente' element={<Cliente/>}></Route>
         <Route path='/cuenta_estado' element={<Cuenta_Estado/>}></Route>
-        <Route path='/ubicaciones' element={<Ubicaciones/>}></Route>
+        {/* <Route path='/ubicaciones' element={<Ubicaciones/>}></Route>
         <Route path='/usuarios' element={<Usuarios/>}></Route>
         <Route path='/formas_pago' element={<Formas_Pago/>}></Route>
         <Route path='/producto' element={<Producto/>}></Route>

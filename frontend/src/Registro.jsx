@@ -18,8 +18,6 @@ export function Registro(){
     const [correo, setCorreo]= useState('')
     const [id_rol, setIdRol]= useState('1')
 
-
-
     const registro = async(event)=>{
       event.preventDefault();
       if(pass == pass2){
@@ -29,11 +27,10 @@ export function Registro(){
            window.location.href='/login'
         }else{
           alert(registro.mensaje)
-         
         }
        return;
       }else{
-        setMensajeAlerta('Hey!! Las contraseñas deben ser iguales')
+        setMensajeAlerta('Hey!! Las Claves deben ser Iguales')
         setTimeout(()=>{
           setMensajeAlerta('')
           setPassDos('')
@@ -70,7 +67,7 @@ export function Registro(){
             <a>
               <img src={logoDeshacer} className="logo" alt="LogoDH23" />
             </a>
-            <h1 className="h3 mb-2 fw-normal">METELE DATOS CHIMI</h1>
+            <h1 className="h2 mb-2 fw-normal">METELE DATOS CHIMI</h1>
     
             <div className="form-floating mb-1">
               <input
@@ -91,8 +88,7 @@ export function Registro(){
                 id="nombre"
               />
               <label htmlFor="nombre">Nombre</label>
-            </div>
-    
+            </div>    
             <div className="form-floating mb-1">
               <input
                 type="number"
@@ -112,8 +108,7 @@ export function Registro(){
                 id="correo"
               />
               <label htmlFor="correo">Correo</label>
-            </div>
-    
+            </div>    
             <div className="form-floating mb-1">
               <input
                 required
@@ -172,7 +167,7 @@ export function Registro(){
             </button>
             <p className="mt-4 mb-1 text-body-secondary letra_roja">
               SI TENES CUENTA ANDA PA' SHA BO...{" "}
-              <Link to="/login">ARRANQUEMOS Y LOGEATE</Link>
+              <Link to="/login">ARRANQUEMOS Y LOGUEATE</Link>
             </p> 
           </form>
         </main>

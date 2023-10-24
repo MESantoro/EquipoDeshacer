@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
 import './Principal.css'
+
 export function Principal(){
 const [usuario, setUsuario]= useState('')
     useEffect(()=>{
@@ -13,7 +14,6 @@ const [usuario, setUsuario]= useState('')
             window.location.href='/'
         }
       },[])
-
 
     return(
         <>

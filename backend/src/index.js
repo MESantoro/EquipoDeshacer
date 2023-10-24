@@ -46,7 +46,7 @@ app.use(require('./routes/routesProductos'))
 app.use(require('./routes/routesTiposProd'))
 app.use(require('./routes/routesFormasPago'))
 app.use(require('./routes/routesCuentaEstado'))
-app.use(require('./routes/routesClientes'))
+app.use(require('./routes/routesCliente'))
 app.use(require('./routes/routesUsuarios')) 
 
 // Public

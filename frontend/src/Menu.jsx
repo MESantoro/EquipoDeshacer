@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logoDeshacer from './assets/LogoDH23.png';
-import reactLogo from './assets/react.svg'
+//import reactLogo from './assets/react.svg'
 import './Menu.css';
 import { Link } from "react-router-dom";
 import * as API from './servicios/servicios'
@@ -25,8 +25,6 @@ export function Menu(){
         const datos= await API.getMenuByRol(id_rol);
         setMenu(datos.menu)
     }
-
-    
 
     const salir = ()=>{
         localStorage.removeItem('usuario');

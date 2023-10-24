@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import * as API from './servicios/servicios'
-import Swal from 'sweetalert2' 
+import * as API from './servicios/servicios';
+import Swal from 'sweetalert2'; 
 
 export function Vigia(){
     const ruta = useLocation();

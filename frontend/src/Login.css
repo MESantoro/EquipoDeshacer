@@ -29,7 +29,7 @@
 
 /* Estilos para reducir el tamaño de los campos de entrada y etiquetas */
 .custom-form .form-control {
-    padding: 8px; /* Reducido para evitar campos grandes */
+    padding: 4px; /* Reducido para evitar campos grandes */
     font-size: 16px;
 }
 
