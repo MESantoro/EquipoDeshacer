@@ -9,7 +9,7 @@ const router = express()
 //URL /cliente
 //parametros : ninguno
 router.get('/cliente', (req , res)=>{
-    //conexionamysql.query("SELECT e.id_cli, e.nombre,te.nombre ,concat_ws(' - ', m.nombre, f.nombre), u.nombre lugar_ubicacion, e.estado    FROM cliente AS e    INNER JOIN tipos_equipo AS te ON te.id_tip=e.id_tip  LEFT JOIN productos AS m ON m.id_pro=e.id_pro LEFT JOIN ubicaciones AS u ON u.id_ubicacion=e.id_ubicacion ", (error, registros)=>{
+    //conexionamysql.query("SELECT cc.id_cli, cc.nombre,p.nombre ,concat_ws(' - ', m.nombre, f.nombre), u.nombre lugar_ubicacion, cc.estado    FROM cliente AS e    INNER JOIN productos AS p ON p.id_tip=cc.id_tip  LEFT JOIN productos AS m ON m.id_pro=cc.id_pro LEFT JOIN ubicaciones AS u ON u.id_ubicacion=e.id_ubicacion ", (error, registros)=>{
     conexionamysql.query('SELECT * FROM cliente', (error, registros)=>{
 
         if(error){

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
  import './Sidebar.css'
 import { Link } from "react-router-dom";
+import logoDeshacer from './assets/LogoDH23.png';
 import * as API from './servicios/servicios'
 
 export function Sidebar(){
@@ -48,9 +49,9 @@ export function Sidebar(){
                 </Link>
               </li>
                             ))}
-                                 <li className="nav-item">
+                         {/*         <li className="nav-item">
                                     <Link  className="nav-link active" aria-current="page"  to='../generador'>Generador</Link>
-                                 </li>
+                                 </li> */}
                             <li className="nav-link active letra_roja"  aria-current="page" >¡¡BUENAS!!: {user}</li>
                             <li><button  class="btn btn-outline-danger" onClick={salir}>RAJEMOS</button></li>
                             </ul>
@@ -61,23 +62,31 @@ export function Sidebar(){
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">CLIENTES</h1>
+        <h1 class="h2">TABLERO DE ARRANQUE</h1>
         
       </div>
 
-      <h2>Tablero de Clientes</h2>
+      {/* <h2>Tablero de Clientes</h2> */}
+      <a>
+          <img src={logoDeshacer} className="logo" alt="LogoDH23" />
+      </a>
       <div class="table-responsive small">
         <table class="table table-striped table-sm">
-          <thead>
+           <thead>
             <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">Apellido</th>
-              <th scope="col">DNI</th>
-              <th scope="col">Otro</th>
-              <th scope="col">Otro</th>
+                <td  colspan="7" ><Link  class="btn btn-outline-success"  to="/agregarcliente">Agregar</Link></td>    
             </tr>
+                <tr>
+                    <th >Nombre</th>
+                    <th >Apellido</th>
+                    <th >Direccion</th>
+                    <th >Correo</th>
+                    <th >Estado</th>
+                    <th >Cuenta</th>
+                    <th  colspan="2">Acciones</th>
+                </tr>
           </thead>
-          <tbody>
+           <tbody>
             <tr>
               <td>1,001</td>
               <td>random</td>
@@ -85,58 +94,7 @@ export function Sidebar(){
               <td>placeholder</td>
               <td>text</td>
             </tr>
-            <tr>
-              <td>1,002</td>
-              <td>placeholder</td>
-              <td>irrelevant</td>
-              <td>visual</td>
-              <td>layout</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>tabular</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>information</td>
-              <td>placeholder</td>
-              <td>illustrative</td>
-              <td>data</td>
-            </tr>
-            <tr>
-              <td>1,004</td>
-              <td>text</td>
-              <td>random</td>
-              <td>layout</td>
-              <td>dashboard</td>
-            </tr>
-            <tr>
-              <td>1,005</td>
-              <td>dashboard</td>
-              <td>irrelevant</td>
-              <td>text</td>
-              <td>placeholder</td>
-            </tr>
-            
-            <tr>
-              <td>1,010</td>
-              <td>data</td>
-              <td>rich</td>
-              <td>dashboard</td>
-              <td>tabular</td>
-            </tr>
-            <tr>
-              <td>1,011</td>
-              <td>information</td>
-              <td>placeholder</td>
-              <td>illustrative</td>
-              <td>data</td>
-            </tr>
-            
-          </tbody>
+           </tbody> 
         </table>
       </div>
     </main>

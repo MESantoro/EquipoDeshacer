@@ -13,8 +13,8 @@ import { Link } from "react-router-dom";
     )
 
 // Funcion para cambio de estados 
-const cambiar_estado = async (e, id_cli, estado_actual)=>{
-    e.preventDefault();
+const cambiar_estado = async (cc, id_cli, estado_actual)=>{
+    cc.preventDefault();
     const actualizar = (estado_actual=="O")?"X":"O";
     const respuesta= await API.ActualizarEstadoCliente(id_cli, {actualizar});
     if(respuesta.status){

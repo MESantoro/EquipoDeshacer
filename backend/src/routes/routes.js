@@ -16,10 +16,20 @@ router.get('/', (req , res)=>{
 // REGISTRO DE USUARIOS
 router.post('/registro', bodyParser.json() , (req , res)=>{
     const {apellido, nombre , dni, user, pass, correo, id_rol} =req.body;
-    //
-    //console.log(req.body)
     let hash= bcrypt.hashSync(pass, 10);
-    //
+    
+    if(!apellido){
+        res.json({
+            status:false,
+            mensaje: "APELLIDO: Este Campo es Obligatorio"
+        })
+    }
+    if(!nombre){
+        res.json({
+            status:false,
+            mensaje: "NOMBRE: Este Campo es Obligatorio"
+        })
+    }
     if(!dni){
         res.json({
             status:false,
@@ -45,7 +55,7 @@ router.post('/registro', bodyParser.json() , (req , res)=>{
                     }else{
                         res.json({
                             status:true,
-                            mensaje: "Los Datos Fueron Ingresados Correctamente"
+                            mensaje: "Entraron bien los Datos Che..."
                         })
                     }
                 })
@@ -78,14 +88,14 @@ router.post('/login', bodyParser.json() , (req , res)=>{
     if(!user){
         res.json({
             status:false,
-            mensaje:"USUARIO: Este Campo es Obligatorio para Logearse" 
+            mensaje:"USUARIO: Este Campo es Obligatorio" 
         })
          return; 
     }
     if(!pass){
         res.json({
             status:false,
-            mensaje:"PASSWORD: Este Campo es Obligatorio para Logearse" 
+            mensaje:"CLAVE: Este Campo es Obligatorio" 
         }) 
         return;
     }
@@ -113,7 +123,7 @@ router.post('/login', bodyParser.json() , (req , res)=>{
                  }else{
                     res.json({
                         status:false,
-                        mensaje:"CONTRASEÑA INCORRECTA" 
+                        mensaje:"CLAVE INCORRECTA" 
                     }) 
                  }
             }else{

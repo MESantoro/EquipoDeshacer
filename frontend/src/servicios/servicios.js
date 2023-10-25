@@ -92,9 +92,9 @@ export async function ver_permisos(datos){
 
 
 
-// Inicio de fabricantes
+// Inicio de Cuenta Estado
 
-export async function getFabricantes(){
+export async function getCuentaEstado(){
     const token = JSON.parse(localStorage.getItem('token'));
     const Options={
         method:'GET',
@@ -103,36 +103,36 @@ export async function getFabricantes(){
              Authorization: `Bearer ${token}`,
         }
     }
-    const respuesta = await fetch(`${URL}/fabricantes`, Options)
+    const respuesta = await fetch(`${URL}/cuenta_estado`, Options)
     const data= await respuesta.json()
 
     return data
 }
 
-export async function getFabricantesByID(id_fabricante){
+export async function getCuentaEstadoByID(id_cue){
     const Options={
         method:'GET',
         headers: {
             'Content-Type': 'application/json',
         }
     }
-    const respuesta = await fetch(`${URL}/fabricantes/${id_fabricante}`, Options)
+    const respuesta = await fetch(`${URL}/cuenta_estado/${id_cue}`, Options)
     const data= await respuesta.json();
     return data[0];
 }
 
-export async function deleteFabricante(id_fabricante){
+export async function deleteCuentaEstado(id_cue){
     const Options={
         method:'DELETE',
         headers: {
             'Content-Type': 'application/json',
         }
     }
-    const respuesta = await fetch(`${URL}/fabricantes/${id_fabricante}`, Options)
+    const respuesta = await fetch(`${URL}/cuenta_estado/${id_cue}`, Options)
     
 }
 
-export async function ActualizarEstadoFabricante(id_fabricante, actulizar){
+export async function ActualizarEstadoCuentaEstado(id_cue, actulizar){
     const Options={
         method:'DELETE',
         body: JSON.stringify(actulizar),
@@ -140,12 +140,12 @@ export async function ActualizarEstadoFabricante(id_fabricante, actulizar){
             'Content-Type': 'application/json',
         }
     }
-    const respuesta = await fetch(`${URL}/fabricantes/${id_fabricante}`, Options)
+    const respuesta = await fetch(`${URL}/cuenta_estado/${id_cue}`, Options)
     const data= await respuesta.json()
     return data;
 }
 
-export async function AddFabricante(datos){
+export async function AddCuentaEstado(datos){
     const Options={
         method:'POST',
         body: JSON.stringify(datos),
@@ -153,13 +153,13 @@ export async function AddFabricante(datos){
             'Content-Type': 'application/json',
         }
     }
-    const respuesta = await fetch(`${URL}/fabricantes`, Options)
+    const respuesta = await fetch(`${URL}/cuenta_estado`, Options)
     const data= await respuesta.json()
     return data;
 }
 
 
-export async function EditFabricante(datos, id_fabricante){
+export async function EditCuentaEstado(datos, id_cue){
     const Options={
         method:'PUT',
         body: JSON.stringify(datos),
@@ -167,12 +167,12 @@ export async function EditFabricante(datos, id_fabricante){
             'Content-Type': 'application/json',
         }
     }
-    const respuesta = await fetch(`${URL}/fabricantes/${id_fabricante}`, Options)
+    const respuesta = await fetch(`${URL}/cuenta_estado/${id_cue}`, Options)
     const data= await respuesta.json()
     return data;
 }
 
-// fin de fabricantes
+// fin de Cuenta Estado
 
 // inicio de modelos
 export async function getModelos(){
@@ -215,8 +215,8 @@ export async function AddModelo(datos){
 // fin de  modelos
 
 
-// inicion de tipos de equipo
-export async function getTiposEquipos(){
+// inicion de Productos
+export async function getProductos(){
     const token = JSON.parse(localStorage.getItem('token'));
     const Options={
         method:'GET',
@@ -225,12 +225,12 @@ export async function getTiposEquipos(){
             Authorization: `Bearer ${token}`,
         }
     }
-    const respuesta = await fetch(`${URL}/tipos_equipo`, Options)
+    const respuesta = await fetch(`${URL}/productos`, Options)
     const data= await respuesta.json();
     return data
 }
 
-export async function getTipoEquipoByID(id_tipo_equipo){
+export async function getProductosByID(id_pro){
     const token = JSON.parse(localStorage.getItem('token'));
     const Options={
         method:'GET',
@@ -239,12 +239,12 @@ export async function getTipoEquipoByID(id_tipo_equipo){
             Authorization: `Bearer ${token}`,
         }
     }
-    const respuesta = await fetch(`${URL}/tipos_equipo/${id_tipo_equipo}`, Options)
+    const respuesta = await fetch(`${URL}/productos/${id_pro}`, Options)
     const data= await respuesta.json();
     return data[0];
 }
 
-export async function EditTipoEquipo(datos, id_tipo_equipo){
+export async function EditProductos(datos, id_pro){
     const token = JSON.parse(localStorage.getItem('token'));
     const Options={
         method:'PUT',
@@ -254,12 +254,12 @@ export async function EditTipoEquipo(datos, id_tipo_equipo){
             Authorization: `Bearer ${token}`,
         }
     }
-    const respuesta = await fetch(`${URL}/tipos_equipo/${id_tipo_equipo}`, Options)
+    const respuesta = await fetch(`${URL}/productos/${id_pro}`, Options)
     const data= await respuesta.json()
     return data;
 }
 
-export async function ActualizarEstadoTipoEquipo(id_tipo_equipo, actualizar){
+export async function ActualizarEstadoProductos(id_pro, actualizar){
     const token = JSON.parse(localStorage.getItem('token'));
     const Options={
         method:'DELETE',
@@ -269,12 +269,12 @@ export async function ActualizarEstadoTipoEquipo(id_tipo_equipo, actualizar){
             Authorization: `Bearer ${token}`,
         }
     }
-    const respuesta = await fetch(`${URL}/tipos_equipo/${id_tipo_equipo}`, Options)
+    const respuesta = await fetch(`${URL}/productos/${id_pro}`, Options)
     const data= await respuesta.json()
     return data;
 }
 
-export async function AddTipoEquipo(datos){
+export async function AddProductos(datos){
     const token = JSON.parse(localStorage.getItem('token'));
     const Options={
         method:'POST',
@@ -284,27 +284,27 @@ export async function AddTipoEquipo(datos){
             Authorization: `Bearer ${token}`,
         }
     }
-    const respuesta = await fetch(`${URL}/tipos_equipo`, Options)
+    const respuesta = await fetch(`${URL}/productos`, Options)
     const data= await respuesta.json()
     return data;
 }
 
-// fin de tipo de equipos
+// fin de Productos
 
 
-// inicio de equipos
-export async function getEquipos(){
+// inicio de Cliente
+export async function getCliente(){
     const Options={
         method:'GET',
         headers: {
             'Content-Type': 'application/json',
         }
     }
-    const respuesta = await fetch(`${URL}/equipos`, Options)
+    const respuesta = await fetch(`${URL}/cliente`, Options)
     const data= await respuesta.json()
     return data
 }
-export async function AddEquipo(datos){
+export async function AddCliente(datos){
     const Options={
         method:'POST',
         body: JSON.stringify(datos),
@@ -312,13 +312,13 @@ export async function AddEquipo(datos){
             'Content-Type': 'application/json',
         }
     }
-    const respuesta = await fetch(`${URL}/equipos`, Options)
+    const respuesta = await fetch(`${URL}/cliente`, Options)
     const data= await respuesta.json()
     return data;
 }
 
 
-export async function EditEquipo(datos, id_equipo){
+export async function EditCliente(datos, id_cli){
     console.log(datos)
     const Options={
         method:'PUT',
@@ -327,12 +327,12 @@ export async function EditEquipo(datos, id_equipo){
             'Content-Type': 'application/json',
         }
     }
-    const respuesta = await fetch(`${URL}/equipos/${id_equipo}`, Options)
+    const respuesta = await fetch(`${URL}/cliente/${id_cli}`, Options)
     const data= await respuesta.json()
     return data;
 }
 
-export async function ActualizarEstadoEquipo(id_equipo, actualizar){
+export async function ActualizarEstadoCliente(id_cli, actualizar){
     const Options={
         method:'PUT',
         body: JSON.stringify(actualizar),
@@ -340,26 +340,26 @@ export async function ActualizarEstadoEquipo(id_equipo, actualizar){
             'Content-Type': 'application/json',
         }
     }
-    const respuesta = await fetch(`${URL}/cambiar_estado_equipos/${id_equipo}`, Options)
+    const respuesta = await fetch(`${URL}/cambiar_estado_cliente/${id_cli}`, Options)
     const data= await respuesta.json()
     return data;
 }
 
 
-export async function getEquipoByID(id_equipo){
+export async function getClienteByID(id_cli){
     const Options={
         method:'GET',
         headers: {
             'Content-Type': 'application/json',
         }
     }
-    const respuesta = await fetch(`${URL}/equipos/${id_equipo}`, Options)
+    const respuesta = await fetch(`${URL}/cliente/${id_cli}`, Options)
     const data= await respuesta.json();
     console.log(data[0])
     return data[0];
 }
 
-// fin de equipos
+// fin de Cliente
 
 //inicio de ubicaciones
 export async function getUbicaciones(){

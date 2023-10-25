@@ -6,14 +6,14 @@ const jwt = require('jsonwebtoken')
 
 // listar Estado de Cuenta
 // metodo GET
-//URL /Cuenta_estado
+//URL /cuenta_estado
 
-router.get('/Cuenta_estado', verificarToken,(req , res)=>{
+router.get('/cuenta_estado', verificarToken,(req , res)=>{
     jwt.verify(req.token, 'siliconKey', (error, valido)=>{
         if(error){
             res.sendStatus(403);
         }else{
-            conexionamysql.query('SELECT * FROM Cuenta_estado', (error, registros)=>{
+            conexionamysql.query('SELECT * FROM cuenta_estado', (error, registros)=>{
                 if(error){
                     console.log('Error en la base de datos', error)
                 }else{
@@ -54,7 +54,7 @@ router.post('/cuenta_estado', bodyParser.json(), (req , res)=>{
        }else{
             res.json({
             status:true,
-            mensaje: "El insert se realizo correctamente"
+            mensaje: "El agregado se realizo correctamente"
             })
        }
    })

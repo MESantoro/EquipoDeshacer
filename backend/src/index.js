@@ -36,11 +36,7 @@ app.use((req, res, next) =>{ // ANDA
 });
 
 //Rutas
-//app.use(require('./routes'));
-//app.use(require('./routes/authentication'));
-//app.use('/links', require('./routes/links'));
 
-//app.use(require('./routes/routesMieres'))
 app.use(require('./routes/routes'))
 app.use(require('./routes/routesProductos'))
 app.use(require('./routes/routesTiposProd'))

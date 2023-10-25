@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import logoDeshacer from './assets/LogoDH23.png';
 
 export function Home() {
   useEffect(() => {
@@ -15,7 +16,9 @@ export function Home() {
     <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column bg-dark text-white text-center">
       <header className="mb-auto">
         <div>
-         
+          <a>
+            <img src={logoDeshacer} className="logo" alt="LogoDH23" />
+          </a>
           <h3 className="mb-0">PANTALLA PRINCIPAL</h3>
           
         </div>

@@ -15,10 +15,10 @@ import { AddFormas_Pago } from './componentesJSX/formas_pago/AddFormas_Pago' //l
 import { EditCuenta_Estado } from './componentesJSX/cuenta_estado/EditCuenta_Estado' //listo
 import { EditCliente } from './componentesJSX/cliente/EditCliente'//listo
 import { AddCliente } from './componentesJSX/cliente/AddCliente'//listo
-import { Ubicaciones } from './componentesJSX/ubicaciones/Ubicaciones'
-import { Usuarios } from './componentesJSX/usuarios/Usuarios'
-import { Producto } from './componentesJSX/producto/producto'//listo
-import { Tipo_Producto } from './componentesJSX/tipo_producto/tipo_producto'//listo */
+import { Ubicaciones } from './componentesJSX/ubicaciones/Ubicaciones'*/
+import { Usuarios } from './componentesJSX/Usuarios/Usuario'
+import { Producto } from './componentesJSX/Productos/Producto'//listo
+/* import { Tipo_Producto } from './componentesJSX/tipo_producto/tipo_producto'//listo */
 
 function App() {
 
@@ -31,16 +31,16 @@ function App() {
         <Route path='/registro' element={<Registro/>}></Route>
         <Route path='/cliente' element={<Cliente/>}></Route>
         <Route path='/cuenta_estado' element={<Cuenta_Estado/>}></Route>
-        {/* <Route path='/ubicaciones' element={<Ubicaciones/>}></Route>
+        {/*<Route path='/ubicaciones' element={<Ubicaciones/>}></Route>*/}
         <Route path='/usuarios' element={<Usuarios/>}></Route>
-        <Route path='/formas_pago' element={<Formas_Pago/>}></Route>
-        <Route path='/producto' element={<Producto/>}></Route>
-        <Route path='/tipo_producto' element={<Tipo_Producto/>}></Route>
+        {/*<Route path='/formas_pago' element={<Formas_Pago/>}></Route>*/}
+        <Route path='/productos' element={<Producto/>}></Route>
+        {/*<Route path='/tipo_producto' element={<Tipo_Producto/>}></Route>
         <Route path='/agregarcuenta_estado' element={<AddCuenta_Estado/>}></Route>
         <Route path='/agregarcliente' element={<AddCliente/>}></Route>
         <Route path='/agregarformas_pago' element={<AddFormas_Pago/>}></Route>
         <Route path='/editcuenta_estado/:id_cuenta_estado' element={<EditCuenta_Estado/>}></Route>
-        <Route path='/editcliente/:id_cliente' element={<EditCliente/>}></Route> */}
+        <Route path='/editcliente/:id_cliente' element={<EditCliente/>}></Route>*/}
       </Routes>
     </>
   )
