@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as API from '../../servicios/servicios'
-import './CuentaEstado.css'
+import './Cuenta_Estado.css'
 import { Link } from "react-router-dom";
 import { Menu } from "../../Menu";
 import { Vigia } from "../../Vigia";
@@ -19,10 +19,10 @@ export function Cuenta_Estado(){
           toastBootstrap.show()
         })
       }
-    const guardarFabricante = async(event)=>{
+    const guardarCuenta_Estado = async(event)=>{
         event.preventDefault();
         if(id_cue){
-            const respuesta = await API.EditFabricante({nombre}, id_cue)
+            const respuesta = await API.EditCuenta_Estado({nombre}, id_cue)
     
             if(respuesta.status){
                 setMensaje(respuesta.mensaje)
@@ -36,7 +36,7 @@ export function Cuenta_Estado(){
             }
             return;
         }else{
-            const respuesta = await API.AddFabricante({nombre})
+            const respuesta = await API.AddCuenta_Estado({nombre})
             if(respuesta.status){
                 setMensaje(respuesta.mensaje)
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
@@ -60,7 +60,7 @@ export function Cuenta_Estado(){
         e.preventDefault();
         const actualizar = (estado_actual=="A")?"B":"A";
         console.log(actualizar)
-        const respuesta= await API.ActualizarEstadoFabricante(id_cue, {actualizar});
+        const respuesta= await API.ActualizarEstadoCuenta_Estado(id_cue, {actualizar});
         if(respuesta.status){
             setMensaje(respuesta.mensaje)
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
@@ -137,7 +137,7 @@ export function Cuenta_Estado(){
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Datos del modelo </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form onSubmit={guardarFabricante}>
+                <form onSubmit={guardarCuenta_Estado}>
                 <div class="modal-body">
                 
                     

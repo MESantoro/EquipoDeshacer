@@ -94,7 +94,7 @@ export async function ver_permisos(datos){
 
 // Inicio de Cuenta Estado
 
-export async function getCuentaEstado(){
+export async function getCuenta_Estado(){
     const token = JSON.parse(localStorage.getItem('token'));
     const Options={
         method:'GET',
@@ -109,7 +109,7 @@ export async function getCuentaEstado(){
     return data
 }
 
-export async function getCuentaEstadoByID(id_cue){
+export async function getCuenta_EstadoByID(id_cue){
     const Options={
         method:'GET',
         headers: {
@@ -121,7 +121,7 @@ export async function getCuentaEstadoByID(id_cue){
     return data[0];
 }
 
-export async function deleteCuentaEstado(id_cue){
+export async function deleteCuenta_Estado(id_cue){
     const Options={
         method:'DELETE',
         headers: {
@@ -132,7 +132,7 @@ export async function deleteCuentaEstado(id_cue){
     
 }
 
-export async function ActualizarEstadoCuentaEstado(id_cue, actulizar){
+export async function ActualizarEstadoCuenta_Estado(id_cue, actulizar){
     const Options={
         method:'DELETE',
         body: JSON.stringify(actulizar),
@@ -145,7 +145,7 @@ export async function ActualizarEstadoCuentaEstado(id_cue, actulizar){
     return data;
 }
 
-export async function AddCuentaEstado(datos){
+export async function AddCuenta_Estado(datos){
     const Options={
         method:'POST',
         body: JSON.stringify(datos),
@@ -159,7 +159,7 @@ export async function AddCuentaEstado(datos){
 }
 
 
-export async function EditCuentaEstado(datos, id_cue){
+export async function EditCuenta_Estado(datos, id_cue){
     const Options={
         method:'PUT',
         body: JSON.stringify(datos),

@@ -18,7 +18,7 @@ export function Vigia(){
         const respuesta= await API.ver_permisos({id_rol, menu });
         if(respuesta.status){
             setPermisoDenegado(true)
-            //console.log('puedo')
+            console.log('puedo')
            
         }else{
             // Swal.fire({
