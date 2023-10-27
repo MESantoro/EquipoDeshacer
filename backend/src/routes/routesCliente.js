@@ -73,19 +73,19 @@ router.post('/cliente', bodyParser.json(), (req , res)=>{
     if(!nombre){
         res.json({
             status:false,
-            mensaje: "El nombre es un campo obligatorio"
+            mensaje: "El Nombre es un campo obligatorio"
         })
     }
     if(!apellido){
         res.json({
             status:false,
-            mensaje: "El apellido es un campo obligatorio"
+            mensaje: "El Apellido es un campo obligatorio"
         })
     }
     if(!correo){
         res.json({
             status:false,
-            mensaje: "El correo es un campo obligatorio"
+            mensaje: "El Correo es un campo obligatorio"
         })
     }
  /*   if(!id_cli){
@@ -141,19 +141,19 @@ router.get('/cliente/:id_cli', (req , res)=>{
         if(!nombre){
             res.json({
                 status:false,
-                mensaje: "El nombre es un campo obligatorio"
+                mensaje: "El Nombre es un campo obligatorio"
             })
         }
         if(!apellido){
             res.json({
                 status:false,
-                mensaje: "El apellido es un campo obligatorio"
+                mensaje: "El Apellido es un campo obligatorio"
             })
         }
         if(!correo){
             res.json({
                 status:false,
-                mensaje: "El correo un campo obligatorio"
+                mensaje: "El Correo un campo obligatorio"
             })
         }
         if(!id_cue){

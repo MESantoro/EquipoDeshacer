@@ -32,7 +32,6 @@ export function Menu(){
     }
     return(
         <>
-            
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
                 <div className="container-fluid">
                 <img src={logoDeshacer} className="logo" alt="LogoDH23" />
@@ -44,7 +43,6 @@ export function Menu(){
                             {menus.map((m)=>(
                                 <li className="nav-item">
                                     <Link  className="nav-link active" aria-current="page"  to={m.href}>{m.nombre}</Link>
-                                
                                 </li>
                             ))}
                                 {/* <li className="nav-item">

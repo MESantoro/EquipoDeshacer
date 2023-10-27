@@ -90,10 +90,7 @@ export async function ver_permisos(datos){
    return data;
 }
 
-
-
-// Inicio de Cuenta Estado
-
+// CUENTA ESTADO
 export async function getCuenta_Estado(){
     const token = JSON.parse(localStorage.getItem('token'));
     const Options={
@@ -158,7 +155,6 @@ export async function AddCuenta_Estado(datos){
     return data;
 }
 
-
 export async function EditCuenta_Estado(datos, id_cue){
     const Options={
         method:'PUT',
@@ -171,8 +167,7 @@ export async function EditCuenta_Estado(datos, id_cue){
     const data= await respuesta.json()
     return data;
 }
-
-// fin de Cuenta Estado
+// FIN
 
 // inicio de modelos
 export async function getModelos(){
@@ -211,11 +206,9 @@ export async function AddModelo(datos){
     const data= await respuesta.json()
     return data;
 }
-
 // fin de  modelos
 
-
-// inicion de Productos
+// PRODUCTOS
 export async function getProductos(){
     const token = JSON.parse(localStorage.getItem('token'));
     const Options={
@@ -288,11 +281,10 @@ export async function AddProductos(datos){
     const data= await respuesta.json()
     return data;
 }
+// FIN
 
-// fin de Productos
 
-
-// inicio de Cliente
+// CLIENTE
 export async function getCliente(){
     const Options={
         method:'GET',
@@ -304,6 +296,7 @@ export async function getCliente(){
     const data= await respuesta.json()
     return data
 }
+
 export async function AddCliente(datos){
     const Options={
         method:'POST',
@@ -316,7 +309,6 @@ export async function AddCliente(datos){
     const data= await respuesta.json()
     return data;
 }
-
 
 export async function EditCliente(datos, id_cli){
     console.log(datos)
@@ -345,7 +337,6 @@ export async function ActualizarEstadoCliente(id_cli, actualizar){
     return data;
 }
 
-
 export async function getClienteByID(id_cli){
     const Options={
         method:'GET',
@@ -358,8 +349,7 @@ export async function getClienteByID(id_cli){
     console.log(data[0])
     return data[0];
 }
-
-// fin de Cliente
+// FIN
 
 //inicio de ubicaciones
 export async function getUbicaciones(){
@@ -398,6 +388,7 @@ export async function getUbicacionesByID(id_ubicacion){
     const data= await respuesta.json();
     return data[0];
 }
+
 export async function EditUbicacion(datos, id_ubicacion){
     const Options={
         method:'PUT',
@@ -423,11 +414,9 @@ export async function ActualizarEstadoUbicacion(id_ubicacion, actulizar){
     const data= await respuesta.json()
     return data;
 }
+// FIN
 
-// fin de ubicaciones
-
-// inicio usuarios
-
+// USUARIOS
 export async function getUsuarios(){
     const token = JSON.parse(localStorage.getItem('token'));
     const Options={
@@ -454,6 +443,7 @@ export async function ActualizarEstadoUsuario(id_usuario, actualizar){
     const data= await respuesta.json()
     return data;
 }
+
 export async function ResetUsuariosByID(id_usuario){
     const Options={
         method:'PUT',

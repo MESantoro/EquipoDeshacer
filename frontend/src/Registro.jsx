@@ -3,7 +3,6 @@ import logoDeshacer from './assets/LogoDH23.png';
 import { Link } from "react-router-dom";
 import * as API from './servicios/servicios'
 
-
 export function Registro(){
     
     const [apellido, setApellido]= useState('')
@@ -166,7 +165,7 @@ export function Registro(){
               PA' DENTRO ESOS DATOS
             </button>
             <p className="mt-4 mb-1 text-body-secondary letra_roja">
-              SI TENES CUENTA ANDA PA' SHA BO...{" "}
+              Si Tenes Cuenta: ANDA PA' SHA BO...{" "}
               <Link to="/login">ARRANQUEMOS Y LOGUEATE</Link>
             </p> 
           </form>

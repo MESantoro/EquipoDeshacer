@@ -24,7 +24,6 @@ export function EditCliente(){
       },[])
       
     
-
       const traer_datos =  async ()=>{
          const datos_cliente= await API.getClienteByID(id_cli);
          console.log(datos_cliente)

@@ -58,7 +58,7 @@ export function Cuenta_Estado(){
 
     const cambiar_estado = async (e, id_cue, estado_actual)=>{
         e.preventDefault();
-        const actualizar = (estado_actual=="A")?"B":"A";
+        const actualizar = (estado_actual=="Pagado")?"Adeuda":"Pagado";
         console.log(actualizar)
         const respuesta= await API.ActualizarEstadoCuenta_Estado(id_cue, {actualizar});
         if(respuesta.status){
@@ -85,8 +85,6 @@ export function Cuenta_Estado(){
         setNombre(datos_cuenta_estado.nombre)
     }
 
-    
-
     return(
         <>
         
@@ -97,7 +95,7 @@ export function Cuenta_Estado(){
             <tr>
                 
                 <th colspan="4">
-                <Link class="btn btn-outline-primary btn-sm" to="/agregarcuenta_estado">Agregar</Link>
+                {/* <Link class="btn btn-outline-primary btn-sm" to="/agregarcuenta_estado">Agregar</Link> */}
                 <button  class="btn btn-outline-primary  btn-sm"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >Agregar Modal</button>
                 </th>    
             </tr>
@@ -114,8 +112,8 @@ export function Cuenta_Estado(){
                 <td >{cuenta_estado.nombre}</td>    
                 <td >{cuenta_estado.estado}</td>
                 <td >
-                    <Link to={`/editcuenta_estado/${cuenta_estado.id_cue}`} ><button class="btn btn-warning btn-sm">Editar Link</button></Link>
-                    <button   data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, cuenta_estado.id_cue)} class="btn btn-outline-warning btn-sm">Editar modal</button>
+                    {/* <Link to={`/editcuenta_estado/${cuenta_estado.id_cue}`} ><button class="btn btn-warning btn-sm">Editar Link</button></Link> */}
+                    <button   data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, cuenta_estado.id_cue)} class="btn btn-outline-warning btn-sm">Editar</button>
                     
                 {(cuenta_estado.estado=="Pagado")?
                 <button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, cuenta_estado.id_cue, cuenta_estado.estado )} >Desactivar</button>
@@ -134,7 +132,7 @@ export function Cuenta_Estado(){
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Datos del modelo </h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cuenta Estado </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form onSubmit={guardarCuenta_Estado}>
@@ -147,9 +145,9 @@ export function Cuenta_Estado(){
                     value={nombre}
                     onChange={(event)=>setNombre(event.target.value)}
                     className="form-control" 
-                    placeholder="Nombre del cuenta_estado"
+                    placeholder="Cuenta Estado"
                     />
-                    <label for="floatingInput">Nombre del cuenta_estado</label>
+                    <label for="floatingInput">Cuenta Estado</label>
                     </div>
                 </div>
                 <div class="modal-footer">

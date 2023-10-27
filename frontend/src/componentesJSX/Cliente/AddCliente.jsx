@@ -20,10 +20,6 @@ export function AddCliente(){
         API.getUbicaciones().then(setUbicaciones)
       },[])
       
-    
-
-      
-
     const GuardarCliente = async(event)=>{
         event.preventDefault();
         const respuesta = await API.AddCliente({nombre_cliente, id_modelo, id_ubicacion, id_tipo_cliente, serial})
