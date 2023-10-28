@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import * as API from '../../servicios/servicios'
-
+import './Productos.css'
+import { Link } from "react-router-dom";
 import { Menu } from "../../Menu";
+import { Vigia } from "../../Vigia";
 
-export function Cuenta_Estado(){
-    const [cuenta_estado, setCuenta_Estado]=useState([])
-    const [id_cue, setIdCuenta_Estado]=useState('')
+export function Productos(){
+    const [producto, setProductos]=useState([])
+    const [id_pro, setIdProductos]=useState('')
     const [nombre, setNombre]=useState('')
     const [mensaje, setMensaje] = useState('')
     const [permisoDenegado, setPermisoDenegado] = useState(false)
@@ -20,27 +22,27 @@ export function Cuenta_Estado(){
     useEffect(()=>{
         const datos_usuario = JSON.parse(localStorage.getItem('usuario'));
         ver_permisos(datos_usuario.id_rol);
-        API.getCuenta_Estado().then(setCuenta_Estado)
+        API.getProductos().then(setProductos)
     }, [])
 
 
-    const editar_registro = async (e, id_cue)=>{
+    const editar_registro = async (e, id_pro)=>{
         e.preventDefault();
-        setIdCuenta_Estado(id_cue)
-        const datos_te= await API.getCuenta_EstadoByID(id_cue);
-        setNombre(datos_te.nombre)
+        setIdProductos(id_pro)
+        const datos_p= await API.getProductosByID(id_pro);
+        setNombre(datos_p.nombre)
     }
 
      const limpiarModal = async ()=>{
        
         setNombre('')
-        setIdCuenta_Estado('')
+        setIdProductos('')
     }
 
-    const guardarCuenta_Estado = async(event)=>{
+    const guardarProductos = async(event)=>{
         event.preventDefault();
-        if(id_cue){
-            const respuesta = await API.EditCuenta_Estado({nombre}, id_cue)
+        if(id_pro){
+            const respuesta = await API.EditProductos({nombre}, id_pro)
     
             if(respuesta.status){
                 setMensaje(respuesta.mensaje)
@@ -49,12 +51,12 @@ export function Cuenta_Estado(){
                 setTimeout(()=>{
                     setMensaje('')
                     toastBootstrap.hide()
-                    API.getCuenta_Estado().then(setCuenta_Estado)
+                    API.getProductos().then(setProductos)
                     }, 2500)
             }
             return;
         }else{
-            const respuesta = await API.AddCuenta_Estado({nombre})
+            const respuesta = await API.AddProductos({nombre})
             if(respuesta.status){
                 setMensaje(respuesta.mensaje)
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
@@ -62,22 +64,22 @@ export function Cuenta_Estado(){
                 setTimeout(()=>{
                     setMensaje('')
                     toastBootstrap.hide()
-                    API.getCuenta_Estado().then(setCuenta_Estado)
+                    API.getProductos().then(setProductos)
                     }, 2500)
             }
             return;
         }
         
     }
-    const cambiar_estado = async (e, id_cue, estado_actual)=>{
+    const cambiar_estado = async (e, id_pro, estado_actual)=>{
         e.preventDefault();
-        const actualizar = (estado_actual=="P")?"A":"P";
-        const respuesta= await API.ActualizarEstadoCuenta_Estado(id_cue, {actualizar});
+        const actualizar = (estado_actual=="O")?"X":"O";
+        const respuesta= await API.ActualizarEstadoProductos(id_pro, {actualizar});
         if(respuesta.status){
             setMensaje(respuesta.mensaje)
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
             toastBootstrap.show()
-            API.getCuenta_Estado().then(setCuenta_Estado)
+            API.getProductos().then(setProductos)
             setTimeout(()=>{
                 setMensaje('')
                 toastBootstrap.hide()
@@ -85,7 +87,7 @@ export function Cuenta_Estado(){
         }
     }
     const ver_permisos =  async (id_rol)=>{
-        const menu='/cuenta_estado';
+        const menu='/productos';
         const respuesta= await API.ver_permisos({id_rol, menu });
         if(respuesta.status){
             setPermisoDenegado(true)
@@ -96,10 +98,11 @@ export function Cuenta_Estado(){
     return(
         <>
         <Menu/>
+        <Vigia/>
         {
         !permisoDenegado? 
             <div className="alert alert-warning" role="alert">
-            No tiene  permiso para acceder a esta opcion
+            No tiene permiso para acceder a esta opcion
             </div>
             :<>
         <table class="table table-striped">
@@ -118,20 +121,20 @@ export function Cuenta_Estado(){
             </tr>
             </thead>
             <tbody>
-            {cuenta_estado.map((te)=>(
+            {producto.map((p)=>(
                 <tr>
-                <td >{te.nombre}</td>    
-                <td >{te.estado}</td>
+                <td >{p.nombre}</td>    
+                <td >{p.estado}</td>
                 <td >
-                {(te.estado=="P")?
-                    <button data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, te.id_cue)} class="btn btn-outline-warning btn-sm">Editar</button>
+                {(p.estado=="O")?
+                    <button data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, p.id_pro)} class="btn btn-outline-warning btn-sm">Editar</button>
                 : 
                     <button disabled class="btn btn-warning btn-sm">Editar</button>
                 }  
-                {(te.estado=="P")?
-                <button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, te.id_cue, te.estado )} >Desactivar</button>
+                {(p.estado=="O")?
+                <button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, p.id_pro, p.estado )} >Desactivar</button>
                 :
-                <button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, te.id_cue, te.estado )} >Activar</button>
+                <button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, p.id_pro, p.estado )} >Activar</button>
                 
                 }
                 </td>
@@ -145,10 +148,10 @@ export function Cuenta_Estado(){
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cuenta Estado </h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Datos del modelo </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form onSubmit={guardarCuenta_Estado}>
+                <form onSubmit={guardarProductos}>
                 <div class="modal-body">
                 
                     
@@ -158,9 +161,9 @@ export function Cuenta_Estado(){
                     value={nombre}
                     onChange={(event)=>setNombre(event.target.value)}
                     className="form-control" 
-                    placeholder="Cuenta"
+                    placeholder="Nombre de Producto"
                     />
-                    <label for="floatingInput">Cuenta Estado</label>
+                    <label for="floatingInput">Nombre de Producto</label>
                     </div>
                     
                 </div>

@@ -17,8 +17,9 @@ import { EditCliente } from './componentesJSX/Cliente/EditCliente'//listo
 import { AddCliente } from './componentesJSX/Cliente/AddCliente'//listo
 /* import { Ubicaciones } from './componentesJSX/ubicacion/Ubicacion' */
 import { Usuarios } from './componentesJSX/Usuarios/Usuario'// Listo
-import { Producto } from './componentesJSX/Productos/Producto'//listo
-/* import { Tipo_Productos } from './componentesJSX/Tipo_Productos/Tipo_Productos'//listo */
+import { Productos } from './componentesJSX/Productos/Productos'//listo
+import { EditProductos } from './componentesJSX/Productos/EditProductos'//listo
+import { Tipo_Producto } from './componentesJSX/Tipo_Producto/Tipo_Producto'//listo */
 
 function App() {
 
@@ -34,8 +35,9 @@ function App() {
         {/* <Route path='/ubicaciones' element={<Ubicacion/>}></Route> */}
         <Route path='/usuarios' element={<Usuarios/>}></Route>
         {/* <Route path='/formas_pago' element={<Formas_Pago/>}></Route> */}
-        <Route path='/productos' element={<Producto/>}></Route>
-        {/* <Route path='/tipo_productos' element={<Tipo_Productos/>}></Route> */}
+        <Route path='/productos' element={<Productos/>}></Route>
+        <Route path='/editproductos' element={<EditProductos/>}></Route>
+        <Route path='/tipo_producto' element={<Tipo_Producto/>}></Route>
         <Route path='/agregarcuenta_estado' element={<AddCuenta_Estado/>}></Route>
         <Route path='/agregarcliente' element={<AddCliente/>}></Route>
         {/* <Route path='/agregarformas_pago' element={<AddFormas_Pago/>}></Route> */}

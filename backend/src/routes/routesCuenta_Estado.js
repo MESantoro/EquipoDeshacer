@@ -68,20 +68,33 @@ router.post('/cuenta_estado', bodyParser.json(), (req , res)=>{
     // en el cuerpo(body) 
     // estado
     // y el parametro que vamos a editar ->id_cue
-router.put('/cuenta_estado/:id_cue', bodyParser.json(), (req , res)=>{
-    const { estado }  = req.body
-    const { id_cue } = req.params
-    conexionamysql.query('UPDATE cuenta_estado SET estado = ?  WHERE id_cue = ?', [estado, id_cue], (error, registros)=>{
-       if(error){
-           console.log('Error en la base de datos', error)
-       }else{
-        res.json({
-            status:true,
-            mensaje: "La edicion de registro se realizo correctamente"
-            })
-       }
-   })
-})
+    router.put('/cuenta_estado/:id_cue', bodyParser.json(), (req, res) => {
+        const { nombre, estado } = req.body;
+        const { id_cue } = req.params;
+    
+        const updateQuery = 'UPDATE cuenta_estado SET nombre = ?, estado = ? WHERE id_cue = ?';
+    
+        conexionamysql.query(updateQuery, [nombre, estado, id_cue], (error, result) => {
+            if (error) {
+                console.log('Error en la base de datos', error);
+                res.status(500).json({
+                    status: false,
+                    mensaje: "Error en la base de datos"
+                });
+            } else if (result.affectedRows === 0) {
+                res.status(404).json({
+                    status: false,
+                    mensaje: "No se encontró un registro con el ID proporcionado."
+                });
+            } else {
+                res.status(200).json({
+                    status: true,
+                    mensaje: "La edición de registro se realizó correctamente"
+                });
+            }
+        });
+    });
+    
 
 ///////////////////eliminacion de estado de cuenta
 

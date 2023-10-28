@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import * as API from '../../servicios/servicios'
 
-export function EditProducto(){
+export function EditProductos(){
 const [nombre, setNombre] = useState('')
 const [mensaje, setMensaje] = useState('')
 
@@ -17,15 +17,15 @@ const traer_datos =  async ()=>{
     setNombre(datos_producto.nombre)
 }
 
-const editarProducto = async(event)=>{
+const editarProductos = async(event)=>{
     event.preventDefault();
-    const respuesta = await API.EditProducto({nombre}, id_pro)
+    const respuesta = await API.EditProductos({nombre}, id_pro)
     
     if(respuesta.status){
         setMensaje(respuesta.mensaje)
         setTimeout(()=>{
             setMensaje('')
-            window.location.href='/producto'
+            window.location.href='/productos'
             }, 5000)
     }
     return;
@@ -33,7 +33,7 @@ const editarProducto = async(event)=>{
     return(
         <>
        <main className="form-signin w-100 m-auto">
-              <form onSubmit={editarProducto}>
+              <form onSubmit={editarproductos}>
                 <div>
                     {mensaje}
                 </div>
@@ -45,12 +45,12 @@ const editarProducto = async(event)=>{
                   className="form-control" 
                   placeholder="Nombre del producto"
                   />
-                  <label for="floatingInput">Datos del Producto</label>
+                  <label for="floatingInput">Datos del producto</label>
                 </div>
                
                
                 <button className="btn btn-primary" type="submit" >Guardar Edicion</button>
-                <Link to="/producto" >Volver</Link>
+                <Link to="/productos" >Volver</Link>
                 
               </form>
           </main>

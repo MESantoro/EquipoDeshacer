@@ -65,7 +65,7 @@ router.post('/registro', bodyParser.json() , (req , res)=>{
 })
 router.get('/menu/:id_rol',verificarToken, (req , res)=>{
     const { id_rol } = req.params;
-    jwt.verify(req.token, 'siliconKey', (error, valido)=>{
+    jwt.verify(req.token, 'deshacerKey', (error, valido)=>{
         if(error){
             res.sendStatus(403);
         }else{
@@ -110,7 +110,7 @@ router.post('/login', bodyParser.json() , (req , res)=>{
                  if(comparacion)  {
 
                     // GENERACION DEL TOKEN
-                    jwt.sign({usuario}, 'siliconKey', (error, token)=>{
+                    jwt.sign({usuario}, 'deshacerKey', (error, token)=>{
 
                         res.json({
                             status: true,

@@ -12,7 +12,7 @@ const bcrypt= require('bcrypt');
 //URL /usuarios
 //parametros : ninguno
 router.get('/usuarios', verificarToken,(req , res)=>{
-    jwt.verify(req.token, 'siliconKey', (error, valido)=>{
+    jwt.verify(req.token, 'deshacerKey', (error, valido)=>{
         if(error){
             res.sendStatus(403);
         }else{
@@ -48,7 +48,7 @@ router.get('/usuarios/:id_usuario', (req , res)=>{
 //parametros : en el cuerpo(body) 
     // nombre
 
-router.post('/usuarios', bodyParser.json(), (req , res)=>{
+router.post('/usuario', bodyParser.json(), (req , res)=>{
     const { nombre }  = req.body
   
     conexionamysql.query('INSERT INTO usuarios (nombre) VALUES (?)', [nombre], (error, registros)=>{
