@@ -74,7 +74,7 @@ export async function getMenuByRol(id_rol){
 }
 
 //FUNCION PERMISOS X DATOS Y TOKEN
-export async function ver_permisos(datos){
+export async function ver_permisos(datos){    
     const token = JSON.parse(localStorage.getItem('token'));
    const Options={
        method:'POST',

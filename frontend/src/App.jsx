@@ -19,7 +19,7 @@ import { AddCliente } from './componentesJSX/Cliente/AddCliente'//listo
 import { Usuarios } from './componentesJSX/Usuarios/Usuario'// Listo
 import { Productos } from './componentesJSX/Productos/Productos'//listo
 import { EditProductos } from './componentesJSX/Productos/EditProductos'//listo
-import { Tipo_Producto } from './componentesJSX/Tipo_Producto/Tipo_Producto'//listo */
+/* import { Tipo_Producto } from './componentesJSX/Tipo_Producto/Tipo_Producto'//listo */
 
 function App() {
 
@@ -37,7 +37,7 @@ function App() {
         {/* <Route path='/formas_pago' element={<Formas_Pago/>}></Route> */}
         <Route path='/productos' element={<Productos/>}></Route>
         <Route path='/editproductos' element={<EditProductos/>}></Route>
-        <Route path='/tipo_producto' element={<Tipo_Producto/>}></Route>
+        {/* <Route path='/tipo_producto' element={<Tipo_Producto/>}></Route> */}
         <Route path='/agregarcuenta_estado' element={<AddCuenta_Estado/>}></Route>
         <Route path='/agregarcliente' element={<AddCliente/>}></Route>
         {/* <Route path='/agregarformas_pago' element={<AddFormas_Pago/>}></Route> */}

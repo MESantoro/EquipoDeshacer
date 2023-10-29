@@ -71,7 +71,7 @@ export function Cuenta_Estado(){
     }
     const cambiar_estado = async (e, id_cue, estado_actual)=>{
         e.preventDefault();
-        const actualizar = (estado_actual=="P")?"A":"P";
+        const actualizar = (estado_actual=="Pagado")?"Adeuda":"Pagado";
         const respuesta= await API.ActualizarEstadoCuenta_Estado(id_cue, {actualizar});
         if(respuesta.status){
             setMensaje(respuesta.mensaje)
@@ -121,17 +121,17 @@ export function Cuenta_Estado(){
             {cuenta_estado.map((te)=>(
                 <tr>
                 <td >{te.nombre}</td>    
-                <td >{te.estado}</td>
+                <td >{te.cue_estado}</td>
                 <td >
-                {(te.estado=="P")?
+                {(te.cue_estado=="Pagado")?
                     <button data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, te.id_cue)} class="btn btn-outline-warning btn-sm">Editar</button>
                 : 
                     <button disabled class="btn btn-warning btn-sm">Editar</button>
                 }  
-                {(te.estado=="P")?
-                <button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, te.id_cue, te.estado )} >Desactivar</button>
+                {(te.cue_estado=="Pagado")?
+                <button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, te.id_cue, te.cue_estado )} >Desactivar</button>
                 :
-                <button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, te.id_cue, te.estado )} >Activar</button>
+                <button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, te.id_cue, te.cue_estado )} >Activar</button>
                 
                 }
                 </td>

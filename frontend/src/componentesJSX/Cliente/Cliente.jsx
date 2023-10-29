@@ -56,7 +56,7 @@ const cambiar_estado = async (cc, id_cli, estado_actual)=>{
                 <td >{cc.direccion}</td>
                 <td >{cc.correo}</td>
                 <td >{cc.cli_estado}</td>
-                <td >{cc.id_cue}</td>
+                <td >{cc.cue_estado}</td>
                 <td >
                     <Link to={`/editcliente/${cc.id_cli}`} ><button class="btn btn-warning btn-sm">Editar</button></Link>
                 </td>

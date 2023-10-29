@@ -54,6 +54,7 @@ export function Usuarios(){
     
     useEffect(()=>{
         const datos_usuario = JSON.parse(localStorage.getItem('usuario'));
+        
         ver_permisos(datos_usuario.id_rol);
     
         API.getUsuarios().then(setUsuarios)
@@ -194,11 +195,14 @@ export function Usuarios(){
     
     }
     const ver_permisos =  async (id_rol)=>{
+        alert("Viene: " + id_rol)
         const menu='/usuarios';
         const respuesta= await API.ver_permisos({id_rol, menu });
         if(respuesta.status){
+            
             setPermisoDenegado(true)
         }else{
+            
             setPermisoDenegado(false)
         }
     }

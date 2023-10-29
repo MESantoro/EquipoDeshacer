@@ -9,7 +9,7 @@ export function Header(){
                     <li class="nav-item text-nowrap">
                     <button class="nav-link px-3 btn btn-outline-success text-white text-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                         <svg class="bi"><use xlink:href="#list"/></svg>
-                        <span>M-D.H.23</span>
+                        <span>MENUCITO-D.H.23</span>
                     </button>
                     </li>
                 </ul>

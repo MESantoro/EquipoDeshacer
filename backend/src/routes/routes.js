@@ -8,11 +8,10 @@ const jwt= require('jsonwebtoken');
 
 const router = express()
 
-
+// RAIZ
 router.get('/', (req , res)=>{
     res.send('SISTEMA CHIMI OPERANDO CORRECTAMENTE')
 })
-
 // REGISTRO DE USUARIOS
 router.post('/registro', bodyParser.json() , (req , res)=>{
     const {apellido, nombre , dni, user, pass, correo, id_rol} =req.body;
@@ -63,6 +62,7 @@ router.post('/registro', bodyParser.json() , (req , res)=>{
         }
     })
 })
+// MENU X ROL
 router.get('/menu/:id_rol',verificarToken, (req , res)=>{
     const { id_rol } = req.params;
     jwt.verify(req.token, 'deshacerKey', (error, valido)=>{
@@ -82,7 +82,34 @@ router.get('/menu/:id_rol',verificarToken, (req , res)=>{
         }
     })
 })
-
+// MENU X PERMISOS
+router.post('/menu_permisos/',verificarToken, bodyParser.json() , (req , res)=>{
+    const { id_rol, menu } = req.body;
+   
+    jwt.verify(req.token, 'deshacerKey', (error, valido)=>{
+        if(error){
+            res.sendStatus(403);
+        }else{
+            mysqlConnect.query('SELECT * FROM menu WHERE id_rol=? AND href=?', [id_rol, menu], (error, registros)=>{
+                if(error){
+                    console.log('Error en la base de datos', error)
+                }else{
+                    if(registros.length>0){
+                        res.json({
+                            status:true
+                        })
+                    }else{
+                        res.json({
+                            status:false
+                        })
+                    }
+                    
+                }
+            })
+        }
+    })
+})
+// LOGIN
 router.post('/login', bodyParser.json() , (req , res)=>{
     const {user, pass} =req.body
     if(!user){
@@ -137,7 +164,31 @@ router.post('/login', bodyParser.json() , (req , res)=>{
     
 
 })
+// VALIDACION DE NICK
+router.post('/validarnick', bodyParser.json() , (req , res)=>{
+    const { user } = req.body;
+    console.log(user)
+            mysqlConnect.query('SELECT * FROM usuarios WHERE user=?', [user], (error, registros)=>{
+                if(error){
+                    console.log('Error en la base de datos', error)
+                }else{
 
+                    if(registros.length>0){
+                        res.json({
+                            status:true,
+                            mensaje:"El nombre de usuario ya existe" 
+                        })
+                    }else{
+                        res.json({
+                            status:false,
+                           
+                        })
+                    }
+                }
+            })
+       
+})
+// VERIFICACION DE TOKEN
 function verificarToken(req, res, next){
     const bearer= req.headers['authorization'];
     if(typeof bearer!=='undefined'){

@@ -22,7 +22,7 @@ const ingresar = async(event)=>{
     setMensaje(usuario.mensaje)
         setTimeout(()=>{
             setMensaje('')
-        }, 5000)
+        }, 3000)
    }
   return;
 }

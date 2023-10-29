@@ -63,7 +63,6 @@ router.post('/usuario', bodyParser.json(), (req , res)=>{
    })
 })
 
-
 ////////////////////edicion de usuario
 // metodo PUT
 //URL /usuarios/:id_usuario

@@ -38,7 +38,7 @@ app.use((req, res, next) =>{ // ANDA
 //Rutas
 
 app.use(require('./routes/routes'))
-app.use(require('./routes/routesProducto'))
+app.use(require('./routes/routesProductos'))
 app.use(require('./routes/routesTipo_Producto'))
 app.use(require('./routes/routesFormas_Pago'))
 app.use(require('./routes/routesCuenta_Estado'))

@@ -41,7 +41,7 @@ export function EditCliente() {
       nombre,
       cli_estado,
       cue_estado,
-      idCue,
+      id_cue,
       apellido,
       direccion,
       correo,
