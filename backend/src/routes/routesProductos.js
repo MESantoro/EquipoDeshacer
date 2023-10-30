@@ -15,8 +15,6 @@ router.get('/productos', (req , res)=>{
     })
 })
 
-// traer los  datos del productos por el ID
-
 // traer datos de producto por ID
 router.get('/productos/:id_pro', (req , res)=>{
     const {id_pro} = req.params
@@ -44,7 +42,6 @@ router.post('/productos', bodyParser.json(), (req , res)=>{
         }
         })
 });
-
 
 /////// edicion de productos
 router.put('/productos/:id_pro', bodyParser.json(), (req , res)=>{

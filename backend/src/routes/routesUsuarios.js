@@ -12,7 +12,7 @@ const bcrypt= require('bcrypt');
 //URL /usuarios
 //parametros : ninguno
 router.get('/usuarios', verificarToken,(req , res)=>{
-    jwt.verify(req.token, 'deshacerKey', (error, valido)=>{
+    jwt.verify(req.token, 'siliconKey', (error, valido)=>{
         if(error){
             res.sendStatus(403);
         }else{

@@ -62,7 +62,7 @@ router.post('/registro', bodyParser.json() , (req , res)=>{
 // MENU X ROL
 router.get('/menu/:id_rol',verificarToken, (req , res)=>{
     const { id_rol } = req.params;
-    jwt.verify(req.token, 'deshacerKey', (error, valido)=>{
+    jwt.verify(req.token, 'siliconKey', (error, valido)=>{
         if(error){
             res.sendStatus(403);
         }else{
@@ -83,7 +83,7 @@ router.get('/menu/:id_rol',verificarToken, (req , res)=>{
 router.post('/menu_permisos/',verificarToken, bodyParser.json() , (req , res)=>{
     const { id_rol, menu } = req.body;
    
-    jwt.verify(req.token, 'deshacerKey', (error, valido)=>{
+    jwt.verify(req.token, 'siliconKey', (error, valido)=>{
         if(error){
             res.sendStatus(403);
         }else{
@@ -134,7 +134,7 @@ router.post('/login', bodyParser.json() , (req , res)=>{
                  if(comparacion)  {
 
                     // GENERACION DEL TOKEN
-                    jwt.sign({usuario}, 'deshacerKey', (error, token)=>{
+                    jwt.sign({usuario}, 'siliconKey', (error, token)=>{
 
                         res.json({
                             status: true,

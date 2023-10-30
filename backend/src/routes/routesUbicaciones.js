@@ -2,8 +2,7 @@ const express = require('express');
 const mysqlConnect = require('../database/bd')
 const bodyParser = require('body-parser');
 const router = express()
-//////////////////////////////
-//////////////////////////////
+
 // listar tipos de equipo
 // metodo GET
 //URL /ubicaciones
@@ -18,7 +17,6 @@ router.get('/ubicaciones', (req , res)=>{
     })
 })
 // traer los  datos del ubicaciones por el ID
-
 // metodo GET
 //URL /ubicaciones/:id_ubicacion
 //parametros : ninguno
@@ -32,13 +30,10 @@ router.get('/ubicaciones/:id_ubicacion', (req , res)=>{
         }
     })
 })
-////////////////////insert de tipos equipo
-
 // metodo POST
 //URL /ubicaciones/
 //parametros : en el cuerpo(body) 
     // nombre
-
 router.post('/ubicaciones', bodyParser.json(), (req , res)=>{
     const { nombre }  = req.body
   
@@ -54,8 +49,7 @@ router.post('/ubicaciones', bodyParser.json(), (req , res)=>{
    })
 })
 
-
-////////////////////edicion de ubicaciones
+// edicion de ubicaciones
 // metodo PUT
 //URL /ubicaciones/:id_ubicacion
 //parametros : 
@@ -77,7 +71,7 @@ router.put('/ubicaciones/:id_ubicacion', bodyParser.json(), (req , res)=>{
    })
 })
 
-///////////////////eliminacion de ubicaciones
+// eliminacion de ubicaciones
 // metodo DELETE
 //URL /ubicaciones/:id_ubicacion
 //parametros : 
@@ -98,6 +92,4 @@ router.delete('/ubicaciones/:id_ubicacion', bodyParser.json(), (req , res)=>{
     })
 })
 
-//////////////////////////////
-//////////////////////////////
 module.exports= router;

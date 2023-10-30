@@ -29,7 +29,7 @@ export function EditCliente() {
     setDireccion(datosCliente.direccion);
     setCli_estado(datosCliente.cli_estado);
     setId_cue(datosCliente.id_cue);
-    setId_cue(datosCliente.cue_estado);
+   /*  setId_cue(datosCliente.cue_estado); */
     setApellido(datosCliente.apellido);
     setCorreo(datosCliente.correo);
   }
@@ -117,7 +117,7 @@ export function EditCliente() {
               </option>
             ))}
           </select>
-          <label htmlFor="floatingInput">Cliente Estado</label>
+          <label htmlFor="floatingInput">Cuenta Estado</label>
         </div>
         <div className="form-floating">
           <select
