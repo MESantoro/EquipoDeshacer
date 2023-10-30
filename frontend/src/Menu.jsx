@@ -50,8 +50,8 @@ export function Menu(){
                                 
                                 </li> */}
                             <li className="nav-link active"  aria-current="page" >{user}</li>
-                            <li><button  class="btn btn-danger" onClick={salir}>JUIRAAA..</button></li>
-                            <Link to="/" >Volver</Link>
+                            <li><button  class="btn btn-outline-danger" onClick={salir}>JUIRAA</button></li>
+                            <Link to="/principal" className="btn btn-outline-light">Volver</Link>
                             </ul>
                     </div>
                 </div>

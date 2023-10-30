@@ -416,6 +416,71 @@ export async function ActualizarEstadoUbicacion(id_ubicacion, actulizar){
 }
 // FIN
 
+//inicio de tipo_producto
+export async function getTipo_Producto(){
+    const Options={
+        method:'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/tipo_producto`, Options)
+    const data= await respuesta.json();
+    return data
+}
+
+export async function AddTipo_Producto(datos){
+    const Options={
+        method:'POST',
+        body: JSON.stringify(datos),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/tipo_producto`, Options)
+    const data= await respuesta.json()
+    return data;
+}
+
+export async function getTipo_ProductoByID(id_tip){
+    const Options={
+        method:'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/tipo_producto/${id_tip}`, Options)
+    const data= await respuesta.json();
+    return data[0];
+}
+
+export async function EditTipo_Producto(datos, id_tip){
+    const Options={
+        method:'PUT',
+        body: JSON.stringify(datos),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/tipo_producto/${id_tip}`, Options)
+    const data= await respuesta.json()
+    return data;
+}
+
+export async function ActualizarEstadoTipo_Producto(id_tip, actulizar){
+    const Options={
+        method:'DELETE',
+        body: JSON.stringify(actulizar),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/tipo_producto/${id_tip}`, Options)
+    const data= await respuesta.json()
+    return data;
+}
+// FIN
+
 // USUARIOS
 export async function getUsuarios(){
     const token = JSON.parse(localStorage.getItem('token'));

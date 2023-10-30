@@ -4,9 +4,9 @@ import * as API from '../../servicios/servicios'
 import { Menu } from "../../Menu";
 import { Vigia } from "../../Vigia";
 
-export function Ubicaciones(){
-    const [ubicaciones, setUbicaciones]=useState([])
-    const [id_ubicacion, setIdUbicaciones]=useState('')
+export function Forma_Pago(){
+    const [forma_pago, setForma_Pago]=useState([])
+    const [id_pag, setIdForma_Pago]=useState('')
     const [mensaje, setMensaje] = useState('')
     const [nombre, setNombre] = useState('')
     //const [numero, setNumero] = useState('')
@@ -19,10 +19,10 @@ export function Ubicaciones(){
           toastBootstrap.show()
         })
       }
-    const guardarUbicacion = async(event)=>{
+    const guardarForma_Pago = async(event)=>{
         event.preventDefault();
-        if(id_ubicacion){
-            const respuesta = await API.EditUbicacion({nombre}, id_ubicacion)
+        if(id_pag){
+            const respuesta = await API.EditForma_Pago({nombre}, id_pag)
     
             if(respuesta.status){
                 setMensaje(respuesta.mensaje)
@@ -30,21 +30,21 @@ export function Ubicaciones(){
                 toastBootstrap.show()
                 setTimeout(()=>{
                     setMensaje('')
-                    window.location.href='/ubicaciones'
-                    // API.getUbicaciones().then(setUbicaciones)
+                    window.location.href='/forma_pago'
+                    // API.getForma_Pago().then(setForma_Pago)
                     }, 2000)
             }
             return;
         }else{
-            const respuesta = await API.AddUbicacion({nombre})
+            const respuesta = await API.AddForma_Pago({nombre})
             if(respuesta.status){
                 setMensaje(respuesta.mensaje)
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
                 toastBootstrap.show()
                 setTimeout(()=>{
                     setMensaje('')
-                    window.location.href='/ubicaciones'
-                    // API.getUbicaciones().then(setUbicaciones)
+                    window.location.href='/forma_pago'
+                    // API.getForma_Pago().then(setForma_Pago)
                     }, 2000)
             }
             return;
@@ -53,37 +53,37 @@ export function Ubicaciones(){
     }
     
     useEffect(()=>{
-        API.getUbicaciones().then(setUbicaciones)
+        API.getForma_Pago().then(setForma_Pago)
     }, [])
 
-    const cambiar_estado = async (e, id_ubicacion, estado_actual)=>{
+    const cambiar_estado = async (e, id_pag, estado_actual)=>{
         e.preventDefault();
         const actualizar = (estado_actual=="O")?"X":"O";
         console.log(actualizar)
-        const respuesta= await API.ActualizarEstadoUbicacion(id_ubicacion, {actualizar});
+        const respuesta= await API.ActualizarEstadoForma_Pago(id_pag, {actualizar});
         if(respuesta.status){
             setMensaje(respuesta.mensaje)
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
             toastBootstrap.show()
-            API.getUbicaciones().then(setUbicaciones)
+            API.getForma_Pago().then(setForma_Pago)
             setTimeout(()=>{
                 setMensaje('')
                 toastBootstrap.hide()
                 
-                // window.location.href='/ubicaciones'
+                // window.location.href='/forma_pago'
             }, 2000)
         }
         
     }
 
-    const editar_registro = async (e, id_ubicacion)=>{
+    const editar_registro = async (e, id_pag)=>{
         e.preventDefault();
         
-        console.log('el id que vamos a editar es el ', id_ubicacion)
-        setIdUbicaciones(id_ubicacion)
-        const datos_ubicacion= await API.getUbicacionesByID(id_ubicacion);
-        console.log(datos_ubicacion)
-        setNombre(datos_ubicacion.nombre)
+        console.log('el id que vamos a editar es el ', id_pag)
+        setIdForma_Pago(id_pag)
+        const datos_forma_pago= await API.getForma_PagoByID(id_pag);
+        console.log(datos_forma_pago)
+        setNombre(datos_forma_pago.nombre)
     }
 
     return(
@@ -99,24 +99,24 @@ export function Ubicaciones(){
             </tr>
 
             <tr>
-                <td>Descripcion de Ubicacion</td>
+                <td>Descripcion de Forma_Pago</td>
                 <td>Estado</td>
                 <td colspan="2">Acciones</td>
             </tr>
             </thead>
             <tbody>
-            {ubicaciones.map((ubicacion)=>(
+            {forma_pago.map((forma_pago)=>(
                 <tr>
-                <td >{ubicacion.nombre}</td>    
-                <td >{ubicacion.estado}</td>
+                <td >{forma_pago.nombre}</td>    
+                <td >{forma_pago.estado}</td>
                 <td >
                     
-                    <button   data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, ubicacion.id_ubicacion)} class="btn btn-outline-warning btn-sm">Editar</button>
+                    <button   data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, forma_pago.id_pag)} class="btn btn-outline-warning btn-sm">Editar</button>
                     
-                {(ubicacion.estado=="O")?
-                <button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, ubicacion.id_ubicacion, ubicacion.estado )} >Desactivar</button>
+                {(forma_pago.estado=="O")?
+                <button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, forma_pago.id_pag, forma_pago.estado )} >Desactivar</button>
                 :
-                <button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, ubicacion.id_ubicacion, ubicacion.estado )} >Activar</button>
+                <button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, forma_pago.id_pag, forma_pago.estado )} >Activar</button>
                 
                 }
                 </td>
@@ -133,7 +133,7 @@ export function Ubicaciones(){
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Datos </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form onSubmit={guardarUbicacion}>
+                <form onSubmit={guardarForma_Pago}>
                 <div class="modal-body">
                 
                     
@@ -143,9 +143,9 @@ export function Ubicaciones(){
                     value={nombre}
                     onChange={(event)=>setNombre(event.target.value)}
                     className="form-control" 
-                    placeholder="Nombre del ubicacion"
+                    placeholder="Nombre del forma_pago"
                     />
-                    <label for="floatingInput">Nombre del ubicacion</label>
+                    <label for="floatingInput">Nombre del forma_pago</label>
                     </div>
                     {/* <div className="form-floating">
                     <input required

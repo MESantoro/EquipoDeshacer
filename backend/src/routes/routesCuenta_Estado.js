@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken')
 //URL /cuenta_estado
 
 router.get('/cuenta_estado', verificarToken,(req , res)=>{
-    jwt.verify(req.token, 'siliconKey', (error, valido)=>{
+    jwt.verify(req.token, 'deshacerKey', (error, valido)=>{
         if(error){
             res.sendStatus(403);
         }else{

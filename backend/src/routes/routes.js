@@ -1,11 +1,8 @@
 const express = require('express');
 const conexionamysql = require('../database/bd')
 const bodyParser = require('body-parser');
-
 const bcrypt= require('bcrypt');
-
 const jwt= require('jsonwebtoken');
-
 const router = express()
 
 // RAIZ

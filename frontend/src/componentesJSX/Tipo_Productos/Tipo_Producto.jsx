@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as API from '../../servicios/servicios'
-import './Tipo_Producto.css'
-import { Link } from "react-router-dom";
+
 import { Menu } from "../../Menu";
 import { Vigia } from "../../Vigia";
 
@@ -10,6 +9,7 @@ export function Tipo_Producto(){
     const [id_tip, setIdTipo_Producto]=useState('')
     const [mensaje, setMensaje] = useState('')
     const [nombre, setNombre] = useState('')
+    //const [numero, setNumero] = useState('')
 
     const toastTrigger = document.getElementById('liveToastBtn')
     const toastLiveExample = document.getElementById('liveToast')
@@ -32,7 +32,7 @@ export function Tipo_Producto(){
                     setMensaje('')
                     window.location.href='/tipo_producto'
                     // API.getTipo_Producto().then(setTipo_Producto)
-                    }, 2500)
+                    }, 2000)
             }
             return;
         }else{
@@ -45,7 +45,7 @@ export function Tipo_Producto(){
                     setMensaje('')
                     window.location.href='/tipo_producto'
                     // API.getTipo_Producto().then(setTipo_Producto)
-                    }, 2500)
+                    }, 2000)
             }
             return;
         }
@@ -60,17 +60,18 @@ export function Tipo_Producto(){
         e.preventDefault();
         const actualizar = (estado_actual=="O")?"X":"O";
         console.log(actualizar)
-        const respuesta= await API.ActualizarTipo_Producto(id_tip, {actualizar});
+        const respuesta= await API.ActualizarEstadoTipo_Producto(id_tip, {actualizar});
         if(respuesta.status){
             setMensaje(respuesta.mensaje)
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
             toastBootstrap.show()
+            API.getTipo_Producto().then(setTipo_Producto)
             setTimeout(()=>{
                 setMensaje('')
                 toastBootstrap.hide()
-                API.getTipo_Producto().then(setTipo_Producto)
+                
                 // window.location.href='/tipo_producto'
-            }, 2500)
+            }, 2000)
         }
         
     }
@@ -85,25 +86,20 @@ export function Tipo_Producto(){
         setNombre(datos_tipo_producto.nombre)
     }
 
-    
-
     return(
         <>
-        
         <Menu/>
         <Vigia/>
         <table class="table table-striped">
         <thead>
             <tr>
-                
                 <th colspan="4">
-                <Link class="btn btn-outline-primary btn-sm" to="/agregartipo_producto">Agregar</Link>
-                <button  class="btn btn-outline-primary  btn-sm"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >Agregar Modal</button>
+                <button  class="btn btn-outline-primary  btn-sm"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >Agregar</button>
                 </th>    
             </tr>
 
             <tr>
-                <td>Descripcion</td>
+                <td>Descripcion de Tipo_Producto</td>
                 <td>Estado</td>
                 <td colspan="2">Acciones</td>
             </tr>
@@ -114,8 +110,8 @@ export function Tipo_Producto(){
                 <td >{tipo_producto.nombre}</td>    
                 <td >{tipo_producto.estado}</td>
                 <td >
-                    <Link to={`/edittipo_producto/${tipo_producto.id_tip}`} ><button class="btn btn-warning btn-sm">Editar Link</button></Link>
-                    <button   data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, tipo_producto.id_tip)} class="btn btn-outline-warning btn-sm">Editar modal</button>
+                    
+                    <button   data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, tipo_producto.id_tip)} class="btn btn-outline-warning btn-sm">Editar</button>
                     
                 {(tipo_producto.estado=="O")?
                 <button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, tipo_producto.id_tip, tipo_producto.estado )} >Desactivar</button>
@@ -134,7 +130,7 @@ export function Tipo_Producto(){
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Datos del modelo </h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Datos </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form onSubmit={guardarTipo_Producto}>
@@ -142,16 +138,29 @@ export function Tipo_Producto(){
                 
                     
                     <div className="form-floating">
-                    <input 
+                    <input required
                     type="text" 
                     value={nombre}
                     onChange={(event)=>setNombre(event.target.value)}
                     className="form-control" 
-                    placeholder="Nombre del tipo_producto"
+                    placeholder="Nombre del Tipo Producto"
                     />
-                    <label for="floatingInput">Nombre del tipo_producto</label>
+                    <label for="floatingInput">Nombre del Tipo Producto</label>
                     </div>
+                    {/* <div className="form-floating">
+                    <input required
+                    type="number" 
+                    value={numero}
+                    onChange={(event) => {
+                        setNumero((event.target.value < 0)?event.target.value * -1:event.target.value);
+                      }}
+                    className="form-control" 
+                    placeholder="Numero"
+                    />
+                    <label for="floatingInput">Numero</label>
+                    </div> */}
                 </div>
+                
                 <div class="modal-footer">
                 <button className="btn btn-primary" type="submit" >Guardar</button>
                     
@@ -166,8 +175,7 @@ export function Tipo_Producto(){
                 <div class="toast-header">
                 
                 <strong class="me-auto">Mensaje</strong>
-                
-                
+             
                 </div>
                 <div class="toast-body">
                 {mensaje}

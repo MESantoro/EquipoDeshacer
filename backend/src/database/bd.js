@@ -4,7 +4,7 @@ const conexionamysql= mysql.createConnection({
     host:'localhost',
     user: 'root',
     password: 'root',
-    database: 'estadosycuentas' //HAY Q PONER BD CUENTAS
+    database: 'estadosycuentas' //ANDA
 });
 
 conexionamysql.connect(function(err){

@@ -46,7 +46,7 @@ router.post('/forma_pago', bodyParser.json(), (req , res)=>{
 })
 // /////////////////////////////
 
-////////////////////edicion de modulo
+////////////////////edicion de de forma de pago
 router.put('/forma_pago/:id_pag', bodyParser.json(), (req , res)=>{
     const { forma,  }  = req.body
     const { id_pag } = req.params

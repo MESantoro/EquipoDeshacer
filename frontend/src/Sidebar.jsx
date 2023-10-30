@@ -53,7 +53,7 @@ export function Sidebar(){
                                     <Link  className="nav-link active" aria-current="page"  to='../generador'>Generador</Link>
                                  </li> */}
                             <li className="nav-link active letra_roja"  aria-current="page" >¡¡BUENAS!!: {user}</li>
-                            <li><button  class="btn btn-outline-danger" onClick={salir}>RAJEMOS</button></li>
+                            <li><button  class="btn btn-outline-danger" onClick={salir}>JUIRAA..</button></li>
                             </ul>
           
         </div>

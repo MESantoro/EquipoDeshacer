@@ -6,7 +6,7 @@ const path = require('path');
 // Inicializaciones
 const app = express(); // ANDA
 
-// Setings (Puerta de Conexion o enganche de la base y puerto disponible)
+// Setings (Puerta de Conexion o enganche de la base y puerto disponible) ANDA
 app.set('puerto', process.env.puerto || 3000);
 
 
@@ -35,12 +35,11 @@ app.use((req, res, next) =>{ // ANDA
     next();
 });
 
-//Rutas
-
+// Rutas ANDA
 app.use(require('./routes/routes'))
 app.use(require('./routes/routesProductos'))
 app.use(require('./routes/routesTipo_Producto'))
-app.use(require('./routes/routesFormas_Pago'))
+app.use(require('./routes/routesForma_Pago'))
 app.use(require('./routes/routesCuenta_Estado'))
 app.use(require('./routes/routesCliente'))
 app.use(require('./routes/routesUsuarios')) 
