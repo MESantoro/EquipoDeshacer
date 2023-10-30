@@ -15,11 +15,11 @@ import { AddCuenta_Estado } from './componentesJSX/Cuenta_Estado/AddCuenta_Estad
 import { EditCuenta_Estado } from './componentesJSX/Cuenta_Estado/EditCuenta_Estado' //listo
 import { EditCliente } from './componentesJSX/Cliente/EditCliente'//listo
 import { AddCliente } from './componentesJSX/Cliente/AddCliente'//listo
-/* import { Ubicaciones } from './componentesJSX/ubicacion/Ubicacion' */
+import { Ubicaciones } from './componentesJSX/Ubicaciones/Ubicacion'
 import { Usuarios } from './componentesJSX/Usuarios/Usuario'// Listo
 import { Productos } from './componentesJSX/Productos/Productos'//listo
 import { EditProductos } from './componentesJSX/Productos/EditProductos'//listo
-/* import { Tipo_Producto } from './componentesJSX/Tipo_Producto/Tipo_Producto'//listo */
+import { Tipo_Producto } from './componentesJSX/Tipo_Productos/Tipo_Producto'//listo */
 
 function App() {
 
@@ -32,12 +32,12 @@ function App() {
         <Route path='/registro' element={<Registro/>}></Route>
         <Route path='/cliente' element={<Cliente/>}></Route>
         <Route path='/cuenta_estado' element={<Cuenta_Estado/>}></Route>
-        {/* <Route path='/ubicaciones' element={<Ubicacion/>}></Route> */}
+        <Route path='/ubicaciones' element={<Ubicaciones/>}></Route>
         <Route path='/usuarios' element={<Usuarios/>}></Route>
         {/* <Route path='/formas_pago' element={<Formas_Pago/>}></Route> */}
         <Route path='/productos' element={<Productos/>}></Route>
         <Route path='/editproductos' element={<EditProductos/>}></Route>
-        {/* <Route path='/tipo_producto' element={<Tipo_Producto/>}></Route> */}
+        <Route path='/tipo_producto' element={<Tipo_Producto/>}></Route>
         <Route path='/agregarcuenta_estado' element={<AddCuenta_Estado/>}></Route>
         <Route path='/agregarcliente' element={<AddCliente/>}></Route>
         {/* <Route path='/agregarformas_pago' element={<AddFormas_Pago/>}></Route> */}

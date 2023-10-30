@@ -19,10 +19,10 @@ export function Tipo_Producto(){
           toastBootstrap.show()
         })
       }
-    const guardarFabricante = async(event)=>{
+    const guardarTipo_Producto = async(event)=>{
         event.preventDefault();
         if(id_tip){
-            const respuesta = await API.EditFabricante({nombre}, id_tip)
+            const respuesta = await API.EditTipo_Producto({nombre}, id_tip)
     
             if(respuesta.status){
                 setMensaje(respuesta.mensaje)
@@ -36,7 +36,7 @@ export function Tipo_Producto(){
             }
             return;
         }else{
-            const respuesta = await API.AddFabricante({nombre})
+            const respuesta = await API.AddTipo_Producto({nombre})
             if(respuesta.status){
                 setMensaje(respuesta.mensaje)
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
@@ -137,7 +137,7 @@ export function Tipo_Producto(){
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Datos del modelo </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form onSubmit={guardarFabricante}>
+                <form onSubmit={guardarTipo_Producto}>
                 <div class="modal-body">
                 
                     
