@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import * as API from '../../servicios/servicios'
-import './Productos.css'
-import { Link } from "react-router-dom";
+
 import { Menu } from "../../Menu";
 import { Vigia } from "../../Vigia";
 
 export function Productos(){
     const [productos, setProductos]=useState([])
     const [id_pro, setIdProductos]=useState('')
-    const [nombre, setNombre]=useState('')
     const [mensaje, setMensaje] = useState('')
-    const [permisoDenegado, setPermisoDenegado] = useState(false)
+    const [nombre, setNombre] = useState('')
+    //const [numero, setNumero] = useState('')
+
     const toastTrigger = document.getElementById('liveToastBtn')
     const toastLiveExample = document.getElementById('liveToast')
     if (toastTrigger) {
@@ -19,26 +19,6 @@ export function Productos(){
           toastBootstrap.show()
         })
       }
-    useEffect(()=>{
-        const datos_usuario = JSON.parse(localStorage.getItem('usuario'));
-        ver_permisos(datos_usuario.id_rol);
-        API.getProductos().then(setProductos)
-    }, [])
-
-
-    const editar_registro = async (e, id_pro)=>{
-        e.preventDefault();
-        setIdProductos(id_pro)
-        const datos_p= await API.getProductosByID(id_pro);
-        setNombre(datos_p.nombre)
-    }
-
-     const limpiarModal = async ()=>{
-       
-        setNombre('')
-        setIdProductos('')
-    }
-
     const guardarProductos = async(event)=>{
         event.preventDefault();
         if(id_pro){
@@ -50,9 +30,9 @@ export function Productos(){
                 toastBootstrap.show()
                 setTimeout(()=>{
                     setMensaje('')
-                    toastBootstrap.hide()
-                    API.getProductos().then(setProductos)
-                    }, 2500)
+                    window.location.href='/productos'
+                    // API.getProductos().then(setProductos)
+                    }, 2000)
             }
             return;
         }else{
@@ -63,17 +43,23 @@ export function Productos(){
                 toastBootstrap.show()
                 setTimeout(()=>{
                     setMensaje('')
-                    toastBootstrap.hide()
-                    API.getProductos().then(setProductos)
-                    }, 2500)
+                    window.location.href='/productos'
+                    // API.getProductos().then(setProductos)
+                    }, 2000)
             }
             return;
         }
         
     }
+    
+    useEffect(()=>{
+        API.getProductos().then(setProductos)
+    }, [])
+
     const cambiar_estado = async (e, id_pro, estado_actual)=>{
         e.preventDefault();
         const actualizar = (estado_actual=="O")?"X":"O";
+        console.log(actualizar)
         const respuesta= await API.ActualizarEstadoProductos(id_pro, {actualizar});
         if(respuesta.status){
             setMensaje(respuesta.mensaje)
@@ -83,58 +69,54 @@ export function Productos(){
             setTimeout(()=>{
                 setMensaje('')
                 toastBootstrap.hide()
-            }, 2500)
+                
+                // window.location.href='/productos'
+            }, 2000)
         }
+        
     }
-    const ver_permisos =  async (id_rol)=>{
-        const menu='/productos';
-        const respuesta= await API.ver_permisos({id_rol, menu });
-        if(respuesta.status){
-            setPermisoDenegado(true)
-        }else{
-            setPermisoDenegado(false)
-        }
+
+    const editar_registro = async (e, id_pro)=>{
+        e.preventDefault();
+        
+        console.log('el id que vamos a editar es el ', id_pro)
+        setIdProductos(id_pro)
+        const datos_productos= await API.getProductosByID(id_pro);
+        console.log(datos_productos)
+        setNombre(datos_productos.nombre)
     }
+
     return(
         <>
         <Menu/>
         <Vigia/>
-        {
-        !permisoDenegado? 
-            <div className="alert alert-warning" role="alert">
-            No tiene permiso para acceder a esta opcion
-            </div>
-            :<>
         <table class="table table-striped">
         <thead>
             <tr>
-                
                 <th colspan="4">
-                <button  onClick={(event)=>limpiarModal('')}  class="btn btn-outline-primary  btn-sm"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >Agregar</button>
+                <button  class="btn btn-outline-primary  btn-sm"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >Agregar</button>
                 </th>    
             </tr>
 
             <tr>
-                <td>Descripcion</td>
+                <td>Descripcion Estado Cuenta </td>
                 <td>Estado</td>
                 <td colspan="2">Acciones</td>
             </tr>
             </thead>
             <tbody>
-            {productos.map((p)=>(
+            {productos.map((productos)=>(
                 <tr>
-                <td >{p.nombre}</td>    
-                <td >{p.estado}</td>
+                <td >{productos.nombre}</td>    
+                <td >{productos.estado}</td>
                 <td >
-                {(p.estado=="O")?
-                    <button data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, p.id_pro)} class="btn btn-outline-warning btn-sm">Editar</button>
-                : 
-                    <button disabled class="btn btn-warning btn-sm">Editar</button>
-                }  
-                {(p.estado=="O")?
-                <button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, p.id_pro, p.estado )} >Desactivar</button>
+                    
+                    <button   data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, productos.id_pro)} class="btn btn-outline-warning btn-sm">Editar</button>
+                    
+                {(productos.estado=="O")?
+                <button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, productos.id_pro, productos.estado )} >Desactivar</button>
                 :
-                <button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, p.id_pro, p.estado )} >Activar</button>
+                <button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, productos.id_pro, productos.estado )} >Activar</button>
                 
                 }
                 </td>
@@ -161,11 +143,22 @@ export function Productos(){
                     value={nombre}
                     onChange={(event)=>setNombre(event.target.value)}
                     className="form-control" 
-                    placeholder="Nombre de Producto"
+                    placeholder="Nombre del Estado de Cuenta"
                     />
-                    <label for="floatingInput">Nombre de Producto</label>
+                    <label for="floatingInput">Nombre Estado de Cuenta</label>
                     </div>
-                    
+                    {/* <div className="form-floating">
+                    <input required
+                    type="number" 
+                    value={numero}
+                    onChange={(event) => {
+                        setNumero((event.target.value < 0)?event.target.value * -1:event.target.value);
+                      }}
+                    className="form-control" 
+                    placeholder="Numero"
+                    />
+                    <label for="floatingInput">Numero</label>
+                    </div> */}
                 </div>
                 
                 <div class="modal-footer">
@@ -176,13 +169,13 @@ export function Productos(){
                 </div>
             </div>
         </div>
+
         <div class="toast-container position-fixed bottom-0 end-0 p-3">
             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                 
                 <strong class="me-auto">Mensaje</strong>
-                
-                
+             
                 </div>
                 <div class="toast-body">
                 {mensaje}
@@ -190,9 +183,5 @@ export function Productos(){
             </div>
         </div>
         </>
-        }
-        
-        </>
     )
-    
 }

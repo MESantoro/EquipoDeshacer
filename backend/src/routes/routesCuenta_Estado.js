@@ -1,36 +1,14 @@
 const express = require('express');
-const conexionamysql = require('../database/bd')
+const mysqlConnect = require('../database/bd')
 const bodyParser = require('body-parser');
 const router = express()
-const jwt = require('jsonwebtoken')
 
-// listar Estado de Cuenta
+// listar Cuentas Estados
 // metodo GET
 //URL /cuenta_estado
-
-router.get('/cuenta_estado', verificarToken,(req , res)=>{
-    jwt.verify(req.token, 'siliconKey', (error, valido)=>{
-        if(error){
-            res.sendStatus(403);
-        }else{
-            conexionamysql.query('SELECT * FROM cuenta_estado', (error, registros)=>{
-                if(error){
-                    console.log('Error en la base de datos', error)
-                }else{
-                    res.json(registros)
-                }
-            })
-        }
-    })
-});
-// traer estados de cuenta por el ID
-
-// metodo GET
-//URL /cuenta_estado/:id_cue
-
-router.get('/cuenta_estado/:id_cue', (req , res)=>{
-    const { id_cue } = req.params
-    conexionamysql.query('SELECT * FROM cuenta_estado WHERE id_cue=?', [id_cue], (error, registros)=>{
+//parametros : ninguno
+router.get('/cuenta_estado', (req , res)=>{
+    mysqlConnect.query('SELECT * FROM cuenta_estado ', (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -38,89 +16,80 @@ router.get('/cuenta_estado/:id_cue', (req , res)=>{
         }
     })
 })
-////////////////////insert de Estado de cuenta
-
+// traer los  datos del cuenta_estado por el ID
+// metodo GET
+//URL /cuenta_estado/:id_cue
+//parametros : ninguno
+router.get('/cuenta_estado/:id_cue', (req , res)=>{
+    const { id_cue } = req.params
+    mysqlConnect.query('SELECT * FROM cuenta_estado WHERE id_cue=?', [id_cue], (error, registros)=>{
+        if(error){
+            console.log('Error en la base de datos', error)
+        }else{
+            res.json(registros)
+        }
+    })
+})
 // metodo POST
 //URL /cuenta_estado/
 //parametros : en el cuerpo(body) 
-    // estado
-
+    // nombre
 router.post('/cuenta_estado', bodyParser.json(), (req , res)=>{
-    const { estado }  = req.body
+    const { nombre }  = req.body
   
-    conexionamysql.query('INSERT INTO cuenta_estado (estado) VALUES (?)', [estado], (error, registros)=>{
+    mysqlConnect.query('INSERT INTO cuenta_estado (nombre) VALUES (?)', [nombre], (error, registros)=>{
        if(error){
            console.log('Error en la base de datos', error)
        }else{
-            res.json({
+        res.json({
             status:true,
-            mensaje: "El agregado se realizo correctamente"
+            mensaje: "Se agrego el registro correctamente"
             })
        }
    })
 })
 
-
-////////////////////edicion de Estado de Cuenta
+// edicion de cuenta_estado
 // metodo PUT
 //URL /cuenta_estado/:id_cue
 //parametros : 
     // en el cuerpo(body) 
-    // estado
+    // nombre
     // y el parametro que vamos a editar ->id_cue
-    router.put('/cuenta_estado/:id_cue', bodyParser.json(), (req, res) => {
-        const { nombre, estado } = req.body;
-        const { id_cue } = req.params;
-    
-        const updateQuery = 'UPDATE cuenta_estado SET nombre = ?, estado = ? WHERE id_cue = ?';
-    
-        conexionamysql.query(updateQuery, [nombre, estado, id_cue], (error, result) => {
-            if (error) {
-                console.log('Error en la base de datos', error);
-                res.status(500).json({
-                    status: false,
-                    mensaje: "Error en la base de datos"
-                });
-            } else if (result.affectedRows === 0) {
-                res.status(404).json({
-                    status: false,
-                    mensaje: "No se encontró un registro con el ID proporcionado."
-                });
-            } else {
-                res.status(200).json({
-                    status: true,
-                    mensaje: "La edición de registro se realizó correctamente"
-                });
-            }
-        });
-    });
-    
+router.put('/cuenta_estado/:id_cue', bodyParser.json(), (req , res)=>{
+    const { nombre }  = req.body
+    const { id_cue } = req.params
+    mysqlConnect.query('UPDATE cuenta_estado SET nombre = ?  WHERE id_cue = ?', [nombre, id_cue], (error, registros)=>{
+       if(error){
+           console.log('Error en la base de datos', error)
+       }else{
+         res.json({
+            status:true,
+            mensaje: "La actualizacion se realizo correctamente"
+            })
+       }
+   })
+})
 
-///////////////////eliminacion de estado de cuenta
-
+// eliminacion de cuenta_estado
+// metodo DELETE
+//URL /cuenta_estado/:id_cue
+//parametros : 
+    // y el parametro que vamos a borrar logicamente ->id_cue
 router.delete('/cuenta_estado/:id_cue', bodyParser.json(), (req , res)=>{
-    const { id_cue } = req.params;
 
-    conexionamysql.query('DELETE FROM cuenta_estado WHERE id_cue = ?', [id_cue], (error, registros) => {
-        if (error) {
-            console.log('error en la base de datos %s', error.message);
-            res.status(500).send('El registro ' + id_cue + ' no se eliminó correctamente');
-        } else {
-            res.status(200).send('El registro ' + id_cue + ' se eliminó correctamente');
+    const { actualizar }  = req.body
+    const { id_cue } = req.params
+    mysqlConnect.query('UPDATE cuenta_estado SET estado = ?  WHERE id_cue = ?', [actualizar, id_cue], (error, registros)=>{
+        if(error){
+            console.log('Error en la base de datos', error)
+        }else{
+            res.json({
+                status:true,
+                mensaje: "El cambio de estado se realizo correctamente"
+                })
         }
-    });
-});
+    })
+})
 
-function verificarToken(req, res, next){
-    const bearer= req.headers['authorization'];
-    if(typeof bearer!=='undefined'){
-        const token =bearer.split(" ")[1]
-        req.token= token;
-        next()
-    }else{
-        res.send('Debe contener un token')
-    }
- }
-
-//////////////////////////////
 module.exports= router;

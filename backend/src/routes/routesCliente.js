@@ -1,5 +1,5 @@
 const express = require('express');
-const conexionamysql = require('../database/bd')
+const mysqlConnect = require('../database/bd')
 const bodyParser = require('body-parser');
 const router = express()
 //////////////////////////////
@@ -9,8 +9,8 @@ const router = express()
 //URL /cliente
 //parametros : ninguno
 router.get('/cliente', (req , res)=>{
-    //conexionamysql.query("SELECT cc.id_cli, cc.nombre, p.nombre ,concat_ws(' - ', m.nombre, f.nombre), u.nombre lugar_ubicacion, cc.estado    FROM cliente AS e    INNER JOIN productos AS p ON p.id_tip=cc.id_tip  LEFT JOIN productos AS m ON m.id_pro=cc.id_pro LEFT JOIN ubicaciones AS u ON u.id_ubicacion=e.id_ubicacion ", (error, registros)=>{
-    conexionamysql.query('SELECT * FROM cliente', (error, registros)=>{
+    //mysqlConnect.query("SELECT cc.id_cli, cc.nombre, p.nombre ,concat_ws(' - ', m.nombre, f.nombre), u.nombre lugar_ubicacion, cc.estado    FROM cliente AS e    INNER JOIN productos AS p ON p.id_tip=cc.id_tip  LEFT JOIN productos AS m ON m.id_pro=cc.id_pro LEFT JOIN ubicaciones AS u ON u.id_ubicacion=e.id_ubicacion ", (error, registros)=>{
+    mysqlConnect.query('SELECT * FROM cliente', (error, registros)=>{
 
         if(error){
             console.log('Error en la base de datos', error)
@@ -24,7 +24,7 @@ router.get('/cliente', (req , res)=>{
 router.put('/cambiar_estado_cliente/:id_cli', bodyParser.json(), (req , res)=>{
     const { actualizar }  = req.body
     const { id_cli } = req.params
-    conexionamysql.query('UPDATE cliente SET cli_estado = ?  WHERE id_cli = ?', [actualizar, id_cli], (error, registros)=>{
+    mysqlConnect.query('UPDATE cliente SET cli_estado = ?  WHERE id_cli = ?', [actualizar, id_cli], (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -51,7 +51,7 @@ router.put('/cambiar_estado_cliente/:id_cli', bodyParser.json(), (req , res)=>{
             my_query += ` AND cli_estado = '${cli_estado}'`;
         }
     
-        conexionamysql.query(my_query, (error, registros) => {
+        mysqlConnect.query(my_query, (error, registros) => {
             if (error) {
                 console.log('Error en la base de datos', error);
                 res.status(500).json({ error: 'Error en la base de datos' });
@@ -94,7 +94,7 @@ router.post('/cliente', bodyParser.json(), (req , res)=>{
             mensaje: "El ID del ciente es un campo obligatorio"
         })
     }*/
-    conexionamysql.query('INSERT INTO cliente (id_cli, nombre, apellido, direccion, correo, cli_estado, id_cue  ) VALUES (?,?,?,?,?,?,?)', [id_cli, nombre, apellido, direccion, correo, cli_estado, id_cue ], (error, registros)=>{
+    mysqlConnect.query('INSERT INTO cliente (id_cli, nombre, apellido, direccion, correo, cli_estado, id_cue  ) VALUES (?,?,?,?,?,?,?)', [id_cli, nombre, apellido, direccion, correo, cli_estado, id_cue ], (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -113,7 +113,7 @@ router.get('/cliente/:id_cli', (req , res)=>{
     
     const { id_cli } = req.params
     console.log('entra aqui', id_cli)
-    conexionamysql.query('SELECT * FROM cliente WHERE id_cli=?', [id_cli], (error, registros)=>{
+    mysqlConnect.query('SELECT * FROM cliente WHERE id_cli=?', [id_cli], (error, registros)=>{
         if(error){
             res.json({
                 status:false
@@ -162,13 +162,13 @@ router.get('/cliente/:id_cli', (req , res)=>{
                 mensaje: "El ID de la cuenta es un campo obligatorio"
             })
         }
-        conexionamysql.query('SELECT * FROM cliente WHERE id_cli=?', [id_cli], (error, registros)=>{
+        mysqlConnect.query('SELECT * FROM cliente WHERE id_cli=?', [id_cli], (error, registros)=>{
             if(error){
                 console.log('Error en la base de datos', error)
             }else{
 
                 if(registros.length>0){
-                    conexionamysql.query('UPDATE cliente SET nombre = ?, apellido = ?, direccion = ?, correo = ?, cli_estado = ?, id_cue = ? WHERE id_cli = ?',
+                    mysqlConnect.query('UPDATE cliente SET nombre = ?, apellido = ?, direccion = ?, correo = ?, cli_estado = ?, id_cue = ? WHERE id_cli = ?',
     [nombre, apellido, direccion, correo, cli_estado, id_cli, id_cue], (error, registros) => {
         if(error){
             console.log('error en la base de datos %s', error.message)
@@ -195,7 +195,7 @@ router.get('/cliente/:id_cli', (req , res)=>{
 router.delete('/cliente/:id_cli', bodyParser.json(), (req , res) => {
     const { id_cli } = req.params;
 
-    conexionamysql.query('DELETE FROM cliente WHERE id_cli = ?', [id_cli], (error, registros) => {
+    mysqlConnect.query('DELETE FROM cliente WHERE id_cli = ?', [id_cli], (error, registros) => {
         if (error) {
             console.log('error en la base de datos %s', error.message);
             res.status(500).send('El registro ' + id_cli + ' no se eliminó correctamente');

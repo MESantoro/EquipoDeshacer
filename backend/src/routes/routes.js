@@ -106,6 +106,7 @@ router.post('/menu_permisos/',verificarToken, bodyParser.json() , (req , res)=>{
         }
     })
 })
+
 // LOGIN
 router.post('/login', bodyParser.json() , (req , res)=>{
     const {user, pass} =req.body
