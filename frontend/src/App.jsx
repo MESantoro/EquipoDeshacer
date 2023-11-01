@@ -20,6 +20,7 @@ import { Usuarios } from './componentesJSX/Usuarios/Usuario'// Listo
 import { Productos } from './componentesJSX/Productos/Productos'//listo
 import { EditProductos } from './componentesJSX/Productos/EditProductos'//listo
 import { Tipo_Producto } from './componentesJSX/Tipo_Productos/Tipo_Producto'//listo
+import { Roles } from './componentesJSX/Roles/Roles'// Listo
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
         {/* <Route path='/agregarforma_pago' element={<AddFormas_Pagos/>}></Route> */}
         <Route path='/editcuenta_estado/:id_cue' element={<EditCuenta_Estado/>}></Route>
         <Route path='/editcliente/:id_cli' element={<EditCliente/>}></Route>
+        <Route path='/roles' element={<Roles/>}></Route>
       </Routes>
     </>
   )

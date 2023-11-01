@@ -4,9 +4,9 @@ import * as API from '../../servicios/servicios'
 import { Menu } from "../../Menu";
 import { Vigia } from "../../Vigia";
 
-export function Forma_Pago(){
-    const [forma_pago, setForma_Pago]=useState([])
-    const [id_pag, setIdForma_Pago]=useState('')
+export function Roles(){
+    const [roles, setRoles]=useState([])
+    const [id_rol, setIdRoles]=useState('')
     const [mensaje, setMensaje] = useState('')
     const [nombre, setNombre] = useState('')
     //const [numero, setNumero] = useState('')
@@ -19,10 +19,10 @@ export function Forma_Pago(){
           toastBootstrap.show()
         })
       }
-    const guardarForma_Pago = async(event)=>{
+    const guardarRoles = async(event)=>{
         event.preventDefault();
-        if(id_pag){
-            const respuesta = await API.EditForma_Pago({nombre}, id_pag)
+        if(id_rol){
+            const respuesta = await API.EditRoles({nombre}, id_rol)
     
             if(respuesta.status){
                 setMensaje(respuesta.mensaje)
@@ -30,21 +30,21 @@ export function Forma_Pago(){
                 toastBootstrap.show()
                 setTimeout(()=>{
                     setMensaje('')
-                    window.location.href='/forma_pago'
-                    // API.getForma_Pago().then(setForma_Pago)
+                    window.location.href='/roles'
+                    // API.getRoles().then(setRoles)
                     }, 2000)
             }
             return;
         }else{
-            const respuesta = await API.AddForma_Pago({nombre})
+            const respuesta = await API.AddRoles({nombre})
             if(respuesta.status){
                 setMensaje(respuesta.mensaje)
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
                 toastBootstrap.show()
                 setTimeout(()=>{
                     setMensaje('')
-                    window.location.href='/forma_pago'
-                    // API.getForma_Pago().then(setForma_Pago)
+                    window.location.href='/roles'
+                    // API.getRoles().then(setRoles)
                     }, 2000)
             }
             return;
@@ -53,37 +53,37 @@ export function Forma_Pago(){
     }
     
     useEffect(()=>{
-        API.getForma_Pago().then(setForma_Pago)
+        API.getRoles().then(setRoles)
     }, [])
 
-    const cambiar_estado = async (e, id_pag, estado_actual)=>{
+    const cambiar_estado = async (e, id_rol, estado_actual)=>{
         e.preventDefault();
         const actualizar = (estado_actual=="O")?"X":"O";
         console.log(actualizar)
-        const respuesta= await API.ActualizarEstadoForma_Pago(id_pag, {actualizar});
+        const respuesta= await API.ActualizarEstadoRoles(id_rol, {actualizar});
         if(respuesta.status){
             setMensaje(respuesta.mensaje)
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
             toastBootstrap.show()
-            API.getForma_Pago().then(setForma_Pago)
+            API.getRoles().then(setRoles)
             setTimeout(()=>{
                 setMensaje('')
                 toastBootstrap.hide()
                 
-                // window.location.href='/forma_pago'
+                // window.location.href='/roles'
             }, 2000)
         }
         
     }
 
-    const editar_registro = async (e, id_pag)=>{
+    const editar_registro = async (e, id_rol)=>{
         e.preventDefault();
         
-        console.log('el id que vamos a editar es el ', id_pag)
-        setIdForma_Pago(id_pag)
-        const datos_forma_pago= await API.getForma_PagoByID(id_pag);
-        console.log(datos_forma_pago)
-        setNombre(datos_forma_pago.nombre)
+        console.log('el id que vamos a editar es el ', id_rol)
+        setIdRoles(id_rol)
+        const datos_roles= await API.getRolesByID(id_rol);
+        console.log(datos_roles)
+        setNombre(datos_roles.nombre)
     }
 
     return(
@@ -99,24 +99,24 @@ export function Forma_Pago(){
             </tr>
 
             <tr>
-                <td>Descripcion de Forma_Pago</td>
+                <td>Descripcion de Rol</td>
                 <td>Estado</td>
                 <td colspan="2">Acciones</td>
             </tr>
             </thead>
             <tbody>
-            {forma_pago.map((forma_pago)=>(
+            {roles.map((roles)=>(
                 <tr>
-                <td >{forma_pago.nombre}</td>    
-                <td >{forma_pago.estado}</td>
+                <td >{roles.nombre}</td>    
+                <td >{roles.estado}</td>
                 <td >
                     
-                    <button   data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, forma_pago.id_pag)} class="btn btn-outline-warning btn-sm">Editar</button>
+                    <button   data-bs-toggle="modal"  data-bs-target="#exampleModal" onClick={(event)=>editar_registro(event, roles.id_rol)} class="btn btn-outline-warning btn-sm">Editar</button>
                     
-                {(forma_pago.estado=="O")?
-                <button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, forma_pago.id_pag, forma_pago.estado )} >Desactivar</button>
+                {(roles.estado=="O")?
+                <button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, roles.id_rol, roles.estado )} >Desactivar</button>
                 :
-                <button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, forma_pago.id_pag, forma_pago.estado )} >Activar</button>
+                <button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, roles.id_rol, roles.estado )} >Activar</button>
                 
                 }
                 </td>
@@ -133,7 +133,7 @@ export function Forma_Pago(){
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Datos </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form onSubmit={guardarForma_Pago}>
+                <form onSubmit={guardarRoles}>
                 <div class="modal-body">
                 
                     
@@ -143,9 +143,9 @@ export function Forma_Pago(){
                     value={nombre}
                     onChange={(event)=>setNombre(event.target.value)}
                     className="form-control" 
-                    placeholder="Nombre del forma_pago"
+                    placeholder="Nombre del roles"
                     />
-                    <label for="floatingInput">Nombre Forma Pago</label>
+                    <label for="floatingInput">Nombre del roles</label>
                     </div>
                     {/* <div className="form-floating">
                     <input required

@@ -44,6 +44,8 @@ app.use(require('./routes/routesCuenta_Estado'))
 app.use(require('./routes/routesCliente'))
 app.use(require('./routes/routesUsuarios')) 
 app.use(require('./routes/routesUbicaciones'))
+app.use(require('./routes/routesRoles'))
+
 
 // Public
 app.use(express.static(path.join(__dirname, 'public')));

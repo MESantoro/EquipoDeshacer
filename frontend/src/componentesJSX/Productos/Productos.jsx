@@ -6,7 +6,7 @@ import { Menu } from "../../Menu";
 import { Vigia } from "../../Vigia";
 
 export function Productos(){
-    const [producto, setProductos]=useState([])
+    const [productos, setProductos]=useState([])
     const [id_pro, setIdProductos]=useState('')
     const [nombre, setNombre]=useState('')
     const [mensaje, setMensaje] = useState('')
@@ -121,7 +121,7 @@ export function Productos(){
             </tr>
             </thead>
             <tbody>
-            {producto.map((p)=>(
+            {productos.map((p)=>(
                 <tr>
                 <td >{p.nombre}</td>    
                 <td >{p.estado}</td>

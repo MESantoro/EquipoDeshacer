@@ -3,7 +3,7 @@ const mysqlConnect = require('../database/bd')
 const bodyParser = require('body-parser');
 const router = express()
 
-// listar tipos de equipo
+// listar tipos de Ubicaciones
 // metodo GET
 //URL /ubicaciones
 //parametros : ninguno

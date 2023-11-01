@@ -3,12 +3,12 @@ const mysqlConnect = require('../database/bd')
 const bodyParser = require('body-parser');
 const router = express()
 
-// listar tipos de Productos
+// listar tipos de equipo
 // metodo GET
-//URL /productos
+//URL /roles
 //parametros : ninguno
-router.get('/productos', (req , res)=>{
-    mysqlConnect.query('SELECT * FROM productos ', (error, registros)=>{
+router.get('/roles', (req , res)=>{
+    mysqlConnect.query('SELECT * FROM roles ', (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -16,13 +16,13 @@ router.get('/productos', (req , res)=>{
         }
     })
 })
-// traer los  datos del productos por el ID
+// traer los  datos del roles por el ID
 // metodo GET
-//URL /productos/:id_pro
+//URL /roles/:id_rol
 //parametros : ninguno
-router.get('/productos/:id_pro', (req , res)=>{
-    const { id_pro } = req.params
-    mysqlConnect.query('SELECT * FROM productos WHERE id_pro=?', [id_pro], (error, registros)=>{
+router.get('/roles/:id_rol', (req , res)=>{
+    const { id_rol } = req.params
+    mysqlConnect.query('SELECT * FROM roles WHERE id_rol=?', [id_rol], (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{
@@ -31,13 +31,13 @@ router.get('/productos/:id_pro', (req , res)=>{
     })
 })
 // metodo POST
-//URL /productos/
+//URL /roles/
 //parametros : en el cuerpo(body) 
     // nombre
-router.post('/productos', bodyParser.json(), (req , res)=>{
+router.post('/roles', bodyParser.json(), (req , res)=>{
     const { nombre }  = req.body
   
-    mysqlConnect.query('INSERT INTO productos (nombre) VALUES (?)', [nombre], (error, registros)=>{
+    mysqlConnect.query('INSERT INTO roles (nombre) VALUES (?)', [nombre], (error, registros)=>{
        if(error){
            console.log('Error en la base de datos', error)
        }else{
@@ -49,17 +49,17 @@ router.post('/productos', bodyParser.json(), (req , res)=>{
    })
 })
 
-// edicion de productos
+// edicion de roles
 // metodo PUT
-//URL /productos/:id_pro
+//URL /roles/:id_rol
 //parametros : 
     // en el cuerpo(body) 
     // nombre
-    // y el parametro que vamos a editar ->id_pro
-router.put('/productos/:id_pro', bodyParser.json(), (req , res)=>{
+    // y el parametro que vamos a editar ->id_rol
+router.put('/roles/:id_rol', bodyParser.json(), (req , res)=>{
     const { nombre }  = req.body
-    const { id_pro } = req.params
-    mysqlConnect.query('UPDATE productos SET nombre = ?  WHERE id_pro = ?', [nombre, id_pro], (error, registros)=>{
+    const { id_rol } = req.params
+    mysqlConnect.query('UPDATE roles SET nombre = ?  WHERE id_rol = ?', [nombre, id_rol], (error, registros)=>{
        if(error){
            console.log('Error en la base de datos', error)
        }else{
@@ -71,16 +71,16 @@ router.put('/productos/:id_pro', bodyParser.json(), (req , res)=>{
    })
 })
 
-// eliminacion de productos
+// eliminacion de roles
 // metodo DELETE
-//URL /productos/:id_pro
+//URL /roles/:id_rol
 //parametros : 
-    // y el parametro que vamos a borrar logicamente ->id_pro
-router.delete('/productos/:id_pro', bodyParser.json(), (req , res)=>{
+    // y el parametro que vamos a borrar logicamente ->id_rol
+router.delete('/roles/:id_rol', bodyParser.json(), (req , res)=>{
 
     const { actualizar }  = req.body
-    const { id_pro } = req.params
-    mysqlConnect.query('UPDATE productos SET estado = ?  WHERE id_pro = ?', [actualizar, id_pro], (error, registros)=>{
+    const { id_rol } = req.params
+    mysqlConnect.query('UPDATE roles SET estado = ?  WHERE id_rol = ?', [actualizar, id_rol], (error, registros)=>{
         if(error){
             console.log('Error en la base de datos', error)
         }else{

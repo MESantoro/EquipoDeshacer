@@ -351,7 +351,7 @@ export async function getClienteByID(id_cli){
 }
 // FIN
 
-//inicio de ubicaciones
+// UBICACIONES
 export async function getUbicaciones(){
     const Options={
         method:'GET',
@@ -416,7 +416,72 @@ export async function ActualizarEstadoUbicacion(id_ubicacion, actulizar){
 }
 // FIN
 
-//inicio de tipo_producto
+// FORMA PAGO
+export async function getForma_Pago(){
+    const Options={
+        method:'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/forma_pago`, Options)
+    const data= await respuesta.json();
+    return data
+}
+
+export async function AddForma_Pago(datos){
+    const Options={
+        method:'POST',
+        body: JSON.stringify(datos),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/forma_pago`, Options)
+    const data= await respuesta.json()
+    return data;
+}
+
+export async function getForma_PagoByID(id_pag){
+    const Options={
+        method:'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/forma_pago/${id_pag}`, Options)
+    const data= await respuesta.json();
+    return data[0];
+}
+
+export async function EditForma_Pago(datos, id_pag){
+    const Options={
+        method:'PUT',
+        body: JSON.stringify(datos),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/forma_pago/${id_pag}`, Options)
+    const data= await respuesta.json()
+    return data;
+}
+
+export async function ActualizarEstadoForma_Pago(id_pag, actulizar){
+    const Options={
+        method:'DELETE',
+        body: JSON.stringify(actulizar),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/forma_pago/${id_pag}`, Options)
+    const data= await respuesta.json()
+    return data;
+}
+// FIN
+
+// TIPO PRODUCTO
 export async function getTipo_Producto(){
     const Options={
         method:'GET',
@@ -476,6 +541,71 @@ export async function ActualizarEstadoTipo_Producto(id_tip, actulizar){
         }
     }
     const respuesta = await fetch(`${URL}/tipo_producto/${id_tip}`, Options)
+    const data= await respuesta.json()
+    return data;
+}
+// FIN
+
+// ROLES
+export async function getRoles(){
+    const Options={
+        method:'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/roles`, Options)
+    const data= await respuesta.json();
+    return data
+}
+
+export async function AddRoles(datos){
+    const Options={
+        method:'POST',
+        body: JSON.stringify(datos),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/roles`, Options)
+    const data= await respuesta.json()
+    return data;
+}
+
+export async function getRolesByID(id_rol){
+    const Options={
+        method:'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/roles/${id_rol}`, Options)
+    const data= await respuesta.json();
+    return data[0];
+}
+
+export async function EditRoles(datos, id_rol){
+    const Options={
+        method:'PUT',
+        body: JSON.stringify(datos),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/roles/${id_rol}`, Options)
+    const data= await respuesta.json()
+    return data;
+}
+
+export async function ActualizarEstadoRoles(id_rol, actulizar){
+    const Options={
+        method:'DELETE',
+        body: JSON.stringify(actulizar),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    const respuesta = await fetch(`${URL}/roles/${id_rol}`, Options)
     const data= await respuesta.json()
     return data;
 }
