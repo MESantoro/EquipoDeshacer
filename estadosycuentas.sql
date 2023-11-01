@@ -31,7 +31,7 @@ CREATE TABLE `cliente` (
   `direccion` varchar(45) NOT NULL,
   `correo` varchar(45) NOT NULL,
   `cli_estado` enum('O','X') NOT NULL DEFAULT 'O',
-  `cue_estado` enum('Pagado','Adeuda','Parcial') DEFAULT 'Pagado',
+  `estado` enum('Pagado','Adeuda','Parcial') DEFAULT 'Pagado',
   PRIMARY KEY (`id_cli`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -56,9 +56,9 @@ DROP TABLE IF EXISTS `cuenta_estado`;
 CREATE TABLE `cuenta_estado` (
   `id_cue` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
-  `cue_estado` enum('Pagado','Adeuda') DEFAULT 'Pagado',
+  `estado` enum('Pagado','Adeuda') DEFAULT 'Pagado',
   PRIMARY KEY (`id_cue`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `cuenta_estado` (
 
 LOCK TABLES `cuenta_estado` WRITE;
 /*!40000 ALTER TABLE `cuenta_estado` DISABLE KEYS */;
-INSERT INTO `cuenta_estado` VALUES (1,'Anduvo Bien Ahora1','Pagado'),(9,'3 cuenta','Adeuda'),(11,'5 cuenta','Pagado'),(12,'Otra cuenta de prueba','Adeuda');
+INSERT INTO `cuenta_estado` VALUES (1,'Pagador malo1','Pagado'),(2,'Deudor','Adeuda');
 /*!40000 ALTER TABLE `cuenta_estado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,7 +83,7 @@ CREATE TABLE `forma_pago` (
   `nombre` varchar(45) NOT NULL,
   `estado` enum('O','X') NOT NULL DEFAULT 'O',
   PRIMARY KEY (`id_pag`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +92,7 @@ CREATE TABLE `forma_pago` (
 
 LOCK TABLES `forma_pago` WRITE;
 /*!40000 ALTER TABLE `forma_pago` DISABLE KEYS */;
-INSERT INTO `forma_pago` VALUES (1,'Efectivo','O'),(2,'Mercado Pago','O'),(3,'T. Bancaria','O'),(4,'Cheque','X'),(5,'Otros','X');
+INSERT INTO `forma_pago` VALUES (1,'Efectivo2','X'),(2,'Mercado Pago1','X'),(4,'Cheque','X'),(6,'Credito','O'),(7,'Debito','X'),(8,'Otra forma','X');
 /*!40000 ALTER TABLE `forma_pago` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +136,7 @@ CREATE TABLE `menu` (
   `href` varchar(45) NOT NULL,
   `id_rol` int NOT NULL,
   PRIMARY KEY (`id_menu`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +145,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (1,'Clientes','/cliente',1),(2,'Cuentas y Estados','/cuenta_estado',1),(3,'Formas de Pago','/forma_pago',1),(4,'Productos','/productos',1),(5,'Tipo de Productos','/tipo_producto',1),(6,'Productos','/productos',2),(7,'Tipo de Productos','/tipo_producto',2),(8,'Productos','/productos',3),(10,'Usuarios','/usuarios',1),(11,'Roles','/roles',1),(12,'Ubicaciones','/ubicaciones',1);
+INSERT INTO `menu` VALUES (1,'Clientes','/cliente',1),(2,'Cuentas y Estados','/cuenta_estado',1),(3,'Formas de Pago','/forma_pago',1),(4,'Productos','/productos',1),(5,'Tipo de Productos','/tipo_producto',1),(6,'Productos','/productos',2),(7,'Tipo de Productos','/tipo_producto',2),(8,'Productos','/productos',3),(9,'Usuarios','/usuarios',1),(10,'Roles','/roles',1),(11,'Ubicaciones','/ubicaciones',1),(12,'Formas de Pago','/forma_pago',2),(13,'Formas de Pago','/forma_pago',3);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +173,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Paletas','O'),(2,'Helados','O');
+INSERT INTO `productos` VALUES (1,'Paletas1','O'),(2,'Helados1','X');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +198,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'Admin','O'),(2,'Test','O'),(3,'Prueba','O');
+INSERT INTO `roles` VALUES (1,'Admin1','X'),(2,'Test','X'),(3,'Prueba1','O');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +214,7 @@ CREATE TABLE `tipo_producto` (
   `nombre` varchar(45) NOT NULL,
   `estado` enum('O','X') NOT NULL DEFAULT 'O',
   PRIMARY KEY (`id_tip`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -223,7 +223,7 @@ CREATE TABLE `tipo_producto` (
 
 LOCK TABLES `tipo_producto` WRITE;
 /*!40000 ALTER TABLE `tipo_producto` DISABLE KEYS */;
-INSERT INTO `tipo_producto` VALUES (1,'Caja de Helados1','O'),(2,'Balde','O');
+INSERT INTO `tipo_producto` VALUES (1,'Caja de Helado','X'),(2,'Balde','X'),(3,'otro','X'),(4,'otros','O');
 /*!40000 ALTER TABLE `tipo_producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,7 +239,7 @@ CREATE TABLE `ubicaciones` (
   `nombre` varchar(45) NOT NULL,
   `estado` enum('O','X') NOT NULL DEFAULT 'O',
   PRIMARY KEY (`id_ubicacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,7 +248,7 @@ CREATE TABLE `ubicaciones` (
 
 LOCK TABLES `ubicaciones` WRITE;
 /*!40000 ALTER TABLE `ubicaciones` DISABLE KEYS */;
-INSERT INTO `ubicaciones` VALUES (1,'Pozo Prueba Mejorado2','O'),(2,'Frezzer','X'),(3,'Heladera','O'),(4,'Pozo Lindo y nuevo','X');
+INSERT INTO `ubicaciones` VALUES (1,'Pozo General2','O'),(2,'Frezzer','O'),(3,'Heladera','O'),(4,'Pozo Lindo y nuevo','O'),(5,'Otra nueva','X');
 /*!40000 ALTER TABLE `ubicaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -300,4 +300,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-30 17:40:35
+-- Dump completed on 2023-11-01 19:23:06
