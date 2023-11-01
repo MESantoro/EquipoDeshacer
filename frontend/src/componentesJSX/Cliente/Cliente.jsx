@@ -44,7 +44,7 @@ const cambiar_estado = async (cc, id_cli, estado_actual)=>{
                     <th >Direccion</th>
                     <th >Correo</th>
                     <th >Estado</th>
-                    <th >Cuenta</th>
+                    <th >Estado Cuenta</th>
                     <th  colspan="2">Acciones</th>
                 </tr>
              </thead>
