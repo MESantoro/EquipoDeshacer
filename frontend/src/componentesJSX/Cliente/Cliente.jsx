@@ -60,7 +60,7 @@ const cambiar_estado = async (cc, id_cli, estado_actual)=>{
                 <td >
                     <Link to={`/editcliente/${cc.id_cli}`} ><button class="btn btn-warning btn-sm">Editar</button></Link>
                 </td>
-                {(cc.cli_estado=="X")?
+                {(cc.cli_estado=="O")?
                 <td><button class="btn btn-danger btn-sm" onClick={(event)=>cambiar_estado(event, cc.id_cli, cc.cli_estado )}>Desactivar</button></td>
                 :
                 <td><button class="btn btn-success btn-sm" onClick={(event)=>cambiar_estado(event, cc.id_cli, cc.cli_estado )} >Activar</button></td>

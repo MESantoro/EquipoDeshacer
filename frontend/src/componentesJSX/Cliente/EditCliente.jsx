@@ -29,7 +29,7 @@ export function EditCliente() {
     setDireccion(datosCliente.direccion);
     setCli_estado(datosCliente.cli_estado);
     setId_cue(datosCliente.id_cue);
-   /*  setId_cue(datosCliente.cue_estado); */
+    //setId_cue(datosCliente.cue_estado);
     setApellido(datosCliente.apellido);
     setCorreo(datosCliente.correo);
   }
@@ -39,7 +39,7 @@ export function EditCliente() {
     const respuesta = await API.EditCliente({
       nombre,
       cli_estado,
-      cue_estado,
+      //cue_estado,
       id_cue,
       apellido,
       direccion,
@@ -117,7 +117,7 @@ export function EditCliente() {
               </option>
             ))}
           </select>
-          <label htmlFor="floatingInput">Cuenta Estado</label>
+          <label htmlFor="floatingInput">Estado Cliente</label>
         </div>
         <div className="form-floating">
           <select
@@ -134,7 +134,7 @@ export function EditCliente() {
               </option>
             ))}
           </select>
-          <label htmlFor="floatingInput">Cuenta estado</label>
+          <label htmlFor="floatingInput">Cuenta Estado</label>
         </div>
         <button className="btn btn-primary" type="submit">Guardar Edición</button>
         <Link to="/cliente">Volver</Link>
